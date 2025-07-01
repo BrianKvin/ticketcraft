@@ -1,8 +1,7 @@
-import react from 'react'
+import React from 'react'
 
-function App() {
-
-  return <h1 className="text-3xl font-bold underline bg-red-400">Hello world!</h1>;
-}
+const App = () => (
+  <div>App Root Component</div>
+)
 
 export default App
