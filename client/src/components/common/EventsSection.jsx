@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Calendar, MapPin, ArrowRight } from "lucide-react";
 
 const EventsSection = () => {
@@ -122,9 +123,12 @@ const EventsSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <button className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
+          <Link
+            to="/browse-events"
+            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200 inline-block"
+          >
             View More Events
-          </button>
+          </Link>
         </div>
       </div>
     </section>

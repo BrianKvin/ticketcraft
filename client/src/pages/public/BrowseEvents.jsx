@@ -83,7 +83,8 @@ const BrowseEvents = () => {
         "Three days of incredible music featuring top artists from around the world.",
       image:
         "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $89",
+      price: "$89",
+      isFree: false,
     },
     {
       id: 2,
@@ -94,7 +95,8 @@ const BrowseEvents = () => {
         "Taste the finest cuisines and wines from renowned chefs and vineyards.",
       image:
         "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $45",
+      price: "$45",
+      isFree: false,
     },
     {
       id: 3,
@@ -105,7 +107,8 @@ const BrowseEvents = () => {
         "Join industry leaders discussing the future of technology and innovation.",
       image:
         "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $199",
+      price: "$199",
+      isFree: false,
     },
     {
       id: 4,
@@ -116,7 +119,8 @@ const BrowseEvents = () => {
         "An evening celebrating local artists and cultural diversity in the community.",
       image:
         "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $25",
+      price: "$25",
+      isFree: false,
     },
     {
       id: 5,
@@ -127,7 +131,8 @@ const BrowseEvents = () => {
         "Laugh the night away with top comedians from around the country.",
       image:
         "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $35",
+      price: "$35",
+      isFree: false,
     },
     {
       id: 6,
@@ -138,7 +143,8 @@ const BrowseEvents = () => {
         "Experience the best jazz and blues performers in an intimate outdoor setting.",
       image:
         "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $65",
+      price: "$65",
+      isFree: false,
     },
     {
       id: 7,
@@ -150,6 +156,7 @@ const BrowseEvents = () => {
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       price: "Free",
+      isFree: true,
     },
     {
       id: 8,
@@ -160,7 +167,8 @@ const BrowseEvents = () => {
         "The latest trends and designs from emerging and established fashion designers.",
       image:
         "https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "From $120",
+      price: "$120",
+      isFree: false,
     },
   ];
 

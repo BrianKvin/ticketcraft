@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { MapPin, Star, ArrowRight } from "lucide-react";
 
 const DestinationsSection = () => {
@@ -129,9 +130,12 @@ const DestinationsSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200">
+          <Link
+            to="/browse-destinations"
+            className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200 inline-block"
+          >
             View More Destinations
-          </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import CreateEvent from "../pages/event/CreateEvent";
+import CreateEvent from "../components/create-events/CreateEvent";
 import EditEvent from "../pages/event/EditEvent";
 import EventDetails from "../pages/event/EventDetails";
 import ManageEvents from "../pages/event/ManageEvents";

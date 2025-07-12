@@ -26,8 +26,8 @@ const Navbar = () => {
   const navItems = [
     { name: "Find Events", href: "/browse-events" },
     { name: "Browse Destinations", href: "/browse-destinations" },
-    { name: "Create Event", href: "/createEvent" },
-    { name: "Create Destination", href: "/createDestination" },
+    { name: "Create Event", href: "/events/create" },
+    { name: "Create Destination", href: "/destinations/create" },
   ];
 
   return (

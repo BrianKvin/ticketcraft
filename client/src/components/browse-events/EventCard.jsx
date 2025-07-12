@@ -1,9 +1,9 @@
 import React from "react";
 import { Calendar, MapPin } from "lucide-react";
 
-const EventCard = () => {
+const EventCard = ({ event }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
       <div className="relative h-48 overflow-hidden">
         <img
           src={event.image}
@@ -11,32 +11,43 @@ const EventCard = () => {
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
-          {event.price}
+          {event.isFree ? "Free" : `From ${event.price}`}
         </div>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
           {event.title}
         </h3>
 
         <div className="flex items-center text-gray-600 mb-2">
-          <Calendar size={16} className="mr-2 flex-shrink-0" />
+          <Calendar size={16} className="mr-2" />
           <span className="text-sm">{event.date}</span>
         </div>
 
         <div className="flex items-center text-gray-600 mb-3">
-          <MapPin size={16} className="mr-2 flex-shrink-0" />
+          <MapPin size={16} className="mr-2" />
           <span className="text-sm">{event.location}</span>
         </div>
 
-        <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">
+        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
           {event.description}
         </p>
 
-        <button className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-semibold transition-colors duration-200 mt-auto">
-          Get Tickets
-        </button>
+        <div className="flex items-center justify-between">
+          <div className="text-left">
+            <span
+              className={`text-lg font-bold ${
+                event.isFree ? "text-green-600" : "text-gray-900"
+              }`}
+            >
+              {event.isFree ? "Free" : event.price}
+            </span>
+          </div>
+          <button className="h-10 px-4 bg-green-500 hover:bg-green-600 text-white rounded-[20px] flex items-center justify-center transition-colors duration-200 group-hover:scale-110 text-xs font-semibold">
+            Buy Now
+          </button>
+        </div>
       </div>
     </div>
   );
