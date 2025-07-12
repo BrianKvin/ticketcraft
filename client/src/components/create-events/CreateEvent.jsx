@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Minus, Calendar, MapPin, DollarSign, Users } from "lucide-react";
+import {
+  Plus,
+  Minus,
+  Calendar,
+  MapPin,
+  DollarSign,
+  Users,
+  Clock,
+  Image as ImageIcon,
+  X,
+  Tag,
+} from "lucide-react";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
@@ -9,15 +20,20 @@ const CreateEvent = () => {
   const [eventData, setEventData] = useState({
     title: "",
     date: "",
+    time: "",
     location: "",
     description: "",
     image: "",
-    price: 0,
+    price: "",
     category: "",
     totalSlots: 100,
     organizer: "",
+    isOnline: false,
+    tags: [],
+    requirements: "",
   });
 
+  const [newTag, setNewTag] = useState("");
   const [registrationFields, setRegistrationFields] = useState([
     {
       id: "firstName",
@@ -57,14 +73,34 @@ const CreateEvent = () => {
     "Technology",
     "Business",
     "Arts",
-    "Wellness",
-    "Education",
+    "Music",
     "Sports",
-    "Entertainment",
+    "Education",
+    "Health",
+    "Food",
+    "Travel",
+    "Networking",
+    "Workshop",
+    "Conference",
+    "Wellness",
   ];
 
   const handleInputChange = (field, value) => {
     setEventData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const addTag = () => {
+    if (newTag.trim() && !eventData.tags.includes(newTag.trim())) {
+      handleInputChange("tags", [...eventData.tags, newTag.trim()]);
+      setNewTag("");
+    }
+  };
+
+  const removeTag = (tagToRemove) => {
+    handleInputChange(
+      "tags",
+      eventData.tags.filter((tag) => tag !== tagToRemove)
+    );
   };
 
   const addRegistrationField = () => {
@@ -112,6 +148,22 @@ const CreateEvent = () => {
     updateRegistrationField(fieldIndex, { options: newOptions });
   };
 
+  const progress = () => {
+    const fields = [
+      eventData.title,
+      eventData.description,
+      eventData.category,
+      eventData.date,
+      eventData.time,
+      eventData.location,
+      eventData.price,
+    ];
+    const filledFields = fields.filter(
+      (field) => field && field.toString().trim() !== ""
+    ).length;
+    return Math.round((filledFields / fields.length) * 100);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -125,9 +177,8 @@ const CreateEvent = () => {
 
     console.log("Creating new event:", newEvent);
 
-    // In a real app, you would save this to a database
-    // For now, we'll navigate to the organizer dashboard
-    navigate("/organizer-dashboard", {
+    // Navigate to the organizer dashboard
+    navigate("/organizer/dashboard", {
       state: {
         message: "Event created successfully!",
         event: newEvent,
@@ -146,6 +197,20 @@ const CreateEvent = () => {
           <p className="text-gray-600">
             Set up your event details and registration form
           </p>
+
+          {/* Progress Bar */}
+          <div className="mt-4">
+            <div className="flex justify-between text-sm text-gray-600 mb-2">
+              <span>Progress</span>
+              <span>{progress()}% complete</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${progress()}%` }}
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -155,8 +220,8 @@ const CreateEvent = () => {
           <div className="bg-white rounded-lg shadow-lg p-6">
             <div className="mb-6">
               <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
-                Event Details
+                <ImageIcon className="h-5 w-5" />
+                Basic Information
               </h2>
             </div>
             <div className="space-y-6">
@@ -172,7 +237,7 @@ const CreateEvent = () => {
                     id="title"
                     value={eventData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
-                    placeholder="Enter event title"
+                    placeholder="Give your event a catchy title"
                     required
                   />
                 </div>
@@ -208,49 +273,14 @@ const CreateEvent = () => {
                   onChange={(e) =>
                     handleInputChange("description", e.target.value)
                   }
-                  placeholder="Describe your event..."
+                  placeholder="Describe what your event is about..."
                   rows={4}
-                  required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  required
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="date"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Event Date *
-                  </label>
-                  <Input
-                    id="date"
-                    type="date"
-                    value={eventData.date}
-                    onChange={(e) => handleInputChange("date", e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="location"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Location *
-                  </label>
-                  <Input
-                    id="location"
-                    value={eventData.location}
-                    onChange={(e) =>
-                      handleInputChange("location", e.target.value)
-                    }
-                    placeholder="Event location"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label
                     htmlFor="category"
@@ -267,7 +297,7 @@ const CreateEvent = () => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                     required
                   >
-                    <option value="">Select category</option>
+                    <option value="">Select a category</option>
                     {categories.map((category) => (
                       <option key={category} value={category}>
                         {category}
@@ -277,25 +307,148 @@ const CreateEvent = () => {
                 </div>
                 <div>
                   <label
+                    htmlFor="image"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Event Image URL
+                  </label>
+                  <Input
+                    id="image"
+                    value={eventData.image}
+                    onChange={(e) => handleInputChange("image", e.target.value)}
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Tags
+                </label>
+                <div className="flex space-x-2">
+                  <Input
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                    placeholder="Add a tag"
+                    onKeyPress={(e) =>
+                      e.key === "Enter" && (e.preventDefault(), addTag())
+                    }
+                  />
+                  <Button
+                    type="button"
+                    onClick={addTag}
+                    className="bg-gray-500 hover:bg-gray-600"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+                {eventData.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {eventData.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800"
+                      >
+                        <Tag className="h-3 w-3 mr-1" />
+                        {tag}
+                        <button
+                          type="button"
+                          onClick={() => removeTag(tag)}
+                          className="ml-2 text-green-600 hover:text-green-800"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Event Details */}
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                Event Details
+              </h2>
+            </div>
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label
+                    htmlFor="date"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Date *
+                  </label>
+                  <Input
+                    id="date"
+                    type="date"
+                    value={eventData.date}
+                    onChange={(e) => handleInputChange("date", e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="time"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Time *
+                  </label>
+                  <Input
+                    id="time"
+                    type="time"
+                    value={eventData.time}
+                    onChange={(e) => handleInputChange("time", e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Location *
+                  </label>
+                  <Input
+                    id="location"
+                    value={eventData.location}
+                    onChange={(e) =>
+                      handleInputChange("location", e.target.value)
+                    }
+                    placeholder="Event location or venue"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label
                     htmlFor="price"
                     className="block text-sm font-medium text-gray-700 mb-2"
                   >
-                    Price ($)
+                    Price (USD) *
                   </label>
-                  <Input
-                    id="price"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    value={eventData.price}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "price",
-                        parseFloat(e.target.value) || 0
-                      )
-                    }
-                    placeholder="0.00"
-                  />
+                  <div className="relative">
+                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="price"
+                      type="number"
+                      value={eventData.price}
+                      onChange={(e) =>
+                        handleInputChange("price", e.target.value)
+                      }
+                      placeholder="0.00"
+                      className="pl-10"
+                      min="0"
+                      step="0.01"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
                   <label
@@ -304,48 +457,58 @@ const CreateEvent = () => {
                   >
                     Total Slots *
                   </label>
-                  <Input
-                    id="totalSlots"
-                    type="number"
-                    min="1"
-                    value={eventData.totalSlots}
-                    onChange={(e) =>
-                      handleInputChange(
-                        "totalSlots",
-                        parseInt(e.target.value) || 100
-                      )
-                    }
-                    required
-                  />
+                  <div className="relative">
+                    <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="totalSlots"
+                      type="number"
+                      value={eventData.totalSlots}
+                      onChange={(e) =>
+                        handleInputChange("totalSlots", e.target.value)
+                      }
+                      className="pl-10"
+                      min="1"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
 
               <div>
                 <label
-                  htmlFor="image"
+                  htmlFor="requirements"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Event Image URL
+                  Requirements/Prerequisites
                 </label>
-                <Input
-                  id="image"
-                  type="url"
-                  value={eventData.image}
-                  onChange={(e) => handleInputChange("image", e.target.value)}
-                  placeholder="https://example.com/image.jpg"
+                <textarea
+                  id="requirements"
+                  value={eventData.requirements}
+                  onChange={(e) =>
+                    handleInputChange("requirements", e.target.value)
+                  }
+                  placeholder="Any requirements or prerequisites for attendees..."
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
-                {eventData.image && (
-                  <div className="mt-2">
-                    <img
-                      src={eventData.image}
-                      alt="Event preview"
-                      className="w-32 h-20 object-cover rounded-lg border"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                  </div>
-                )}
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  id="isOnline"
+                  type="checkbox"
+                  checked={eventData.isOnline}
+                  onChange={(e) =>
+                    handleInputChange("isOnline", e.target.checked)
+                  }
+                  className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                />
+                <label
+                  htmlFor="isOnline"
+                  className="ml-2 block text-sm text-gray-700"
+                >
+                  This is an online event
+                </label>
               </div>
             </div>
           </div>
@@ -357,42 +520,26 @@ const CreateEvent = () => {
                 <Users className="h-5 w-5" />
                 Registration Form
               </h2>
-              <p className="text-sm text-gray-600">
-                Define the fields attendees will fill out when registering
+              <p className="text-gray-600 mt-2">
+                Customize the registration form for your event attendees
               </p>
             </div>
-            <div className="space-y-6">
-              {registrationFields.map((field, fieldIndex) => (
+
+            <div className="space-y-4">
+              {registrationFields.map((field, index) => (
                 <div
                   key={field.id}
-                  className="bg-gray-50 p-4 rounded-lg space-y-4"
+                  className="border border-gray-200 rounded-lg p-4"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="bg-gray-200 text-gray-800 px-2 py-1 rounded-full text-sm font-medium">
-                      Field {fieldIndex + 1}
-                    </span>
-                    {registrationFields.length > 1 && (
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeRegistrationField(fieldIndex)}
-                        className="text-red-600 hover:text-red-700"
-                      >
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Field Label *
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Field Label
                       </label>
                       <Input
                         value={field.label}
                         onChange={(e) =>
-                          updateRegistrationField(fieldIndex, {
+                          updateRegistrationField(index, {
                             label: e.target.value,
                           })
                         }
@@ -400,13 +547,13 @@ const CreateEvent = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Field Type *
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Field Type
                       </label>
                       <select
                         value={field.type}
                         onChange={(e) =>
-                          updateRegistrationField(fieldIndex, {
+                          updateRegistrationField(index, {
                             type: e.target.value,
                           })
                         }
@@ -419,80 +566,89 @@ const CreateEvent = () => {
                         ))}
                       </select>
                     </div>
-                    <div className="flex items-center space-x-2 mt-6">
-                      <input
-                        type="checkbox"
-                        id={`required_${fieldIndex}`}
-                        checked={field.required}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Placeholder
+                      </label>
+                      <Input
+                        value={field.placeholder}
                         onChange={(e) =>
-                          updateRegistrationField(fieldIndex, {
-                            required: e.target.checked,
+                          updateRegistrationField(index, {
+                            placeholder: e.target.value,
                           })
                         }
-                        className="rounded"
+                        placeholder="Placeholder text"
                       />
-                      <label
-                        htmlFor={`required_${fieldIndex}`}
-                        className="text-sm font-medium text-gray-700"
-                      >
-                        Required
+                    </div>
+                    <div className="flex items-end">
+                      <label className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={field.required}
+                          onChange={(e) =>
+                            updateRegistrationField(index, {
+                              required: e.target.checked,
+                            })
+                          }
+                          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">
+                          Required
+                        </span>
                       </label>
+                      {registrationFields.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeRegistrationField(index)}
+                          className="ml-auto text-red-600 hover:text-red-800"
+                        >
+                          <Minus className="h-4 w-4" />
+                        </button>
+                      )}
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Placeholder Text
-                    </label>
-                    <Input
-                      value={field.placeholder || ""}
-                      onChange={(e) =>
-                        updateRegistrationField(fieldIndex, {
-                          placeholder: e.target.value,
-                        })
-                      }
-                      placeholder="Enter placeholder text"
-                    />
-                  </div>
-
-                  {field.type === "select" && (
-                    <div>
+                  {/* Select/Radio Options */}
+                  {(field.type === "select" || field.type === "radio") && (
+                    <div className="mt-4">
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Options
                       </label>
                       <div className="space-y-2">
                         {(field.options || []).map((option, optionIndex) => (
-                          <div key={optionIndex} className="flex gap-2">
+                          <div
+                            key={optionIndex}
+                            className="flex items-center space-x-2"
+                          >
                             <Input
                               value={option}
                               onChange={(e) =>
                                 updateSelectOption(
-                                  fieldIndex,
+                                  index,
                                   optionIndex,
                                   e.target.value
                                 )
                               }
                               placeholder={`Option ${optionIndex + 1}`}
+                              className="flex-1"
                             />
-                            <Button
+                            <button
                               type="button"
-                              variant="outline"
-                              size="sm"
                               onClick={() =>
-                                removeSelectOption(fieldIndex, optionIndex)
+                                removeSelectOption(index, optionIndex)
                               }
+                              className="text-red-600 hover:text-red-800"
                             >
-                              <Minus className="h-4 w-4" />
-                            </Button>
+                              <X className="h-4 w-4" />
+                            </button>
                           </div>
                         ))}
                         <Button
                           type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => addSelectOption(fieldIndex)}
+                          onClick={() => addSelectOption(index)}
+                          className="bg-gray-500 hover:bg-gray-600"
                         >
-                          <Plus className="h-4 w-4 mr-2" />
+                          <Plus className="h-4 w-4 mr-1" />
                           Add Option
                         </Button>
                       </div>
@@ -503,9 +659,8 @@ const CreateEvent = () => {
 
               <Button
                 type="button"
-                variant="outline"
                 onClick={addRegistrationField}
-                className="w-full"
+                className="bg-gray-500 hover:bg-gray-600"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Registration Field
@@ -514,11 +669,11 @@ const CreateEvent = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex gap-4 justify-end">
+          <div className="flex justify-end space-x-4">
             <Button
               type="button"
-              variant="outline"
-              onClick={() => navigate(-1)}
+              onClick={() => navigate("/organizer/dashboard")}
+              className="bg-gray-500 hover:bg-gray-600"
             >
               Cancel
             </Button>

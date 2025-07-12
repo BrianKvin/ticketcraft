@@ -26,7 +26,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Find Events", href: "/browse-events" },
     { name: "Browse Destinations", href: "/browse-destinations" },
-    { name: "Create Event", href: "/events/create" },
+    { name: "Create Event", href: "/organizer/register" },
     { name: "Create Destination", href: "/destinations/create" },
   ];
 

@@ -12,27 +12,11 @@ import {
   History,
   Download,
   User,
+  TrendingUp,
+  Star,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import OrganizerProfile from "../components/organizer/OrganizerProfile";
+import Button from "../common/Button";
+import Input from "../common/Input";
 
 const OrganizerDashboard = () => {
   const location = useLocation();
@@ -64,6 +48,7 @@ const OrganizerDashboard = () => {
       registeredAttendees: 155,
       revenue: 46245,
       status: "active",
+      views: 1250,
     },
     {
       id: 2,
@@ -76,6 +61,7 @@ const OrganizerDashboard = () => {
       registeredAttendees: 32,
       revenue: 4800,
       status: "active",
+      views: 450,
     },
   ]);
 
@@ -109,36 +95,82 @@ const OrganizerDashboard = () => {
     },
   ]);
 
-  const [changeHistory] = useState([
-    {
-      id: 1,
-      action: "Event Created",
-      item: "Tech Innovation Summit 2024",
-      timestamp: "2024-01-15 10:30 AM",
-      user: "Admin",
-    },
-    {
-      id: 2,
-      action: "Price Updated",
-      item: "Tech Innovation Summit 2024",
-      timestamp: "2024-01-20 2:15 PM",
-      user: "Admin",
-      details: "$249 → $299",
-    },
-    {
-      id: 3,
-      action: "Event Created",
-      item: "Business Leadership Workshop",
-      timestamp: "2024-02-01 9:00 AM",
-      user: "Admin",
-    },
-  ]);
-
   const totalRevenue = events.reduce((sum, event) => sum + event.revenue, 0);
   const totalAttendees = events.reduce(
     (sum, event) => sum + event.registeredAttendees,
     0
   );
+  const totalViews = events.reduce((sum, event) => sum + event.views, 0);
+
+  const stats = [
+    {
+      title: "Total Events",
+      value: events.length,
+      change: "+12%",
+      changeType: "positive",
+      icon: Calendar,
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+    },
+    {
+      title: "Total Attendees",
+      value: totalAttendees,
+      change: "+8%",
+      changeType: "positive",
+      icon: Users,
+      color: "text-green-600",
+      bgColor: "bg-green-50",
+    },
+    {
+      title: "Total Revenue",
+      value: `$${totalRevenue.toLocaleString()}`,
+      change: "+18%",
+      changeType: "positive",
+      icon: DollarSign,
+      color: "text-yellow-600",
+      bgColor: "bg-yellow-50",
+    },
+    {
+      title: "Total Views",
+      value: totalViews,
+      change: "+15%",
+      changeType: "positive",
+      icon: Eye,
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+    },
+  ];
+
+  const quickActions = [
+    {
+      title: "Create New Event",
+      description: "Start planning your next event",
+      icon: Plus,
+      link: "/events/create",
+      color: "bg-green-500 hover:bg-green-600",
+    },
+    {
+      title: "Manage Events",
+      description: "View and edit your events",
+      icon: Edit,
+      link: "/events/manage",
+      color: "bg-blue-500 hover:bg-blue-600",
+    },
+    {
+      title: "View Analytics",
+      description: "Detailed performance insights",
+      icon: TrendingUp,
+      link: "/organizer/analytics",
+      color: "bg-purple-500 hover:bg-purple-600",
+    },
+    {
+      title: "Update Profile",
+      description: "Manage your organizer profile",
+      icon: User,
+      link: "/organizer/profile",
+      color: "bg-orange-500 hover:bg-orange-600",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -151,11 +183,12 @@ const OrganizerDashboard = () => {
                 Organizer Dashboard
               </h1>
               <p className="text-gray-600">
-                Manage your events and track performance
+                Welcome back, {organizer.name}! Manage your events and track
+                performance
               </p>
             </div>
             <Button
-              onClick={() => navigate("/create-event")}
+              onClick={() => navigate("/events/create")}
               className="bg-green-500 hover:bg-green-600"
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -177,360 +210,209 @@ const OrganizerDashboard = () => {
       )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center">
-                <Calendar className="h-8 w-8 text-blue-600" />
-                <div className="ml-4">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {stats.map((stat, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-lg p-6">
+              <div className="flex items-center justify-between">
+                <div>
                   <p className="text-sm font-medium text-gray-600">
-                    Total Events
+                    {stat.title}
                   </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {events.length}
+                  <p className="text-2xl font-bold text-gray-900 mt-1">
+                    {stat.value}
                   </p>
+                  {stat.change && (
+                    <div className="flex items-center mt-2">
+                      <span
+                        className={`text-sm font-medium ${
+                          stat.changeType === "positive"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
+                        {stat.change}
+                      </span>
+                      <span className="text-sm text-gray-500 ml-1">
+                        from last month
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div
+                  className={`w-12 h-12 rounded-full ${stat.bgColor} flex items-center justify-center`}
+                >
+                  <stat.icon className={`h-6 w-6 ${stat.color}`} />
                 </div>
               </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center">
-                <Users className="h-8 w-8 text-green-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">
-                    Total Attendees
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {totalAttendees}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center">
-                <DollarSign className="h-8 w-8 text-yellow-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">
-                    Total Revenue
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    ${totalRevenue.toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center">
-                <Eye className="h-8 w-8 text-purple-600" />
-                <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">
-                    Avg. Fill Rate
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {Math.round(
-                      (totalAttendees /
-                        events.reduce(
-                          (sum, event) => sum + event.totalSlots,
-                          0
-                        )) *
-                        100
-                    )}
-                    %
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          ))}
         </div>
 
-        {/* Main Content Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="attendees">Attendees</TabsTrigger>
-            <TabsTrigger value="payments">Payments</TabsTrigger>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-          </TabsList>
-
-          {/* Events Tab */}
-          <TabsContent value="events" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>My Events</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {events.map((event) => (
-                    <div
-                      key={event.id}
-                      className="border rounded-lg p-4 hover:shadow-md transition-shadow"
-                    >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                            {event.title}
-                          </h3>
-                          <div className="flex items-center gap-4 text-sm text-gray-600 mb-2">
-                            <div className="flex items-center gap-1">
-                              <Calendar className="h-4 w-4" />
-                              {event.date}
-                            </div>
-                            <div className="flex items-center gap-1">
-                              <MapPin className="h-4 w-4" />
-                              {event.location}
-                            </div>
-                            <Badge variant="secondary">{event.category}</Badge>
-                          </div>
-                          <div className="flex items-center gap-6 text-sm">
-                            <span>
-                              <strong>{event.registeredAttendees}</strong> /{" "}
-                              {event.totalSlots} attendees
-                            </span>
-                            <span>
-                              Revenue:{" "}
-                              <strong>${event.revenue.toLocaleString()}</strong>
-                            </span>
-                            <Badge
-                              variant={
-                                event.status === "active"
-                                  ? "default"
-                                  : "secondary"
-                              }
-                            >
-                              {event.status}
-                            </Badge>
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm">
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="outline" size="sm">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Dialog>
-                            <DialogTrigger asChild>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                className="text-red-600 hover:text-red-700"
-                              >
-                                <Trash2 className="h-4 w-4" />
-                              </Button>
-                            </DialogTrigger>
-                            <DialogContent>
-                              <DialogHeader>
-                                <DialogTitle>Delete Event</DialogTitle>
-                              </DialogHeader>
-                              <p>
-                                Are you sure you want to delete "{event.title}"?
-                                This action cannot be undone.
-                              </p>
-                              <div className="flex justify-end gap-2 mt-4">
-                                <Button variant="outline">Cancel</Button>
-                                <Button variant="destructive">Delete</Button>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
-                        </div>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Quick Actions */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                Quick Actions
+              </h3>
+              <div className="space-y-3">
+                {quickActions.map((action, index) => (
+                  <button
+                    key={index}
+                    onClick={() => navigate(action.link)}
+                    className={`w-full ${action.color} text-white p-4 rounded-lg flex items-center space-x-3 transition-colors duration-200`}
+                  >
+                    <action.icon className="h-5 w-5" />
+                    <div className="text-left">
+                      <div className="font-medium">{action.title}</div>
+                      <div className="text-sm opacity-90">
+                        {action.description}
                       </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
-          {/* Attendees Tab */}
-          <TabsContent value="attendees" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <div className="flex justify-between items-center">
-                  <CardTitle>Attendee Management</CardTitle>
-                  <Button variant="outline" size="sm">
-                    <Download className="h-4 w-4 mr-2" />
-                    Export
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Event</TableHead>
-                      <TableHead>Registration Date</TableHead>
-                      <TableHead>Payment Status</TableHead>
-                      <TableHead>Amount</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {attendees.map((attendee) => (
-                      <TableRow key={attendee.id}>
-                        <TableCell className="font-medium">
-                          {attendee.name}
-                        </TableCell>
-                        <TableCell>{attendee.email}</TableCell>
-                        <TableCell className="text-sm">
-                          {attendee.event}
-                        </TableCell>
-                        <TableCell>{attendee.registrationDate}</TableCell>
-                        <TableCell>
-                          <Badge
-                            variant={
-                              attendee.paymentStatus === "paid"
-                                ? "default"
-                                : "secondary"
-                            }
-                          >
-                            {attendee.paymentStatus}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>${attendee.amount}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </TabsContent>
+          {/* Recent Events */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Recent Events
+                </h3>
+                <button
+                  onClick={() => navigate("/events/manage")}
+                  className="text-green-600 hover:text-green-700 font-medium"
+                >
+                  View All Events →
+                </button>
+              </div>
 
-          {/* Payments Tab */}
-          <TabsContent value="payments" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Payment Records</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                  <Card>
-                    <CardContent className="p-4">
-                      <p className="text-sm text-gray-600">Total Revenue</p>
-                      <p className="text-2xl font-bold text-green-600">
-                        ${totalRevenue.toLocaleString()}
-                      </p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4">
-                      <p className="text-sm text-gray-600">Pending Payments</p>
-                      <p className="text-2xl font-bold text-yellow-600">
-                        $
-                        {attendees
-                          .filter((a) => a.paymentStatus === "pending")
-                          .reduce((sum, a) => sum + a.amount, 0)}
-                      </p>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardContent className="p-4">
-                      <p className="text-sm text-gray-600">
-                        Completed Payments
-                      </p>
-                      <p className="text-2xl font-bold text-blue-600">
-                        {
-                          attendees.filter((a) => a.paymentStatus === "paid")
-                            .length
-                        }
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Attendee</TableHead>
-                      <TableHead>Event</TableHead>
-                      <TableHead>Amount</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Date</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {attendees.map((attendee) => (
-                      <TableRow key={attendee.id}>
-                        <TableCell className="font-medium">
-                          {attendee.name}
-                        </TableCell>
-                        <TableCell className="text-sm">
-                          {attendee.event}
-                        </TableCell>
-                        <TableCell>${attendee.amount}</TableCell>
-                        <TableCell>
-                          <Badge
-                            variant={
-                              attendee.paymentStatus === "paid"
-                                ? "default"
-                                : "secondary"
-                            }
-                          >
-                            {attendee.paymentStatus}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{attendee.registrationDate}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* History Tab */}
-          <TabsContent value="history" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <History className="h-5 w-5" />
-                  Change History
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {changeHistory.map((change) => (
-                    <div
-                      key={change.id}
-                      className="border-l-4 border-blue-500 pl-4 py-2"
-                    >
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-medium text-gray-900">
-                            {change.action}: {change.item}
-                          </p>
-                          {change.details && (
-                            <p className="text-sm text-gray-600">
-                              {change.details}
-                            </p>
-                          )}
-                          <p className="text-xs text-gray-500 mt-1">
-                            {change.timestamp} by {change.user}
-                          </p>
+              <div className="space-y-4">
+                {events.map((event) => (
+                  <div
+                    key={event.id}
+                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-gray-900">
+                          {event.title}
+                        </h4>
+                        <div className="flex items-center text-sm text-gray-600 mt-1">
+                          <Calendar className="h-4 w-4 mr-1" />
+                          {event.date}
+                          <MapPin className="h-4 w-4 ml-3 mr-1" />
+                          {event.location}
+                        </div>
+                        <div className="flex items-center text-sm text-gray-600 mt-2">
+                          <Users className="h-4 w-4 mr-1" />
+                          {event.registeredAttendees}/{event.totalSlots}{" "}
+                          attendees
+                          <DollarSign className="h-4 w-4 ml-3 mr-1" />$
+                          {event.revenue.toLocaleString()} revenue
                         </div>
                       </div>
+                      <div className="flex items-center space-x-2">
+                        <span
+                          className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            event.status === "active"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {event.status}
+                        </span>
+                        <button
+                          onClick={() => navigate(`/events/edit/${event.id}`)}
+                          className="text-blue-600 hover:text-blue-700"
+                        >
+                          <Edit className="h-4 w-4" />
+                        </button>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
-          {/* Profile Tab */}
-          <TabsContent value="profile">
-            <OrganizerProfile organizer={organizer} />
-          </TabsContent>
-        </Tabs>
+        {/* Recent Attendees */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-lg font-semibold text-gray-900">
+              Recent Attendees
+            </h3>
+            <button className="text-green-600 hover:text-green-700 font-medium">
+              View All Attendees →
+            </button>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Attendee
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Event
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Registration Date
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Payment Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Amount
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {attendees.map((attendee) => (
+                  <tr key={attendee.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {attendee.name}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {attendee.email}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      {attendee.event}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {attendee.registrationDate}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          attendee.paymentStatus === "paid"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}
+                      >
+                        {attendee.paymentStatus}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      ${attendee.amount}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
