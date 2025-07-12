@@ -30,10 +30,10 @@ const EventPage = () => {
 
       {/* Hero Background Section */}
       <section className="pt-20 pb-16 px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <Card className="overflow-hidden">
             <div
-              className="h-96 bg-cover bg-center relative"
+              className="h-[28rem] bg-cover bg-center relative"
               style={{
                 backgroundImage:
                   "url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')",
