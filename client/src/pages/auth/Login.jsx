@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/common/Navbar";
-import Footer from "../../components/common/Footer";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -25,10 +23,8 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-
-      <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-md w-full mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -147,8 +143,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

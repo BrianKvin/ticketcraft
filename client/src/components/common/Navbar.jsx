@@ -36,9 +36,19 @@ const Navbar = () => {
       <div className="bg-green-500 h-8 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-end text-white text-sm font-medium">
           <div className="flex items-center space-x-6">
-            <span>Login</span>
+            <Link
+              to="/auth/login"
+              className="hover:text-green-200 transition-colors duration-200 cursor-pointer"
+            >
+              Login
+            </Link>
             <span>|</span>
-            <span>SignUp</span>
+            <Link
+              to="/auth/register"
+              className="hover:text-green-200 transition-colors duration-200 cursor-pointer"
+            >
+              SignUp
+            </Link>
           </div>
         </div>
       </div>

@@ -9,9 +9,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <div className="flex h-screen">
-        <RouterProvider router={router} />
-      </div>
+      <RouterProvider router={router} />
     </AuthProvider>
   </QueryClientProvider>
 );
