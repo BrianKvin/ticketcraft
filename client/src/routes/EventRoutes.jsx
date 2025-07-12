@@ -6,11 +6,16 @@ import OrganizerDashboard from "../components/create-events/OrganizerDashboard";
 import OrganizerProfile from "../components/create-events/OrganizerProfile";
 import OrganizerRegistration from "../components/create-events/OrganizerRegistration";
 import EventAnalytics from "../pages/event/EventAnalytics";
+import EventPage from "../components/create-events/EventPage";
 
 const eventRoutes = [
   {
     path: "/organizer/register",
     element: <OrganizerRegistration />,
+  },
+  {
+    path: "/events",
+    element: <EventPage />,
   },
   {
     path: "/events/create",

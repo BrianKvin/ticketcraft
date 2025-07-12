@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Button from "./common/Button";
 import { useNavigate } from "react-router-dom";
 
 const GetStartedCTA = () => {
@@ -15,11 +15,10 @@ const GetStartedCTA = () => {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
-            size="lg"
-            onClick={() => navigate("/register")}
-            className="text-lg px-8"
+            onClick={() => navigate("/events/create")}
+            className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-200 transform hover:scale-105"
           >
-            Start Registration
+            Start Creating Event
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           <Button size="lg" variant="outline" className="text-lg px-8">
