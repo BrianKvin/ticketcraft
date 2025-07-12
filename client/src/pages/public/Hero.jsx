@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import concertImage from "../../assets/images/concert.jpg";
+import musicImage from "../../assets/images/music.jpg";
+import drumsImage from "../../assets/images/drums.jpg";
+import audienceImage from "../../assets/images/audience.jpg";
+import cheerImage from "../../assets/images/cheer.jpg";
+import techSummitImage from "../../assets/images/tech-summit.jpg";
 
 const Hero = () => {
   const backgroundImages = [
-    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=7372&q=80",
-    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=7372&q=80",
-    "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=7372&q=80",
-    "https://images.unsplash.com/photo-1517022812141-23620dba5c23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=7372&q=80",
+    concertImage,
+    musicImage,
+    drumsImage,
+    audienceImage,
+    cheerImage,
+    techSummitImage
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -74,7 +82,7 @@ const Hero = () => {
       {backgroundImages.map((image, index) => (
         <div
           key={index}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ${
             index === currentImageIndex ? "opacity-100" : "opacity-0"
           }`}
           style={{ backgroundImage: `url(${image})` }}
@@ -108,7 +116,7 @@ const Hero = () => {
             to="/demo"
             className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200"
           >
-            Watch Demo
+            Find Events
           </Link>
         </div>
 
