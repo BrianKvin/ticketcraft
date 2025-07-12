@@ -1,11 +1,15 @@
-import React from 'react'
+import ViewEvents from "../pages/user/ViewEvents";
+import ViewDestination from "../pages/user/ViewDestination";
 
-const ClientRoutes = () => {
-  return (
-    <div>
-      Client Routes
-    </div>
-  )
-}
+const clientRoutes = [
+  {
+    path: "/user/events",
+    element: <ViewEvents />,
+  },
+  {
+    path: "/user/destinations",
+    element: <ViewDestination />,
+  },
+];
 
-export default ClientRoutes
+export default clientRoutes;

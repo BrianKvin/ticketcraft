@@ -1,5 +1,5 @@
 import React from "react";
-import Navabar from "../../components/common/Navabar";
+import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 import Hero from "./Hero";
 import EventTypes from "./EventTypes";
@@ -10,7 +10,7 @@ import NewsletterSection from "./NewsLetterSection";
 const Home = () => {
   return (
     <div className="w-full min-h-screen">
-      <Navabar />
+      <Navbar />
       <Hero />
       <EventTypes />
       <EventsSection />
