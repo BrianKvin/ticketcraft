@@ -1,7 +1,31 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Calendar, MapPin } from "lucide-react";
 
 const EventCard = ({ event }) => {
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    // Navigate to user registration with event data
+    navigate("/user/register", {
+      state: {
+        event: {
+          id: event.id,
+          title: event.title,
+          date: event.date,
+          location: event.location,
+          price: event.isFree ? 0 : parseInt(event.price.replace("$", "")),
+          isFree: event.isFree,
+          totalSlots: 200,
+          availableSlots: 45,
+          category: "General",
+          image: event.image,
+          description: event.description,
+        },
+      },
+    });
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
       <div className="relative h-48 overflow-hidden">
@@ -44,8 +68,11 @@ const EventCard = ({ event }) => {
               {event.isFree ? "Free" : event.price}
             </span>
           </div>
-          <button className="h-10 px-4 bg-green-500 hover:bg-green-600 text-white rounded-[20px] flex items-center justify-center transition-colors duration-200 group-hover:scale-110 text-xs font-semibold">
-            Buy Now
+          <button
+            onClick={handleRegister}
+            className="h-10 px-4 bg-green-500 hover:bg-green-600 text-white rounded-[20px] flex items-center justify-center transition-colors duration-200 group-hover:scale-110 text-xs font-semibold"
+          >
+            {event.isFree ? "Register" : "Buy Now"}
           </button>
         </div>
       </div>

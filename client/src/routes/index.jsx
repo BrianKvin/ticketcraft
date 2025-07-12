@@ -4,6 +4,7 @@ import authRoutes from "./AuthRoutes";
 import eventRoutes from "./EventRoutes";
 import destinationRoutes from "./DestinationRoutes";
 import clientRoutes from "./ClientRoutes";
+import userRoutes from "./UserRoutes";
 
 const router = createBrowserRouter([
   ...publicRoutes,
@@ -11,6 +12,7 @@ const router = createBrowserRouter([
   ...eventRoutes,
   ...destinationRoutes,
   ...clientRoutes,
+  ...userRoutes,
 ]);
 
 export default router;

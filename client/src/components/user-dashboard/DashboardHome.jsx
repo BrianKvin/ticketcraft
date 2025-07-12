@@ -1,9 +1,8 @@
 import React from "react";
 import { Calendar, MapPin, Users, Clock, Download, Video } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Button from "../common/Button";
 
-const DashboardHome = ({ eventData, user }) => {
+const DashboardHome = ({ eventData, user, registration }) => {
   const calculateDaysUntilEvent = () => {
     const eventDate = new Date("2024-03-15");
     const today = new Date();
@@ -29,67 +28,67 @@ const DashboardHome = ({ eventData, user }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Event Details Card */}
         <div className="lg:col-span-2">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-green-600" />
                 Your Registered Event
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex gap-4">
-                <img
-                  src={eventData.image}
-                  alt={eventData.title}
-                  className="w-24 h-24 object-cover rounded-lg"
-                />
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {eventData.title}
-                  </h3>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      {eventData.date}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4" />
-                      {eventData.location}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4" />
-                      {eventData.type} Event
-                    </div>
+              </h2>
+            </div>
+            <div className="flex gap-4">
+              <img
+                src={eventData.image}
+                alt={eventData.title}
+                className="w-24 h-24 object-cover rounded-lg"
+              />
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {eventData.title}
+                </h3>
+                <div className="space-y-2 text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    {eventData.date}
                   </div>
-                  <div className="mt-4 flex gap-2">
-                    <Button
-                      size="sm"
-                      className="bg-green-500 hover:bg-green-600"
-                    >
-                      <Video className="h-4 w-4 mr-2" />
-                      Join Virtual Session
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download Details
-                    </Button>
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    {eventData.location}
                   </div>
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4" />
+                    {eventData.type} Event
+                  </div>
+                  {registration && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-gray-600">Ticket ID: {registration.ticketId}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-4 flex gap-2">
+                  <Button className="bg-green-500 hover:bg-green-600">
+                    <Video className="h-4 w-4 mr-2" />
+                    Join Virtual Session
+                  </Button>
+                  <Button className="bg-gray-500 hover:bg-gray-600">
+                    <Download className="h-4 w-4 mr-2" />
+                    Download Details
+                  </Button>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Event Countdown */}
         <div>
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
                 <Clock className="h-5 w-5 text-blue-600" />
                 Event Countdown
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-center">
+              </h2>
+            </div>
+            <div className="text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">
                 {daysUntilEvent}
               </div>
@@ -99,71 +98,71 @@ const DashboardHome = ({ eventData, user }) => {
                   Don't forget to prepare for the event!
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6 text-center">
+        <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-md transition-shadow cursor-pointer">
+          <div className="text-center">
             <Users className="h-8 w-8 text-purple-600 mx-auto mb-3" />
             <h3 className="font-semibold mb-2">View Speakers</h3>
             <p className="text-sm text-gray-600">
               Explore event speakers and their sessions
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6 text-center">
+        <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-md transition-shadow cursor-pointer">
+          <div className="text-center">
             <MapPin className="h-8 w-8 text-orange-600 mx-auto mb-3" />
             <h3 className="font-semibold mb-2">Exhibitors</h3>
             <p className="text-sm text-gray-600">
               Browse exhibitors and their booths
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6 text-center">
+        <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-md transition-shadow cursor-pointer">
+          <div className="text-center">
             <Calendar className="h-8 w-8 text-green-600 mx-auto mb-3" />
             <h3 className="font-semibold mb-2">Event Agenda</h3>
             <p className="text-sm text-gray-600">
               View the complete event schedule
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className="hover:shadow-md transition-shadow cursor-pointer">
-          <CardContent className="p-6 text-center">
+        <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-md transition-shadow cursor-pointer">
+          <div className="text-center">
             <Download className="h-8 w-8 text-red-600 mx-auto mb-3" />
             <h3 className="font-semibold mb-2">My Badge</h3>
             <p className="text-sm text-gray-600">Download your event badge</p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {/* Recent Activity */}
       <div className="mt-8">
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Registration Confirmed</p>
-                  <p className="text-xs text-gray-600">
-                    Successfully registered for {eventData.title}
-                  </p>
-                </div>
-                <span className="text-xs text-gray-500">2 days ago</span>
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="mb-4">
+            <h2 className="text-xl font-bold text-gray-900">Recent Activity</h2>
+          </div>
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Registration Confirmed</p>
+                <p className="text-xs text-gray-600">
+                  Successfully registered for {eventData.title}
+                </p>
               </div>
+              <span className="text-xs text-gray-500">2 days ago</span>
+            </div>
 
+            {registration && registration.status === "confirmed" && (
               <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <div className="flex-1">
@@ -174,20 +173,20 @@ const DashboardHome = ({ eventData, user }) => {
                 </div>
                 <span className="text-xs text-gray-500">2 days ago</span>
               </div>
+            )}
 
-              <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Event Reminder</p>
-                  <p className="text-xs text-gray-600">
-                    Event starts in {daysUntilEvent} days
-                  </p>
-                </div>
-                <span className="text-xs text-gray-500">Just now</span>
+            <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-lg">
+              <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+              <div className="flex-1">
+                <p className="text-sm font-medium">Event Reminder</p>
+                <p className="text-xs text-gray-600">
+                  Event starts in {daysUntilEvent} days
+                </p>
               </div>
+              <span className="text-xs text-gray-500">Just now</span>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

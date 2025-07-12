@@ -8,8 +8,7 @@ import {
   Building,
   Calendar,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Button from "../common/Button";
 
 const DashboardMyBadge = ({
   eventData,
@@ -39,11 +38,11 @@ const DashboardMyBadge = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Badge Preview */}
         <div>
-          <Card className="overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-green-500 to-blue-600 text-white">
-              <CardTitle className="text-center">Event Badge Preview</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="bg-gradient-to-r from-green-500 to-blue-600 text-white p-4">
+              <h3 className="text-center font-semibold">Event Badge Preview</h3>
+            </div>
+            <div className="p-0">
               {/* Badge Design */}
               <div className="bg-white p-8">
                 <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-lg p-6 text-white text-center">
@@ -75,8 +74,8 @@ const DashboardMyBadge = ({
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Badge Actions */}
           <div className="mt-6 flex gap-3">
@@ -94,14 +93,14 @@ const DashboardMyBadge = ({
         {/* Badge Information */}
         <div className="space-y-6">
           {/* Personal Information */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="flex items-center gap-2 font-semibold">
                 <User className="h-5 w-5" />
                 Personal Information
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+              </h3>
+            </div>
+            <div className="p-4">
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -122,18 +121,18 @@ const DashboardMyBadge = ({
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Badge Details */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="flex items-center gap-2 font-semibold">
                 <Building className="h-5 w-5" />
                 Badge Details
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+              </h3>
+            </div>
+            <div className="p-4">
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -164,15 +163,15 @@ const DashboardMyBadge = ({
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Networking Interests */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Networking Interests</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold">Networking Interests</h3>
+            </div>
+            <div className="p-4">
               <div className="flex flex-wrap gap-2">
                 {badgeData.networkingInterests.map((interest, index) => (
                   <span
@@ -187,18 +186,18 @@ const DashboardMyBadge = ({
                 These interests will be visible to other attendees for
                 networking purposes.
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Badge Instructions */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="flex items-center gap-2 font-semibold">
                 <Calendar className="h-5 w-5" />
                 Badge Instructions
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+              </h3>
+            </div>
+            <div className="p-4">
               <div className="space-y-3 text-sm">
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
@@ -236,28 +235,28 @@ const DashboardMyBadge = ({
                   </p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Digital Wallet */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Add to Digital Wallet</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold">Add to Digital Wallet</h3>
+            </div>
+            <div className="p-4">
               <p className="text-sm text-gray-600 mb-4">
                 Add your event badge to your mobile wallet for easy access
               </p>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="flex-1">
+                <Button variant="outline" className="flex-1 text-sm">
                   Add to Apple Wallet
                 </Button>
-                <Button variant="outline" size="sm" className="flex-1">
+                <Button variant="outline" className="flex-1 text-sm">
                   Add to Google Pay
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

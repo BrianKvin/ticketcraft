@@ -1,7 +1,6 @@
 import React from "react";
 import { MessageCircle, MapPin } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Button from "../common/Button";
 
 const DashboardSpeakers = ({ eventData }) => {
   const speakers = [
@@ -64,8 +63,8 @@ const DashboardSpeakers = ({ eventData }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {speakers.map((speaker) => (
-          <Card key={speaker.id} className="hover:shadow-lg transition-shadow">
-            <CardContent className="p-6">
+          <div key={speaker.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
+            <div className="p-6">
               <div className="flex gap-4 mb-4">
                 <img
                   src={speaker.image}
@@ -104,26 +103,26 @@ const DashboardSpeakers = ({ eventData }) => {
               </div>
 
               <div className="flex gap-2">
-                <Button size="sm" className="bg-green-500 hover:bg-green-600">
+                <Button className="bg-green-500 hover:bg-green-600 text-sm">
                   <MessageCircle className="h-4 w-4 mr-2" />
                   Connect
                 </Button>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" className="text-sm">
                   View Session
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
 
       {/* Featured Speakers Section */}
       <div className="mt-12">
-        <Card>
-          <CardHeader>
-            <CardTitle>Keynote Speakers</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className="bg-white rounded-lg shadow-md">
+          <div className="p-4 border-b">
+            <h3 className="font-semibold">Keynote Speakers</h3>
+          </div>
+          <div className="p-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="flex gap-4 items-center p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
                 <img
@@ -169,8 +168,8 @@ const DashboardSpeakers = ({ eventData }) => {
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

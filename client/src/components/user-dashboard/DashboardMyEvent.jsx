@@ -9,8 +9,7 @@ import {
   QrCode,
   Video,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Button from "../common/Button";
 
 const DashboardMyEvent = ({ eventData }) => {
   const registrationDetails = {
@@ -101,8 +100,8 @@ const DashboardMyEvent = ({ eventData }) => {
         {/* Main Event Information */}
         <div className="lg:col-span-2 space-y-6">
           {/* Event Details Card */}
-          <Card>
-            <CardContent className="p-6">
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-6">
               <div className="flex gap-6">
                 <img
                   src={eventData.image}
@@ -142,15 +141,15 @@ const DashboardMyEvent = ({ eventData }) => {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Registration Details */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Registration Details</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold">Registration Details</h3>
+            </div>
+            <div className="p-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-600 mb-1">Ticket ID</p>
@@ -185,15 +184,15 @@ const DashboardMyEvent = ({ eventData }) => {
                   </p>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Event Resources */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Event Resources</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold">Event Resources</h3>
+            </div>
+            <div className="p-4">
               <div className="space-y-4">
                 {eventResources.map((resource) => (
                   <div
@@ -211,44 +210,44 @@ const DashboardMyEvent = ({ eventData }) => {
                         {resource.type} • {resource.size}
                       </p>
                     </div>
-                    <Button size="sm" variant="outline">
+                    <Button variant="outline" className="text-sm">
                       <Download className="h-4 w-4 mr-2" />
                       Download
                     </Button>
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
           {/* QR Code Card */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-center">Event QR Code</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center">
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="text-center font-semibold">Event QR Code</h3>
+            </div>
+            <div className="p-4 text-center">
               <div className="bg-gray-100 p-6 rounded-lg mb-4">
                 <QrCode className="h-24 w-24 mx-auto text-gray-400" />
               </div>
               <p className="text-sm text-gray-600 mb-4">
                 Show this QR code at the venue for quick check-in
               </p>
-              <Button size="sm" className="w-full">
+              <Button className="w-full text-sm">
                 <Download className="h-4 w-4 mr-2" />
                 Download QR Code
               </Button>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Important Updates */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Important Updates</CardTitle>
-            </CardHeader>
-            <CardContent>
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold">Important Updates</h3>
+            </div>
+            <div className="p-4">
               <div className="space-y-4">
                 {importantUpdates.map((update) => (
                   <div
@@ -265,15 +264,15 @@ const DashboardMyEvent = ({ eventData }) => {
                   </div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Quick Actions */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
+          <div className="bg-white rounded-lg shadow-md">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold">Quick Actions</h3>
+            </div>
+            <div className="p-4 space-y-3">
               <Button className="w-full" variant="outline">
                 <Calendar className="h-4 w-4 mr-2" />
                 Add to Calendar
@@ -286,8 +285,8 @@ const DashboardMyEvent = ({ eventData }) => {
                 <Download className="h-4 w-4 mr-2" />
                 Download Ticket
               </Button>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
     </div>

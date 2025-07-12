@@ -1,7 +1,6 @@
 import React from "react";
 import { MapPin, MessageCircle, ExternalLink } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Button from "../common/Button";
 
 const DashboardExhibitors = ({
   eventData,
@@ -111,11 +110,11 @@ const DashboardExhibitors = ({
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {featuredExhibitors.map((exhibitor) => (
-            <Card
+            <div
               key={exhibitor.id}
-              className="hover:shadow-lg transition-shadow border-l-4 border-l-green-500"
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border-l-4 border-l-green-500"
             >
-              <CardContent className="p-6">
+              <div className="p-6">
                 <div className="flex items-center gap-4 mb-4">
                   <img
                     src={exhibitor.logo}
@@ -154,17 +153,17 @@ const DashboardExhibitors = ({
                 </div>
 
                 <div className="flex gap-2">
-                  <Button size="sm" className="bg-green-500 hover:bg-green-600">
+                  <Button className="bg-green-500 hover:bg-green-600 text-sm">
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Contact
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" className="text-sm">
                     <ExternalLink className="h-4 w-4 mr-2" />
                     Visit
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -176,11 +175,11 @@ const DashboardExhibitors = ({
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {allExhibitors.map((exhibitor) => (
-            <Card
+            <div
               key={exhibitor.id}
-              className="hover:shadow-md transition-shadow"
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow"
             >
-              <CardContent className="p-6">
+              <div className="p-6">
                 <div className="flex gap-4">
                   <img
                     src={exhibitor.logo}
@@ -225,30 +224,30 @@ const DashboardExhibitors = ({
                     </div>
 
                     <div className="flex gap-2">
-                      <Button size="sm" variant="outline">
+                      <Button variant="outline" className="text-sm">
                         <MessageCircle className="h-4 w-4 mr-2" />
                         Contact
                       </Button>
-                      <Button size="sm" variant="outline">
+                      <Button variant="outline" className="text-sm">
                         <ExternalLink className="h-4 w-4 mr-2" />
                         Website
                       </Button>
                     </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Exhibitor Map */}
       <div className="mt-12">
-        <Card>
-          <CardHeader>
-            <CardTitle>Exhibition Hall Map</CardTitle>
-          </CardHeader>
-          <CardContent>
+        <div className="bg-white rounded-lg shadow-md">
+          <div className="p-4 border-b">
+            <h3 className="font-semibold">Exhibition Hall Map</h3>
+          </div>
+          <div className="p-4">
             <div className="bg-gray-100 rounded-lg p-8 text-center">
               <p className="text-gray-600 mb-4">
                 Interactive Exhibition Hall Map
@@ -262,8 +261,8 @@ const DashboardExhibitors = ({
                 </Button>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
