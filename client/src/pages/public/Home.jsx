@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 import Hero from "./Hero";
+import AboutSection from "./AboutSection";
 import EventTypes from "./EventTypes";
 import EventsSection from "../../components/common/EventsSection";
 import DestinationsSection from "./DestinationSection";
@@ -21,9 +22,10 @@ const Home = () => {
       {/* Scrolling Content */}
       <div className="relative z-10" style={{ marginTop: "100vh" }}>
         <div className="bg-white">
-          <EventTypes />
+          <AboutSection />
           <EventsSection />
           <DestinationsSection />
+          <EventTypes />
           <NewsletterSection />
           <Footer />
         </div>
