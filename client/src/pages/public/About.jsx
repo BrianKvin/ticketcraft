@@ -14,28 +14,31 @@ import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 
 const AboutSection = () => {
-  const features = [
+  const keyFeatures = [
     {
       icon: Ticket,
-      title: "Digital Ticketing System",
-      description:
-        "Create and sell tickets for your events with our comprehensive digital ticketing platform. Secure, instant, and hassle-free.",
-      highlight: true,
+      title: "Digital Ticketing",
+      description: "Secure, instant ticket creation and sales",
+      stat: "10M+",
+      statLabel: "Tickets Sold",
     },
     {
       icon: QrCode,
       title: "QR Code Scanning",
-      description:
-        "Scan QR codes from tickets sent via email at event entrances. Fast, secure, and contactless entry verification.",
-      highlight: true,
+      description: "Fast, contactless entry verification",
+      stat: "99.9%",
+      statLabel: "Success Rate",
     },
     {
       icon: Smartphone,
-      title: "Mobile App Integration",
-      description:
-        "Event organizers can leverage our mobile app to manage tickets, check-ins, and event logistics on the go.",
-      highlight: true,
+      title: "Mobile Integration",
+      description: "Manage events and check-ins on the go",
+      stat: "50K+",
+      statLabel: "Active Users",
     },
+  ];
+
+  const features = [
     {
       icon: MapPin,
       title: "Destination Discovery",
@@ -56,23 +59,11 @@ const AboutSection = () => {
     },
   ];
 
-  const benefits = [
-    {
-      icon: Shield,
-      title: "Secure & Reliable",
-      description: "Bank-level security for all transactions and ticket data",
-    },
-    {
-      icon: Mail,
-      title: "Instant Delivery",
-      description: "Tickets delivered instantly via email with QR codes",
-    },
-    {
-      icon: Users,
-      title: "Easy Management",
-      description:
-        "Simple dashboard for organizers to manage events and attendees",
-    },
+  const stats = [
+    { number: "1M+", label: "Events Created" },
+    { number: "500+", label: "Destinations" },
+    { number: "24/7", label: "Support" },
+    { number: "98%", label: "Satisfaction" },
   ];
 
   return (
@@ -85,6 +76,7 @@ const AboutSection = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Your Complete Event Platform
             </h2>
+
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               <span className="font-semibold text-green-600">TicketCraft</span>{" "}
               is more than just a ticketing system. We're your all-in-one
@@ -95,46 +87,55 @@ const AboutSection = () => {
             </p>
           </div>
 
-          {/* Main Features Grid */}
+          {/* Key Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {keyFeatures.map((feature, index) => (
+              <div
+                key={index}
+                className="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-green-200"
+              >
+                <div className="w-16 h-16 rounded-xl bg-green-500 text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <feature.icon size={28} />
+                </div>
+
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {feature.title}
+                </h3>
+
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  {feature.description}
+                </p>
+
+                <div className="flex items-center justify-between">
+                  <div className="text-2xl font-bold text-green-600">
+                    {feature.stat}
+                  </div>
+                  <div className="text-sm text-gray-500 font-medium">
+                    {feature.statLabel}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`group p-6 rounded-2xl transition-all duration-300 hover:shadow-xl ${
-                  feature.highlight
-                    ? "bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 hover:border-green-300"
-                    : "bg-gray-50 border border-gray-200 hover:border-gray-300"
-                }`}
+                className="group p-6 rounded-2xl transition-all duration-300 hover:shadow-xl bg-gray-50 border border-gray-200 hover:border-gray-300"
               >
-                <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
-                    feature.highlight
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-200 text-gray-600"
-                  } group-hover:scale-110 transition-transform duration-300`}
-                >
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-gray-200 text-gray-600 group-hover:scale-110 transition-transform duration-300">
                   <feature.icon size={24} />
                 </div>
 
-                <h3
-                  className={`text-xl font-bold mb-3 ${
-                    feature.highlight ? "text-green-700" : "text-gray-900"
-                  }`}
-                >
+                <h3 className="text-xl font-bold mb-3 text-gray-900">
                   {feature.title}
                 </h3>
 
                 <p className="text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
-
-                {feature.highlight && (
-                  <div className="mt-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Core Feature
-                    </span>
-                  </div>
-                )}
               </div>
             ))}
           </div>
@@ -202,50 +203,71 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Benefits Section */}
+          {/* Stats Section */}
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-12">
-              Why Choose Our Platform?
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Why Choose TicketCraft?
             </h3>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12">
+              Join thousands of event organizers and attendees who trust our
+              platform for seamless event experiences.
+            </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="group">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
-                    <benefit.icon size={28} className="text-green-600" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center group">
+                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
+                      {stat.number}
+                    </div>
+                    <div className="text-gray-600 font-medium">
+                      {stat.label}
+                    </div>
                   </div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                    {benefit.title}
-                  </h4>
-                  <p className="text-gray-600">{benefit.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* Trust Indicators */}
+          <div className="text-center mb-12">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+              <div className="flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-green-600 mr-3" />
+                <h3 className="text-2xl font-bold text-gray-900">
+                  Bank-Level Security
+                </h3>
+              </div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Your data and transactions are protected with enterprise-grade
+                security. We process millions of tickets safely every year.
+              </p>
+            </div>
+          </div>
+
+          <EventTypes />
+
           {/* CTA Section */}
           <div className="text-center">
-            <div className="bg-gray-50 rounded-2xl p-8 md:p-12">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-                Ready to Get Started?
+            <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-2xl p-8 md:p-12 text-white">
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                Ready to Transform Your Events?
               </h3>
-              <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                Whether you're an event organizer looking to sell tickets or an
-                attendee wanting to discover amazing events, our platform has
-                everything you need.
+              <p className="text-green-100 mb-8 max-w-2xl mx-auto">
+                Join thousands of successful event organizers who trust
+                TicketCraft for their ticketing needs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  Create Your First Event
+                <button className="bg-white hover:bg-gray-100 text-green-600 px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                  Start Creating Events
                 </button>
-                <button className="bg-white hover:bg-gray-50 text-gray-900 px-8 py-3 rounded-full font-semibold transition-all duration-300 border-2 border-green-500 hover:border-green-600">
-                  Browse Events
+                <button className="bg-transparent hover:bg-white hover:text-green-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 border-2 border-white hover:border-white">
+                  Learn More
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <EventTypes />
       </section>
       <Footer />
     </>
