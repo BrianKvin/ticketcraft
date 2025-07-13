@@ -5,15 +5,24 @@ import ManageDestinations from "../pages/destination/ManageDestinations";
 import DestinationDashboard from "../pages/destination/DestinationDashboard";
 import DestinationProfile from "../pages/destination/DestinationProfile";
 import DestinationAnalytics from "../pages/destination/DestinationAnalytics";
+import ProtectedRoute from "../components/common/ProtectedRoute";
 
 const destinationRoutes = [
   {
     path: "/destinations/create",
-    element: <CreateDestination />,
+    element: (
+      <ProtectedRoute>
+        <CreateDestination />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/destinations/edit/:id",
-    element: <EditDestination />,
+    element: (
+      <ProtectedRoute>
+        <EditDestination />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/destinations/:id",
@@ -21,19 +30,35 @@ const destinationRoutes = [
   },
   {
     path: "/destinations/manage",
-    element: <ManageDestinations />,
+    element: (
+      <ProtectedRoute>
+        <ManageDestinations />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/destination-owner/dashboard",
-    element: <DestinationDashboard />,
+    element: (
+      <ProtectedRoute>
+        <DestinationDashboard />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/destination-owner/profile",
-    element: <DestinationProfile />,
+    element: (
+      <ProtectedRoute>
+        <DestinationProfile />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/destination-owner/analytics",
-    element: <DestinationAnalytics />,
+    element: (
+      <ProtectedRoute>
+        <DestinationAnalytics />
+      </ProtectedRoute>
+    ),
   },
 ];
 

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, User, LogOut } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -36,19 +38,38 @@ const Navbar = () => {
       <div className="bg-green-500 h-8 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-end text-white text-sm font-medium">
           <div className="flex items-center space-x-6">
-            <Link
-              to="/auth/login"
-              className="hover:text-green-200 transition-colors duration-200 cursor-pointer"
-            >
-              Login
-            </Link>
-            <span>|</span>
-            <Link
-              to="/auth/register"
-              className="hover:text-green-200 transition-colors duration-200 cursor-pointer"
-            >
-              SignUp
-            </Link>
+            {user ? (
+              <>
+                <div className="flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span>{user.name}</span>
+                </div>
+                <span>|</span>
+                <button
+                  onClick={logout}
+                  className="hover:text-green-200 transition-colors duration-200 cursor-pointer flex items-center space-x-1"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/auth/login"
+                  className="hover:text-green-200 transition-colors duration-200 cursor-pointer"
+                >
+                  Login
+                </Link>
+                <span>|</span>
+                <Link
+                  to="/auth/register"
+                  className="hover:text-green-200 transition-colors duration-200 cursor-pointer"
+                >
+                  SignUp
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

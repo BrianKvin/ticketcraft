@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,7 +24,21 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login form data:", formData);
-    // UI only - no auth logic
+
+    // Simulate login - in a real app, this would be an API call
+    const userData = {
+      id: 1,
+      email: formData.email,
+      name: "John Doe",
+      type: "destination_owner",
+    };
+
+    login(userData);
+
+    // Redirect to the original destination or dashboard
+    const from =
+      location.state?.from?.pathname || "/destination-owner/dashboard";
+    navigate(from, { replace: true });
   };
 
   return (

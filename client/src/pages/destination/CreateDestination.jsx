@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MapPin,
   BarChart3,
@@ -24,6 +25,7 @@ import Button from "../../components/common/Button";
 import destinationImage from "../../assets/images/tour.jpg";
 
 const CreateDestination = () => {
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const formRef = useRef(null);
 
@@ -44,7 +46,24 @@ const CreateDestination = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Destination data:", formData);
-    // Handle destination creation logic here
+
+    // Simulate destination creation
+    const newDestination = {
+      id: Date.now(),
+      ...formData,
+      status: "active",
+      createdAt: new Date().toISOString(),
+    };
+
+    console.log("Creating new destination:", newDestination);
+
+    // Navigate to the destination dashboard with success message
+    navigate("/destination-owner/dashboard", {
+      state: {
+        message: "Destination created successfully!",
+        destination: newDestination,
+      },
+    });
   };
 
   const scrollToForm = () => {

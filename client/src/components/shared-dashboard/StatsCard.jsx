@@ -22,7 +22,13 @@ const StatsCard = ({ title, value, change, changeType = "positive", icon }) => {
             </div>
           )}
         </div>
-        <div className="text-3xl">{icon}</div>
+        <div className="text-3xl">
+          {icon && typeof icon === "string" ? (
+            <span>{icon}</span>
+          ) : (
+            React.createElement(icon, { className: "w-8 h-8 text-gray-400" })
+          )}
+        </div>
       </div>
     </div>
   );
