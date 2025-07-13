@@ -3,7 +3,7 @@ import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 import Hero from "./Hero";
 import AboutSection from "./AboutSection";
-import EventTypes from "./EventTypes";
+// import EventTypes from "./EventTypes";
 import EventsSection from "../../components/common/EventsSection";
 import DestinationsSection from "./DestinationSection";
 import NewsletterSection from "./NewsLetterSection";
@@ -25,7 +25,7 @@ const Home = () => {
           <AboutSection />
           <EventsSection />
           <DestinationsSection />
-          <EventTypes />
+          {/* <EventTypes /> */}
           <NewsletterSection />
           <Footer />
         </div>
