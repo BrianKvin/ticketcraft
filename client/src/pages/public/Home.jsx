@@ -10,15 +10,26 @@ import NewsletterSection from "./NewsLetterSection";
 const Home = () => {
   return (
     <div className="w-full min-h-screen">
-      <Navbar />
+      {/* Fixed Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Navbar />
+      </div>
+
+      {/* Fixed Hero Background */}
       <Hero />
-      <EventTypes />
-      <EventsSection />
-      <DestinationsSection />
-      <NewsletterSection />
-      <Footer />
+
+      {/* Scrolling Content */}
+      <div className="relative z-10" style={{ marginTop: "100vh" }}>
+        <div className="bg-white">
+          <EventTypes />
+          <EventsSection />
+          <DestinationsSection />
+          <NewsletterSection />
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };
-export default Home;
 
+export default Home;

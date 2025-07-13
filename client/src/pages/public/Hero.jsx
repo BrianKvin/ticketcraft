@@ -34,7 +34,7 @@ const Hero = () => {
     );
   }, [backgroundImages.length]);
 
-  const goToImage = () => {
+  const goToImage = (index) => {
     setCurrentImageIndex(index);
   };
 
@@ -47,11 +47,11 @@ const Hero = () => {
   }, [nextImage, isPaused]);
 
   // Handle touch events for swipe functionality
-  const handleTouchStart = () => {
+  const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
 
-  const handleTouchMove = () => {
+  const handleTouchMove = (e) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
@@ -77,15 +77,22 @@ const Hero = () => {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1 }}
     >
-      {/* Background Images */}
+      {/* Background Images with parallax effect */}
       {backgroundImages.map((image, index) => (
         <div
           key={index}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-2000 ${
+          className={`absolute inset-0 bg-cover bg-center bg-fixed transition-opacity duration-2000 ${
             index === currentImageIndex ? "opacity-100" : "opacity-0"
           }`}
-          style={{ backgroundImage: `url(${image})` }}
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundAttachment: "fixed",
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+          }}
         />
       ))}
 

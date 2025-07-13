@@ -16,6 +16,7 @@ import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
 import Button from "../common/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "../common/Card";
+import ticketImage from "../../assets/images/ticket.jpg";
 
 const EventPage = () => {
   const navigate = useNavigate();
@@ -35,8 +36,7 @@ const EventPage = () => {
             <div
               className="h-[28rem] bg-cover bg-center relative"
               style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')",
+                backgroundImage: `url(${ticketImage})`,
               }}
             >
               <div className="absolute inset-0 bg-black/40"></div>

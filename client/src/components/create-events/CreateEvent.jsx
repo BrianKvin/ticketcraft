@@ -12,6 +12,8 @@ import {
   X,
   Tag,
 } from "lucide-react";
+import Navbar from "../common/Navbar";
+import Footer from "../common/Footer";
 import Button from "../common/Button";
 import Input from "../common/Input";
 
@@ -188,8 +190,10 @@ const CreateEvent = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar />
+
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white shadow-sm border-b pt-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Create New Event
@@ -683,6 +687,8 @@ const CreateEvent = () => {
           </div>
         </form>
       </div>
+
+      <Footer />
     </div>
   );
 };
