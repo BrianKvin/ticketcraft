@@ -67,7 +67,7 @@ const Navbar = () => {
             <Link to="/" className="flex items-center">
               <span
                 className={`text-2xl font-bold transition-colors duration-300 ease-in-out ${
-                  isScrolled ? "text-gray-900" : "text-white"
+                  isScrolled ? "text-gray-900" : "text-gray-900"
                 }`}
               >
                 TicketCraft
@@ -83,7 +83,7 @@ const Navbar = () => {
                     className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200 ease-in-out ${
                       isScrolled
                         ? "text-gray-700 hover:text-green-600"
-                        : "text-white hover:text-green-200"
+                        : "text-gray-700 hover:text-green-600"
                     }`}
                     onMouseEnter={() =>
                       item.dropdown && setActiveDropdown(item.name)
@@ -131,7 +131,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`xl:hidden transition-colors duration-200 ease-in-out ${
-                isScrolled ? "text-gray-900" : "text-white"
+                isScrolled ? "text-gray-900" : "text-gray-900"
               }`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
