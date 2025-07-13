@@ -8,13 +8,49 @@ import cheerImage from "../../assets/images/cheer.jpg";
 import techSummitImage from "../../assets/images/tech-summit.jpg";
 
 const Hero = () => {
-  const backgroundImages = [
-    concertImage,
-    musicImage,
-    drumsImage,
-    audienceImage,
-    cheerImage,
-    techSummitImage,
+  const heroContent = [
+    {
+      image: concertImage,
+      title: "Create Unforgettable",
+      subtitle: "Experiences",
+      description:
+        "The complete event management platform that helps you sell tickets, manage events, and create amazing experiences for your attendees.",
+    },
+    {
+      image: musicImage,
+      title: "Sell Tickets",
+      subtitle: "Instantly",
+      description:
+        "Create and sell tickets with secure QR codes. Get paid instantly and deliver tickets to attendees automatically.",
+    },
+    {
+      image: drumsImage,
+      title: "Manage Events",
+      subtitle: "Seamlessly",
+      description:
+        "Powerful dashboard and mobile app for managing events, attendees, and check-ins from anywhere.",
+    },
+    {
+      image: audienceImage,
+      title: "Connect with",
+      subtitle: "Your Audience",
+      description:
+        "Build relationships with your attendees through our comprehensive event management and communication tools.",
+    },
+    {
+      image: cheerImage,
+      title: "Celebrate",
+      subtitle: "Success",
+      description:
+        "Track your event performance with real-time analytics and insights to make every event better than the last.",
+    },
+    {
+      image: techSummitImage,
+      title: "Scale Your",
+      subtitle: "Business",
+      description:
+        "From small meetups to large conferences, our platform grows with your event business needs.",
+    },
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -24,15 +60,15 @@ const Hero = () => {
 
   const nextImage = useCallback(() => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === backgroundImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === heroContent.length - 1 ? 0 : prevIndex + 1
     );
-  }, [backgroundImages.length]);
+  }, [heroContent.length]);
 
   const prevImage = useCallback(() => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? backgroundImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? heroContent.length - 1 : prevIndex - 1
     );
-  }, [backgroundImages.length]);
+  }, [heroContent.length]);
 
   const goToImage = (index) => {
     setCurrentImageIndex(index);
@@ -69,6 +105,8 @@ const Hero = () => {
     }
   };
 
+  const currentContent = heroContent[currentImageIndex];
+
   return (
     <div
       className="relative w-full h-screen overflow-hidden flex items-center justify-center"
@@ -80,14 +118,14 @@ const Hero = () => {
       style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1 }}
     >
       {/* Background Images with parallax effect */}
-      {backgroundImages.map((image, index) => (
+      {heroContent.map((content, index) => (
         <div
           key={index}
           className={`absolute inset-0 bg-cover bg-center bg-fixed transition-opacity duration-2000 ${
             index === currentImageIndex ? "opacity-100" : "opacity-0"
           }`}
           style={{
-            backgroundImage: `url(${image})`,
+            backgroundImage: `url(${content.image})`,
             backgroundAttachment: "fixed",
             backgroundSize: "cover",
             backgroundPosition: "center center",
@@ -101,14 +139,15 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          Create Unforgettable
-          <span className="block text-green-400">Experiences</span>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight transition-all duration-1000">
+          {currentContent.title}
+          <span className="block text-green-400">
+            {currentContent.subtitle}
+          </span>
         </h1>
 
-        <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto">
-          The complete event management platform that helps you sell tickets,
-          manage events, and create amazing experiences for your attendees.
+        <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto transition-all duration-1000">
+          {currentContent.description}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -123,8 +162,17 @@ const Hero = () => {
             to="/browse-events"
             className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200"
           >
-            Find Events
+            Browse Events
           </Link>
+        </div>
+
+        <div className="mt-8">
+          <a
+            href="#events"
+            className="text-green-400 hover:text-green-300 text-sm font-medium transition-colors duration-200"
+          >
+            ↓ See Featured Events
+          </a>
         </div>
 
         <div className="mt-12 text-sm text-gray-300">
@@ -134,7 +182,7 @@ const Hero = () => {
 
       {/* Navigation Dots */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-        {backgroundImages.map((_, index) => (
+        {heroContent.map((_, index) => (
           <button
             key={index}
             onClick={() => goToImage(index)}
