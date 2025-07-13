@@ -141,7 +141,7 @@ const Navbar = () => {
             {/* CTA Buttons */}
             <div className="hidden md:flex items-center space-x-4">
               <Link
-                to="/events"
+                to="/register"
                 className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200"
               >
                 Get Started
@@ -197,7 +197,7 @@ const Navbar = () => {
                 Contact Sales
               </Link>
               <Link
-                to="/events"
+                to="/register"
                 className="block mt-2 bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
