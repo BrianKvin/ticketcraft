@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { CreditCard, Lock, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import Label from "../common/Label";
+import { RadioGroup, RadioGroupItem } from "../common/RadioGroup";
+import { Card, CardContent, CardHeader, CardTitle } from "../common/Card";
 import { Event, RegistrationData, PaymentSummary } from "../types/event";
 
 const PaymentForm = ({

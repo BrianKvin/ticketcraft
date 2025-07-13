@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Search, Calendar, MapPin, Users, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import EventRegistrationModal from "../components/EventRegistrationModal";
-import { Event } from "../types/event";
+import { useNavigate } from "react-router-dom";
 
 const EventBooking = () => {
-  const [selectedEvent, setSelectedEvent] = (useState < Event) | (null > null);
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -360,12 +359,8 @@ const EventBooking = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const openRegistrationModal = () => {
-    setSelectedEvent(event);
-  };
-
-  const closeRegistrationModal = () => {
-    setSelectedEvent(null);
+  const openRegistrationForm = (event) => {
+    navigate(`/events/${event.id}/register`);
   };
 
   return (
@@ -419,7 +414,7 @@ const EventBooking = () => {
             <div
               key={event.id}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group cursor-pointer"
-              onClick={() => openRegistrationModal(event)}
+              onClick={() => openRegistrationForm(event)}
             >
               <div className="relative h-48 overflow-hidden">
                 <img
@@ -485,15 +480,6 @@ const EventBooking = () => {
           </div>
         )}
       </div>
-
-      {/* Registration Modal */}
-      {selectedEvent && (
-        <EventRegistrationModal
-          event={selectedEvent}
-          isOpen={true}
-          onClose={closeRegistrationModal}
-        />
-      )}
     </div>
   );
 };

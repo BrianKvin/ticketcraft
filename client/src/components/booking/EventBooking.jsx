@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { Calendar, MapPin, Users, CreditCard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const EventBooking = ({ event }) => {
+  const navigate = useNavigate();
   const [ticketQuantity, setTicketQuantity] = useState(1);
-  const [isBooking, setIsBooking] = useState(false);
 
   const handleBooking = () => {
-    setIsBooking(true);
-    // Simulate booking process
-    setTimeout(() => {
-      setIsBooking(false);
-      alert(
-        "Booking successful! You will receive a confirmation email shortly."
-      );
-    }, 2000);
+    // Navigate to the registration form
+    navigate(`/events/${event.id}/register`);
   };
 
   const totalPrice = event.price
@@ -96,24 +91,19 @@ const EventBooking = ({ event }) => {
       {/* Book Button */}
       <button
         onClick={handleBooking}
-        disabled={isBooking || event.availableTickets === 0}
+        disabled={event.availableTickets === 0}
         className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center ${
-          isBooking || event.availableTickets === 0
+          event.availableTickets === 0
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
             : "bg-green-500 hover:bg-green-600 text-white transform hover:scale-105"
         }`}
       >
-        {isBooking ? (
-          <>
-            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-            Processing...
-          </>
-        ) : event.availableTickets === 0 ? (
+        {event.availableTickets === 0 ? (
           "Sold Out"
         ) : (
           <>
             <CreditCard className="w-5 h-5 mr-2" />
-            Book Now
+            Register Now
           </>
         )}
       </button>

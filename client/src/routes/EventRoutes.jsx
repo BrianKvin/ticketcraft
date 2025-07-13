@@ -1,6 +1,7 @@
 import EditEvent from "../pages/event/EditEvent";
 import EventDetails from "../pages/event/EventDetails";
 import ManageEvents from "../pages/event/ManageEvents";
+import EventRegistration from "../pages/event/EventRegistration";
 import OrganizerDashboard from "../components/create-events/OrganizerDashboard";
 import OrganizerProfile from "../components/create-events/OrganizerProfile";
 import OrganizerRegistration from "../components/create-events/OrganizerRegistration";
@@ -23,6 +24,10 @@ const eventRoutes = [
   {
     path: "/events/:id",
     element: <EventDetails />,
+  },
+  {
+    path: "/events/:id/register",
+    element: <EventRegistration />,
   },
   {
     path: "/events/manage",
