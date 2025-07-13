@@ -26,7 +26,7 @@ const BrowseEventsHero = () => {
   }, [nextImage]);
 
   return (
-    <div className="relative w-full h-56 overflow-hidden rounded-lg">
+    <div className="relative w-full h-[28rem] overflow-hidden rounded-lg">
       {/* Background Images */}
       {backgroundImages.map((image, index) => (
         <div

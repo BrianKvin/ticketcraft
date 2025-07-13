@@ -11,12 +11,18 @@ import {
   Settings,
   Sparkles,
   ArrowRight,
+  Edit3,
+  Calendar,
+  MapPin,
+  DollarSign,
+  CheckCircle,
 } from "lucide-react";
 import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
 import Button from "../common/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "../common/Card";
 import ticketImage from "../../assets/images/ticket.jpg";
+import qrCodeImage from "../../assets/images/QR-code.jpg";
 
 const EventPage = () => {
   const navigate = useNavigate();
@@ -52,10 +58,70 @@ const EventPage = () => {
               </div>
             </div>
             <CardContent className="p-8 text-center">
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-muted-foreground mb-8">
                 Effortlessly manage your events, scan QR codes, and reach a
                 wider audience — all in one place.
               </p>
+
+              {/* Process Walkthrough */}
+              <div className="mt-8">
+                <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                  How to Create Your Event
+                </h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {/* Step 1 */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-3">
+                      <Edit3 className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      1. Basic Details
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      Add your event title, description, and category
+                    </p>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-3">
+                      <Calendar className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      2. Schedule & Location
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      Set date, time, and venue details
+                    </p>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mb-3">
+                      <DollarSign className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      3. Pricing & Tickets
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      Configure pricing and ticket types
+                    </p>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-3">
+                      <CheckCircle className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      4. Launch & Manage
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      Publish and monitor your event
+                    </p>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -185,17 +251,12 @@ const EventPage = () => {
         <div className="max-w-6xl mx-auto">
           <Card className="overflow-hidden">
             <div className="grid md:grid-cols-2 gap-0">
-              <div className="bg-gradient-to-br from-primary/20 to-primary/5 p-8 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Smartphone className="w-16 h-16 text-primary" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="w-16 h-2 bg-primary/20 rounded mx-auto"></div>
-                    <div className="w-20 h-2 bg-primary/30 rounded mx-auto"></div>
-                    <div className="w-12 h-2 bg-primary/20 rounded mx-auto"></div>
-                  </div>
-                </div>
+              <div className="w-full h-full">
+                <img
+                  src={qrCodeImage}
+                  alt="QR Code for mobile check-in"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <CardContent className="p-8 flex flex-col justify-center">
                 <h3 className="text-2xl font-bold mb-4">
