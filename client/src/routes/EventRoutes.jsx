@@ -7,6 +7,7 @@ import OrganizerProfile from "../components/create-events/OrganizerProfile";
 import OrganizerRegistration from "../components/create-events/OrganizerRegistration";
 import EventAnalytics from "../pages/event/EventAnalytics";
 import EventPage from "../components/create-events/EventPage";
+import CreateEvent from "../components/create-events/CreateEvent";
 
 const eventRoutes = [
   {
@@ -16,6 +17,10 @@ const eventRoutes = [
   {
     path: "/events",
     element: <EventPage />,
+  },
+  {
+    path: "/events/create",
+    element: <CreateEvent />,
   },
   {
     path: "/events/edit/:id",
