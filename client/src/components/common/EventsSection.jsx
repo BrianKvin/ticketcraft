@@ -40,18 +40,6 @@ const EventsSection = () => {
       price: "$199",
       isFree: false,
     },
-    {
-      id: 4,
-      title: "Art & Culture Night",
-      date: "November 5, 2024",
-      location: "Downtown Gallery District",
-      description:
-        "An evening celebrating local artists and cultural diversity in the community.",
-      image:
-        "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      price: "Free",
-      isFree: true,
-    },
   ];
 
   return (
@@ -59,7 +47,7 @@ const EventsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Upcoming Events
+            Featured Events
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Discover amazing events happening near you and book your tickets
@@ -67,7 +55,7 @@ const EventsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {events.map((event) => (
             <div
               key={event.id}
@@ -125,9 +113,13 @@ const EventsSection = () => {
         <div className="text-center mt-12">
           <Link
             to="/browse-events"
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-200 inline-block"
+            className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full font-semibold transition-all duration-200 inline-flex items-center group"
           >
-            View More Events
+            Browse All Events
+            <ArrowRight
+              size={20}
+              className="ml-2 group-hover:translate-x-1 transition-transform"
+            />
           </Link>
         </div>
       </div>
