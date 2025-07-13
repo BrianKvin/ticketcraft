@@ -1,5 +1,4 @@
 import CreateDestination from "../pages/destination/CreateDestination";
-import EditDestination from "../pages/destination/EditDestination";
 import DestinationDetails from "../pages/destination/DestinationDetails";
 import ManageDestinations from "../pages/destination/ManageDestinations";
 import DestinationDashboard from "../pages/destination/DestinationDashboard";
@@ -13,14 +12,6 @@ const destinationRoutes = [
     element: (
       <ProtectedRoute>
         <CreateDestination />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/destinations/edit/:id",
-    element: (
-      <ProtectedRoute>
-        <EditDestination />
       </ProtectedRoute>
     ),
   },

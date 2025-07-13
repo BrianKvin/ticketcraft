@@ -172,22 +172,22 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
 
       {/* Progress Bar */}
-      <div className="pt-20 pb-8 px-4 bg-muted/30">
+      <div className="pt-20 pb-8 px-4 bg-gray-50">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center">
-                                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
-                      currentStep >= step.number
-                        ? "bg-green-500 text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
-                  >
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
+                    currentStep >= step.number
+                      ? "bg-green-500 text-white"
+                      : "bg-gray-200 text-gray-600"
+                  }`}
+                >
                   {currentStep > step.number ? (
                     <CheckCircle className="w-5 h-5" />
                   ) : (

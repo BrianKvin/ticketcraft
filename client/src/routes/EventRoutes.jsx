@@ -1,4 +1,3 @@
-import CreateEvent from "../components/create-events/CreateEvent";
 import EditEvent from "../pages/event/EditEvent";
 import EventDetails from "../pages/event/EventDetails";
 import ManageEvents from "../pages/event/ManageEvents";
@@ -16,10 +15,6 @@ const eventRoutes = [
   {
     path: "/events",
     element: <EventPage />,
-  },
-  {
-    path: "/events/create",
-    element: <CreateEvent />,
   },
   {
     path: "/events/edit/:id",
