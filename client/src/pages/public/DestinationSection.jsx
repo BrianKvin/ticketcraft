@@ -136,7 +136,7 @@ const DestinationsSection = () => {
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Navigation Arrows - Simple < > symbols within max-w-7xl */}
-          <button
+          {/* <button
             onClick={prevDestination}
             className="absolute -left-12 top-1/2 transform -translate-y-1/2 z-20 bg-white hover:bg-gray-50 text-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 border border-gray-200"
             aria-label="Previous destination"
@@ -150,7 +150,7 @@ const DestinationsSection = () => {
             aria-label="Next destination"
           >
             <ArrowRight size={24} />
-          </button>
+          </button> */}
 
           <div className="bg-white rounded-3xl shadow-2xl overflow-hidden group hover:shadow-3xl transition-all duration-500">
             <div className="relative h-96 overflow-hidden">
