@@ -171,7 +171,7 @@ const Hero = () => {
             href="#events"
             className="text-green-400 hover:text-green-300 text-sm font-medium transition-colors duration-200"
           >
-            ↓ See Featured Events
+            ↓ See Upcoming Events
           </a>
         </div>
 

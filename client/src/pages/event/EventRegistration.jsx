@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
+import Label from "../../components/common/Label";
 import {
   Card,
   CardContent,
@@ -19,6 +20,9 @@ import {
 import PaymentForm from "../../components/forms/PaymentForm";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
+import Textarea from "../../components/common/Textarea";
+import { RadioGroup, RadioGroupItem } from "../../components/common/RadioGroup";
+
 const EventRegistration = () => {
   const { eventId } = useParams();
   const navigate = useNavigate();

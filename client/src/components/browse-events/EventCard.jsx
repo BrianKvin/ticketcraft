@@ -131,7 +131,9 @@ export const RelatedEventCard = ({ event }) => {
           </div>
         </div>
         <button
-          onClick={() => (window.location.href = `/events/${event.id}`)}
+          onClick={() =>
+            (window.location.href = `/events/${event.id}/register`)
+          }
           className="mt-4 w-full border border-green-500 text-green-600 font-semibold py-2 rounded-full hover:bg-green-50 transition-colors"
         >
           Buy Ticket
