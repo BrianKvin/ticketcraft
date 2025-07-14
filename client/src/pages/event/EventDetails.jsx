@@ -8,7 +8,9 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/common/Card";
-import EventCard from "../../components/browse-events/EventCard";
+import EventCard, {
+  RelatedEventCard,
+} from "../../components/browse-events/EventCard";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 
@@ -224,7 +226,7 @@ const EventDetails = () => {
         <h2 className="text-2xl font-bold mb-8">More Events Like These</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {relatedEvents.map((relatedEvent) => (
-            <EventCard key={relatedEvent.id} event={relatedEvent} />
+            <RelatedEventCard key={relatedEvent.id} event={relatedEvent} />
           ))}
         </div>
       </div>
