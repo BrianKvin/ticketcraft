@@ -314,7 +314,7 @@ const EventRegistration = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
 
-      <main className="flex-1 py-8">
+      <main className="flex-1 py-8 mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back Button */}
           <div className="mb-6">
@@ -325,6 +325,100 @@ const EventRegistration = () => {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Events
             </Link>
+          </div>
+
+          {/* Hero Section */}
+          <div className="mb-10">
+            <Card className="w-full overflow-hidden shadow-lg">
+              <div className="flex flex-col md:flex-row">
+                {/* Event Image */}
+                <div className="md:w-2/5 w-full h-64 md:h-auto">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                {/* Event Details */}
+                <div className="md:w-3/5 w-full p-6 flex flex-col justify-between bg-white">
+                  <div>
+                    <h2 className="font-bold text-2xl md:text-3xl mb-2 text-gray-900">
+                      {event.title}
+                    </h2>
+                    <div className="flex items-center text-gray-600 text-base mb-2">
+                      <Calendar className="h-5 w-5 mr-2" />
+                      {event.date}
+                    </div>
+                    <div className="flex items-center text-gray-600 text-base mb-4">
+                      <MapPin className="h-5 w-5 mr-2" />
+                      {event.location}
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {event.price === 0 ? (
+                        <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
+                          Free Event
+                        </span>
+                      ) : (
+                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+                          ${event.price}
+                        </span>
+                      )}
+                      <span className="text-sm text-gray-500">
+                        {event.availableSlots} spots remaining
+                      </span>
+                    </div>
+                  </div>
+                  {/* Action Buttons */}
+                  <div className="flex gap-4 mt-4">
+                    <button
+                      type="button"
+                      className="flex items-center gap-1 px-3 py-2 rounded hover:bg-gray-100 text-gray-700"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                      </svg>
+                      <span>Favorite</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="flex items-center gap-1 px-3 py-2 rounded hover:bg-gray-100 text-gray-700"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M4 4v16h16V4H4zm2 2h12v12H6V6zm3 3v6h6V9H9z" />
+                      </svg>
+                      <span>Share</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="flex items-center gap-1 px-3 py-2 rounded hover:bg-gray-100 text-gray-700"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                      <span>Rate</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
 
           {/* Progress Indicator */}
@@ -354,66 +448,33 @@ const EventRegistration = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content */}
-            <div className="lg:col-span-2">
-              {/* Event Summary */}
-              <Card className="mb-6">
-                <CardContent className="p-6">
-                  <div className="flex gap-4 items-center">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-24 h-24 object-cover rounded-lg border"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-xl mb-1 truncate">
-                        {event.title}
-                      </h3>
-                      <div className="flex items-center text-gray-600 text-sm mb-1">
-                        <Calendar className="h-4 w-4 mr-2" />
-                        {event.date}
-                      </div>
-                      <div className="flex items-center text-gray-600 text-sm mb-2">
-                        <MapPin className="h-4 w-4 mr-2" />
-                        {event.location}
-                      </div>
-                      <div className="flex items-center justify-between flex-wrap gap-2">
-                        {event.price === 0 ? (
-                          <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
-                            Free Event
-                          </span>
-                        ) : (
-                          <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
-                            ${event.price}
-                          </span>
-                        )}
-                        <span className="text-sm text-gray-500">
-                          {event.availableSlots} spots remaining
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Registration Form */}
-              {currentStep === "registration" && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <User className="h-5 w-5" />
-                      Registration Information
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <form
-                      onSubmit={handleRegistrationSubmit}
-                      className="space-y-6"
-                      autoComplete="on"
-                    >
-                      <div className="grid gap-6">
-                        {event.registrationFields.map((field, idx) => (
+          {/* Registration Form Section */}
+          <div className="mb-10">
+            {currentStep === "registration" && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <User className="h-5 w-5" />
+                    Registration Information
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form
+                    onSubmit={handleRegistrationSubmit}
+                    className="space-y-6"
+                    autoComplete="on"
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {event.registrationFields.map((field, idx) => {
+                        // Long-form fields (textarea) span both columns
+                        if (field.type === "textarea") {
+                          return (
+                            <div key={field.id} className="md:col-span-2">
+                              {renderFormField(field)}
+                            </div>
+                          );
+                        }
+                        return (
                           <div key={field.id}>
                             {renderFormField(field)}
                             {/* Helper text for email/phone */}
@@ -428,158 +489,94 @@ const EventRegistration = () => {
                               </p>
                             )}
                           </div>
-                        ))}
-                      </div>
-                      <div className="flex flex-col sm:flex-row justify-between pt-6 border-t gap-4">
-                        <Link
-                          to="/browse-events"
-                          className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors text-center"
-                        >
-                          Cancel
-                        </Link>
-                        <Button
-                          type="submit"
-                          className="bg-green-500 hover:bg-green-600 px-8"
-                          disabled={loading}
-                          autoFocus
-                        >
-                          {event.price === 0
-                            ? "Register Now"
-                            : "Continue to Payment"}
-                        </Button>
-                      </div>
-                    </form>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Payment Form */}
-              {currentStep === "payment" && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <CreditCard className="h-5 w-5" />
-                      Payment Details
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <PaymentForm
-                      event={event}
-                      registrationData={formData}
-                      onSuccess={handlePaymentSuccess}
-                      onBack={() => setCurrentStep("registration")}
-                      onCancel={() => navigate("/browse-events")}
-                    />
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Confirmation */}
-              {currentStep === "confirmation" && (
-                <Card>
-                  <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
-                      <Check className="w-8 h-8 text-green-600" />
+                        );
+                      })}
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      Registration Confirmed!
-                    </h3>
-                    <p className="text-gray-600 mb-6">
-                      You have successfully registered for{" "}
-                      <strong>{event.title}</strong>. A confirmation email will
-                      be sent to your registered email address.
-                    </p>
-                    <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                      <h4 className="font-semibold mb-2">Event Details:</h4>
-                      <p className="text-sm text-gray-600">
-                        {event.date} at {event.location}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        Organized by {event.organizer}
-                      </p>
-                    </div>
-                    <div className="flex gap-4 justify-center">
+                    <div className="flex flex-col sm:flex-row justify-between pt-6 border-t gap-4">
                       <Link
                         to="/browse-events"
-                        className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200"
+                        className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors text-center"
                       >
-                        Browse More Events
+                        Cancel
                       </Link>
-                      <Link
-                        to="/user/dashboard"
-                        className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors"
+                      <Button
+                        type="submit"
+                        className="bg-green-500 hover:bg-green-600 px-8"
+                        disabled={loading}
+                        autoFocus
                       >
-                        Go to Dashboard
-                      </Link>
+                        {event.price === 0
+                          ? "Register Now"
+                          : "Continue to Payment"}
+                      </Button>
                     </div>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
+                  </form>
+                </CardContent>
+              </Card>
+            )}
 
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <Card className="sticky top-8">
+            {/* Payment Form */}
+            {currentStep === "payment" && (
+              <Card>
                 <CardHeader>
-                  <CardTitle>Registration Summary</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <CreditCard className="h-5 w-5" />
+                    Payment Details
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-24 object-cover rounded mb-2"
+                <CardContent>
+                  <PaymentForm
+                    event={event}
+                    registrationData={formData}
+                    onSuccess={handlePaymentSuccess}
+                    onBack={() => setCurrentStep("registration")}
+                    onCancel={() => navigate("/browse-events")}
                   />
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Event:</span>
-                    <span className="font-medium truncate max-w-[120px]">
-                      {event.title}
-                    </span>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Confirmation */}
+            {currentStep === "confirmation" && (
+              <Card>
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                    <Check className="w-8 h-8 text-green-600" />
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Date:</span>
-                    <span className="font-medium">{event.date}</span>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Registration Confirmed!
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    You have successfully registered for{" "}
+                    <strong>{event.title}</strong>. A confirmation email will be
+                    sent to your registered email address.
+                  </p>
+                  <div className="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h4 className="font-semibold mb-2">Event Details:</h4>
+                    <p className="text-sm text-gray-600">
+                      {event.date} at {event.location}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Organized by {event.organizer}
+                    </p>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Location:</span>
-                    <span className="font-medium truncate max-w-[120px]">
-                      {event.location}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Price:</span>
-                    <span className="font-medium">
-                      {event.price === 0 ? "Free" : `$${event.price}`}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Available:</span>
-                    <span className="font-medium">
-                      {event.availableSlots} spots
-                    </span>
-                  </div>
-                  {/* Countdown */}
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Countdown:</span>
-                    <span className="font-medium">
-                      {getDaysUntilEvent(event.date)} days
-                    </span>
-                  </div>
-                  <a
-                    href={`mailto:info@example.com`}
-                    className="text-green-600 hover:underline text-sm block mt-2"
-                  >
-                    Contact Organizer
-                  </a>
-                  <hr className="my-4" />
-                  <div className="flex justify-between font-semibold">
-                    <span>Total:</span>
-                    <span>
-                      {event.price === 0 ? "Free" : `$${event.price}`}
-                    </span>
+                  <div className="flex gap-4 justify-center">
+                    <Link
+                      to="/browse-events"
+                      className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold transition-colors duration-200"
+                    >
+                      Browse More Events
+                    </Link>
+                    <Link
+                      to="/user/dashboard"
+                      className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      Go to Dashboard
+                    </Link>
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            )}
           </div>
         </div>
       </main>
