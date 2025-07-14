@@ -402,26 +402,30 @@ const EventDetails = () => {
           {/* Right Column: Ticket Price and Map */}
           <div className="flex flex-col gap-8">
             {/* Ticket Price Card */}
-            <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-between min-h-[180px]">
-              <h2 className="text-lg font-semibold mb-2">Ticket Price</h2>
-              <div className="text-2xl font-bold text-green-600 mb-4">
-                {event.price}
-              </div>
-              <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold mb-2">
-                Buy Ticket
-              </button>
-              <div className="text-xs text-gray-500">Minimum age: 18+</div>
-            </div>
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-3">Ticket Price</h3>
+                <div className="text-3xl font-bold text-primary mb-4">
+                  {event.price}
+                </div>
+                <Button className="w-full mb-3">Buy Ticket</Button>
+                <p className="text-sm text-muted-foreground">{event.minAge}</p>
+              </CardContent>
+            </Card>
+
             {/* Map Card */}
-            <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center min-h-[180px]">
-              <h2 className="text-lg font-semibold mb-2">Location Map</h2>
-              {/* Placeholder for map */}
-              <div className="w-full h-32 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
-                <MapPin className="h-8 w-8 mx-auto mb-2" />
-                <p className="text-sm">Interactive map would be here</p>
-                <p className="text-xs">{event.location}</p>
-              </div>
-            </div>
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-3">Location</h3>
+                <div className="w-full h-48 bg-muted rounded-lg flex items-center justify-center">
+                  <div className="text-center text-muted-foreground">
+                    <MapPin className="h-8 w-8 mx-auto mb-2" />
+                    <p className="text-sm">Interactive map would be here</p>
+                    <p className="text-xs">{event.location}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
