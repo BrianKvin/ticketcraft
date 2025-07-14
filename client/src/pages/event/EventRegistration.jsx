@@ -22,6 +22,14 @@ import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
 import Textarea from "../../components/common/Textarea";
 import { RadioGroup, RadioGroupItem } from "../../components/common/RadioGroup";
+import dayjs from "dayjs";
+
+const getDaysUntilEvent = (dateStr) => {
+  const eventDate = dayjs(dateStr);
+  const now = dayjs();
+  const diff = eventDate.diff(now, "day");
+  return diff > 0 ? diff : 0;
+};
 
 const EventRegistration = () => {
   const { eventId } = useParams();
@@ -319,14 +327,31 @@ const EventRegistration = () => {
             </Link>
           </div>
 
-          {/* Page Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Event Registration
-            </h1>
-            <p className="text-gray-600">
-              Complete your registration for this event
-            </p>
+          {/* Progress Indicator */}
+          <div className="mb-8 flex items-center gap-2 text-sm text-gray-500 justify-center">
+            <span
+              className={
+                currentStep === "registration" ? "font-bold text-green-600" : ""
+              }
+            >
+              1. Registration Info
+            </span>
+            <span>→</span>
+            <span
+              className={
+                currentStep === "payment" ? "font-bold text-green-600" : ""
+              }
+            >
+              2. Payment
+            </span>
+            <span>→</span>
+            <span
+              className={
+                currentStep === "confirmation" ? "font-bold text-green-600" : ""
+              }
+            >
+              3. Confirmation
+            </span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -335,23 +360,25 @@ const EventRegistration = () => {
               {/* Event Summary */}
               <Card className="mb-6">
                 <CardContent className="p-6">
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 items-center">
                     <img
                       src={event.image}
                       alt={event.title}
-                      className="w-24 h-24 object-cover rounded-lg"
+                      className="w-24 h-24 object-cover rounded-lg border"
                     />
-                    <div className="flex-1">
-                      <h3 className="font-bold text-xl mb-2">{event.title}</h3>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-xl mb-1 truncate">
+                        {event.title}
+                      </h3>
                       <div className="flex items-center text-gray-600 text-sm mb-1">
                         <Calendar className="h-4 w-4 mr-2" />
                         {event.date}
                       </div>
-                      <div className="flex items-center text-gray-600 text-sm mb-3">
+                      <div className="flex items-center text-gray-600 text-sm mb-2">
                         <MapPin className="h-4 w-4 mr-2" />
                         {event.location}
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between flex-wrap gap-2">
                         {event.price === 0 ? (
                           <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
                             Free Event
@@ -383,21 +410,38 @@ const EventRegistration = () => {
                     <form
                       onSubmit={handleRegistrationSubmit}
                       className="space-y-6"
+                      autoComplete="on"
                     >
                       <div className="grid gap-6">
-                        {event.registrationFields.map(renderFormField)}
+                        {event.registrationFields.map((field, idx) => (
+                          <div key={field.id}>
+                            {renderFormField(field)}
+                            {/* Helper text for email/phone */}
+                            {field.type === "email" && (
+                              <p className="text-xs text-gray-400 mt-1">
+                                We'll never share your email.
+                              </p>
+                            )}
+                            {field.type === "phone" && (
+                              <p className="text-xs text-gray-400 mt-1">
+                                Format: +1 (555) 123-4567
+                              </p>
+                            )}
+                          </div>
+                        ))}
                       </div>
-
-                      <div className="flex justify-between pt-6 border-t">
+                      <div className="flex flex-col sm:flex-row justify-between pt-6 border-t gap-4">
                         <Link
                           to="/browse-events"
-                          className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors"
+                          className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors text-center"
                         >
                           Cancel
                         </Link>
                         <Button
                           type="submit"
                           className="bg-green-500 hover:bg-green-600 px-8"
+                          disabled={loading}
+                          autoFocus
                         >
                           {event.price === 0
                             ? "Register Now"
@@ -434,7 +478,7 @@ const EventRegistration = () => {
               {currentStep === "confirmation" && (
                 <Card>
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
                       <Check className="w-8 h-8 text-green-600" />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">
@@ -480,9 +524,16 @@ const EventRegistration = () => {
                   <CardTitle>Registration Summary</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-24 object-cover rounded mb-2"
+                  />
                   <div className="flex justify-between">
                     <span className="text-gray-600">Event:</span>
-                    <span className="font-medium">{event.title}</span>
+                    <span className="font-medium truncate max-w-[120px]">
+                      {event.title}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Date:</span>
@@ -490,7 +541,9 @@ const EventRegistration = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Location:</span>
-                    <span className="font-medium">{event.location}</span>
+                    <span className="font-medium truncate max-w-[120px]">
+                      {event.location}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Price:</span>
@@ -504,6 +557,19 @@ const EventRegistration = () => {
                       {event.availableSlots} spots
                     </span>
                   </div>
+                  {/* Countdown */}
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Countdown:</span>
+                    <span className="font-medium">
+                      {getDaysUntilEvent(event.date)} days
+                    </span>
+                  </div>
+                  <a
+                    href={`mailto:info@example.com`}
+                    className="text-green-600 hover:underline text-sm block mt-2"
+                  >
+                    Contact Organizer
+                  </a>
                   <hr className="my-4" />
                   <div className="flex justify-between font-semibold">
                     <span>Total:</span>
