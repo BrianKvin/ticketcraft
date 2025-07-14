@@ -46,8 +46,8 @@ const EventHighlight = () => {
         <div className="grid lg:grid-cols-5 gap-8 items-center">
           {/* Left Side: Primary Content (3/5 width for 60/40 split) */}
           <div className="lg:col-span-3">
-            <div className="space-y-6">
-              <div className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
                 <h2 className="text-4xl font-bold text-primary leading-tight">
                   Plan Your Ideal Gathering
                 </h2>
