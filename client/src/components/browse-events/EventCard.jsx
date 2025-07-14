@@ -6,24 +6,8 @@ const EventCard = ({ event }) => {
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    // Navigate to user registration with event data
-    navigate("/user/register", {
-      state: {
-        event: {
-          id: event.id,
-          title: event.title,
-          date: event.date,
-          location: event.location,
-          price: event.isFree ? 0 : parseInt(event.price.replace("$", "")),
-          isFree: event.isFree,
-          totalSlots: 200,
-          availableSlots: 45,
-          category: "General",
-          image: event.image,
-          description: event.description,
-        },
-      },
-    });
+    // Navigate to event details page
+    navigate(`/events/${event.id}`);
   };
 
   return (
