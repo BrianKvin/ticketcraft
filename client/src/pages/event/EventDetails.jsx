@@ -1,216 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
-// import Navbar from "../../components/common/Navbar";
-// import Footer from "../../components/common/Footer";
-// import EventBooking from "../../components/booking/EventBooking";
-// import { Heart, Share2, Star, Calendar, MapPin } from "lucide-react";
-// import EventCard from "../../components/browse-events/EventCard";
-
-// const EventDetails = () => {
-//   const { id } = useParams();
-//   const [event, setEvent] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     // Simulate fetching event data
-//     const fetchEvent = async () => {
-//       setLoading(true);
-//       // Mock event data - replace with actual API call
-//       const mockEvent = {
-//         id: id,
-//         title: "Summer Music Festival",
-//         date: "August 15-17, 2024",
-//         time: "6:00 PM",
-//         location: "Central Park, NYC",
-//         description:
-//           "Three days of incredible music featuring top artists from around the world. Experience the best live performances in an amazing outdoor setting.",
-//         image:
-//           "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-//         price: "From $89",
-//         capacity: 5000,
-//         availableTickets: 1200,
-//         category: "Music",
-//         organizer: "Music Events Inc.",
-//         contact: "info@musicevents.com",
-//         phone: "+1 (555) 123-4567",
-//       };
-
-//       setTimeout(() => {
-//         setEvent(mockEvent);
-//         setLoading(false);
-//       }, 1000);
-//     };
-
-//     fetchEvent();
-//   }, [id]);
-
-//   if (loading) {
-//     return (
-//       <div className="min-h-screen bg-gray-50">
-//         <Navbar />
-//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
-//           <div className="animate-pulse">
-//             <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
-//             <div className="h-64 bg-gray-200 rounded mb-4"></div>
-//             <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
-//             <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-//           </div>
-//         </div>
-//         <Footer />
-//       </div>
-//     );
-//   }
-
-//   if (!event) {
-//     return (
-//       <div className="min-h-screen bg-gray-50">
-//         <Navbar />
-//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
-//           <div className="text-center">
-//             <h1 className="text-2xl font-bold text-gray-900 mb-4">
-//               Event Not Found
-//             </h1>
-//             <p className="text-gray-600">
-//               The event you're looking for doesn't exist.
-//             </p>
-//           </div>
-//         </div>
-//         <Footer />
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-gray-50">
-//       <Navbar />
-
-//       {/* Section 1: Header Background */}
-//       <div className="w-full flex justify-center bg-gray-100">
-//         <div className="w-full max-w-7xl h-56 md:h-64 lg:h-72 rounded-b-3xl overflow-hidden relative flex items-center justify-center">
-//           <img
-//             src={event.image}
-//             alt={event.title}
-//             className="w-full h-full object-cover object-center"
-//           />
-//           <div className="absolute inset-0 bg-black/30" />
-//         </div>
-//       </div>
-
-//       {/* Section 2: Event Details (Main Content) */}
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-//         {/* Main Content (2/3 width) */}
-//         <div className="lg:col-span-2 space-y-8">
-//           {/* Row 1: Event Name & Interactive Row */}
-//           <div>
-//             <h1 className="text-3xl font-bold text-gray-900 mb-4">
-//               {event.title}
-//             </h1>
-//             <div className="flex flex-wrap gap-4 mb-6">
-//               <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow hover:bg-gray-100 transition">
-//                 <Heart className="w-5 h-5 text-red-500" />
-//                 <span className="font-medium text-gray-700">
-//                   Add to Favorite
-//                 </span>
-//               </button>
-//               <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow hover:bg-gray-100 transition">
-//                 <Share2 className="w-5 h-5 text-blue-500" />
-//                 <span className="font-medium text-gray-700">Share Event</span>
-//               </button>
-//               <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow hover:bg-gray-100 transition">
-//                 <Star className="w-5 h-5 text-yellow-400" />
-//                 <span className="font-medium text-gray-700">Rate Event</span>
-//               </button>
-//             </div>
-//             {/* When & Where Cards */}
-//             <div className="flex flex-col md:flex-row gap-4">
-//               {/* When Card */}
-//               <div className="flex-1 bg-white rounded-xl shadow p-4 flex flex-col justify-center min-h-[90px]">
-//                 <div className="flex items-center gap-2 mb-2">
-//                   <Calendar className="w-5 h-5 text-green-600" />
-//                   <span className="font-semibold text-gray-800">
-//                     {event.date}
-//                   </span>
-//                 </div>
-//                 <div className="text-gray-600 text-sm ml-7">
-//                   <div>{event.time || "08:00 - 10:00"}</div>
-//                   <div>GMT +7:00</div>
-//                 </div>
-//               </div>
-//               {/* Where Card */}
-//               <div className="flex-1 bg-white rounded-xl shadow p-4 flex flex-col justify-center min-h-[90px]">
-//                 <div className="flex items-center gap-2 mb-2">
-//                   <MapPin className="w-5 h-5 text-blue-600" />
-//                   <span className="font-semibold text-gray-800">Where</span>
-//                 </div>
-//                 <div className="text-gray-600 text-sm ml-7">
-//                   {event.location}
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Row 2: Ticket Price & Map, stacked vertically */}
-//           <div className="flex flex-col md:flex-row gap-4">
-//             {/* Ticket Price Card */}
-//             <div className="flex-1 bg-white rounded-xl shadow p-6 flex flex-col items-center justify-between min-h-[180px]">
-//               <h2 className="text-lg font-semibold mb-2">Ticket Price</h2>
-//               <div className="text-2xl font-bold text-green-600 mb-4">
-//                 {event.price}
-//               </div>
-//               <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold mb-2">
-//                 Buy Ticket
-//               </button>
-//               <div className="text-xs text-gray-500">Minimum age: 18+</div>
-//             </div>
-//             {/* Map Card */}
-//             <div className="flex-1 bg-white rounded-xl shadow p-6 flex flex-col items-center justify-center min-h-[180px]">
-//               <h2 className="text-lg font-semibold mb-2">Location Map</h2>
-//               {/* Placeholder for map */}
-//               <div className="w-full h-32 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
-//                 Map Placeholder
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* About the Event Card */}
-//           <div className="bg-white rounded-xl shadow p-6 min-h-[220px]">
-//             <h2 className="text-lg font-semibold mb-4">About the Event</h2>
-//             <p className="text-gray-700 leading-relaxed">{event.description}</p>
-//           </div>
-//         </div>
-
-//         {/* More Events Section (1/3 width on desktop, full width on mobile) */}
-//         <div className="lg:col-span-1 mt-12 lg:mt-0">
-//           <h2 className="text-xl font-bold text-gray-900 mb-6">
-//             More Events Like These
-//           </h2>
-//           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 gap-6">
-//             {[1, 2, 3].map((i) => (
-//               <EventCard
-//                 key={i}
-//                 event={{
-//                   id: i,
-//                   title: `Related Event ${i}`,
-//                   date: "Jan 1, 2025",
-//                   location: "Sample Venue",
-//                   description: "This is a related event description.",
-//                   image: event.image,
-//                   price: "$99",
-//                   isFree: false,
-//                 }}
-//               />
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default EventDetails;
-
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, Share2, Star, Calendar, MapPin, ArrowLeft } from "lucide-react";
@@ -222,6 +9,8 @@ import {
   CardTitle,
 } from "../../components/common/Card";
 import EventCard from "../../components/browse-events/EventCard";
+import Navbar from "../../components/common/Navbar";
+import Footer from "../../components/common/Footer";
 
 // Sample event data - in a real app, this would come from an API
 const sampleEvents = [
@@ -317,9 +106,10 @@ const EventDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Section 1: Header Background */}
-      <div className="relative w-full">
-        <div className="mx-auto max-w-7xl relative h-64 overflow-hidden">
+      <div className="w-full mt-20">
+        <div className="mx-auto max-w-7xl relative h-64 overflow-hidden flex items-center justify-center">
           <img
             src={event.image}
             alt={event.title}
@@ -339,7 +129,7 @@ const EventDetails = () => {
       </div>
 
       {/* Section 2: Event Details (Main Content) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column: Event Name and About the Event */}
           <div className="lg:col-span-2 flex flex-col gap-8">
@@ -412,7 +202,6 @@ const EventDetails = () => {
                 <p className="text-sm text-muted-foreground">{event.minAge}</p>
               </CardContent>
             </Card>
-
             {/* Map Card */}
             <Card>
               <CardContent className="p-6">
@@ -439,6 +228,7 @@ const EventDetails = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
