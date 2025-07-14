@@ -4,7 +4,10 @@ import {
   QrCode,
   Smartphone,
   Mail,
+  Clock,
   MapPin,
+  Star,
+  Headphones,
   Users,
   Calendar,
   Shield,
@@ -12,6 +15,12 @@ import {
 import EventTypes from "./EventTypes";
 import Navbar from "../../components/common/Navbar";
 import Footer from "../../components/common/Footer";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/common/Card";
 
 const AboutSection = () => {
   const keyFeatures = [
@@ -59,11 +68,46 @@ const AboutSection = () => {
     },
   ];
 
-  const stats = [
-    { number: "1M+", label: "Events Created" },
-    { number: "500+", label: "Destinations" },
-    { number: "24/7", label: "Support" },
-    { number: "98%", label: "Satisfaction" },
+  // const benefits = [
+  //   {
+  //     icon: Shield,
+  //     title: "Secure & Reliable",
+  //     description: "Bank-level security for all transactions and ticket data",
+  //   },
+  //   {
+  //     icon: Mail,
+  //     title: "Instant Delivery",
+  //     description: "Tickets delivered instantly via email with QR codes",
+  //   },
+  //   {
+  //     icon: Users,
+  //     title: "Easy Management",
+  //     description:
+  //       "Simple dashboard for organizers to manage events and attendees",
+  //   },
+  // ];
+
+  const chooseUs = [
+    {
+      icon: Clock,
+      title: "Easy Planning",
+      description: "Streamlined event creation and management tools",
+    },
+    {
+      icon: Shield,
+      title: "Secure Platform",
+      description: "Enterprise-grade security for all your events",
+    },
+    {
+      icon: Star,
+      title: "Premium Experience",
+      description: "Professional features for memorable events",
+    },
+    {
+      icon: Headphones,
+      title: "24/7 Support",
+      description: "Round-the-clock assistance when you need it",
+    },
   ];
 
   return (
@@ -140,6 +184,22 @@ const AboutSection = () => {
             ))}
           </div>
 
+          {/* Trust Indicators */}
+          {/* <div className="text-center mb-12">
+            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+              <div className="flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-green-600 mr-3" />
+                <h3 className="text-2xl font-bold text-gray-900">
+                  Bank-Level Security
+                </h3>
+              </div>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Your data and transactions are protected with enterprise-grade
+                security. We process millions of tickets safely every year.
+              </p>
+            </div>
+          </div> */}
+
           {/* How It Works Section - No Background */}
           <div className="mb-20">
             <div className="text-center mb-12">
@@ -204,46 +264,59 @@ const AboutSection = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="text-center mb-16">
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              Why Choose TicketCraft?
+          {/* <div className="text-center mb-16">
+            <h3 className="text-3xl font-bold text-gray-900 mb-12">
+              Why Choose Our Platform?
             </h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12">
-              Join thousands of event organizers and attendees who trust our
-              platform for seamless event experiences.
-            </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                      {stat.number}
-                    </div>
-                    <div className="text-gray-600 font-medium">
-                      {stat.label}
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="group">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors duration-300">
+                    <benefit.icon size={28} className="text-green-600" />
                   </div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                    {benefit.title}
+                  </h4>
+                  <p className="text-gray-600">{benefit.description}</p>
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
-          {/* Trust Indicators */}
-          <div className="text-center mb-12">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-              <div className="flex items-center justify-center mb-4">
-                <Shield className="w-8 h-8 text-green-600 mr-3" />
-                <h3 className="text-2xl font-bold text-gray-900">
-                  Bank-Level Security
-                </h3>
-              </div>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Your data and transactions are protected with enterprise-grade
-                security. We process millions of tickets safely every year.
+          {/* Bottom Section: Informational Overview */}
+          <Card className="bg-background">
+            <CardHeader className="text-left pb-8">
+              <CardTitle className="text-3xl font-bold">
+                Why Choose Us for Your Next Event?
+              </CardTitle>
+              <p className="text-muted-foreground text-lg mt-2">
+                Join thousands of event organizers who trust our platform to
+                deliver exceptional experiences and seamless event management.
               </p>
-            </div>
-          </div>
+            </CardHeader>
+
+            <CardContent className="pt-0">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {chooseUs.map((item, index) => (
+                  <Card
+                    key={index}
+                    className="text-center border-muted/50 hover:border-primary/20 transition-colors"
+                  >
+                    <CardContent className="p-6 space-y-3">
+                      <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <item.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <h4 className="font-semibold">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {item.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
           <EventTypes />
 
