@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Heart } from "lucide-react";
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate();
@@ -34,8 +34,8 @@ const EventCard = ({ event }) => {
           alt={event.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold text-gray-900">
-          {event.isFree ? "Free" : `From ${event.price}`}
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full flex items-center justify-center">
+          <Heart className="w-5 h-5 text-red-500" />
         </div>
       </div>
 
