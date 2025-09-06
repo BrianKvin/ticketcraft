@@ -51,7 +51,7 @@ const EventPerformanceAnalytics = () => {
       checkInRate: 97.1,
       satisfactionScore: 4.6,
       netPromoterScore: 78,
-      costPerAcquisition: 45.50,
+      costPerAcquisition: 45.5,
       returnOnInvestment: 320,
       trends: {
         revenue: { current: 145200, previous: 120000, change: 21.0 },
@@ -86,7 +86,7 @@ const EventPerformanceAnalytics = () => {
       checkInRate: 0,
       satisfactionScore: 0,
       netPromoterScore: 0,
-      costPerAcquisition: 38.20,
+      costPerAcquisition: 38.2,
       returnOnInvestment: 0,
       trends: {
         revenue: { current: 15600, previous: 0, change: 0 },
@@ -121,7 +121,7 @@ const EventPerformanceAnalytics = () => {
       checkInRate: 95.6,
       satisfactionScore: 4.5,
       netPromoterScore: 72,
-      costPerAcquisition: 32.80,
+      costPerAcquisition: 32.8,
       returnOnInvestment: 180,
       trends: {
         revenue: { current: 25600, previous: 22000, change: 16.4 },
@@ -156,7 +156,7 @@ const EventPerformanceAnalytics = () => {
       checkInRate: 98.2,
       satisfactionScore: 4.7,
       netPromoterScore: 85,
-      costPerAcquisition: 42.30,
+      costPerAcquisition: 42.3,
       returnOnInvestment: 280,
       trends: {
         revenue: { current: 67500, previous: 58000, change: 16.4 },
@@ -191,7 +191,7 @@ const EventPerformanceAnalytics = () => {
       checkInRate: 0,
       satisfactionScore: 0,
       netPromoterScore: 0,
-      costPerAcquisition: 28.50,
+      costPerAcquisition: 28.5,
       returnOnInvestment: 0,
       trends: {
         revenue: { current: 3750, previous: 0, change: 0 },
@@ -202,7 +202,13 @@ const EventPerformanceAnalytics = () => {
     },
   ];
 
-  const categories = ["Technology", "Business", "Food & Drink", "Marketing", "Startup"];
+  const categories = [
+    "Technology",
+    "Business",
+    "Food & Drink",
+    "Marketing",
+    "Startup",
+  ];
   const timeRanges = [
     { value: "7d", label: "Last 7 Days" },
     { value: "30d", label: "Last 30 Days" },
@@ -217,8 +223,9 @@ const EventPerformanceAnalytics = () => {
     { value: "satisfaction", label: "Satisfaction" },
   ];
 
-  const filteredEvents = events.filter(event => {
-    const matchesCategory = eventFilter === "all" || event.category === eventFilter;
+  const filteredEvents = events.filter((event) => {
+    const matchesCategory =
+      eventFilter === "all" || event.category === eventFilter;
     return matchesCategory;
   });
 
@@ -274,7 +281,7 @@ const EventPerformanceAnalytics = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-start">
@@ -367,7 +374,10 @@ const EventPerformanceAnalytics = () => {
               <p className="text-sm font-medium text-gray-600">Total Revenue</p>
               <p className="text-2xl font-bold text-gray-900">
                 {formatCurrency(
-                  filteredEvents.reduce((sum, event) => sum + event.totalRevenue, 0)
+                  filteredEvents.reduce(
+                    (sum, event) => sum + event.totalRevenue,
+                    0
+                  )
                 )}
               </p>
             </div>
@@ -380,9 +390,14 @@ const EventPerformanceAnalytics = () => {
               <Users className="h-6 w-6 text-green-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Attendees</p>
+              <p className="text-sm font-medium text-gray-600">
+                Total Attendees
+              </p>
               <p className="text-2xl font-bold text-gray-900">
-                {filteredEvents.reduce((sum, event) => sum + event.ticketsSold, 0)}
+                {filteredEvents.reduce(
+                  (sum, event) => sum + event.ticketsSold,
+                  0
+                )}
               </p>
             </div>
           </div>
@@ -394,11 +409,15 @@ const EventPerformanceAnalytics = () => {
               <Target className="h-6 w-6 text-yellow-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Avg. Conversion</p>
+              <p className="text-sm font-medium text-gray-600">
+                Avg. Conversion
+              </p>
               <p className="text-2xl font-bold text-gray-900">
                 {formatPercentage(
-                  filteredEvents.reduce((sum, event) => sum + event.conversionRate, 0) /
-                  filteredEvents.length
+                  filteredEvents.reduce(
+                    (sum, event) => sum + event.conversionRate,
+                    0
+                  ) / filteredEvents.length
                 )}
               </p>
             </div>
@@ -415,9 +434,9 @@ const EventPerformanceAnalytics = () => {
               <p className="text-2xl font-bold text-gray-900">
                 {(
                   filteredEvents
-                    .filter(event => event.rating > 0)
+                    .filter((event) => event.rating > 0)
                     .reduce((sum, event) => sum + event.rating, 0) /
-                  filteredEvents.filter(event => event.rating > 0).length
+                  filteredEvents.filter((event) => event.rating > 0).length
                 ).toFixed(1)}
               </p>
             </div>
@@ -428,7 +447,9 @@ const EventPerformanceAnalytics = () => {
       {/* Event Performance Table */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-8">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Event Performance Details</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Event Performance Details
+          </h2>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -477,7 +498,11 @@ const EventPerformanceAnalytics = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(event.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
+                        event.status
+                      )}`}
+                    >
                       {event.status}
                     </span>
                   </td>
@@ -527,7 +552,11 @@ const EventPerformanceAnalytics = () => {
                           style={{ width: `${getPerformanceScore(event)}%` }}
                         ></div>
                       </div>
-                      <span className={`text-sm font-medium ${getPerformanceColor(getPerformanceScore(event))}`}>
+                      <span
+                        className={`text-sm font-medium ${getPerformanceColor(
+                          getPerformanceScore(event)
+                        )}`}
+                      >
                         {getPerformanceScore(event).toFixed(0)}%
                       </span>
                     </div>
@@ -536,7 +565,11 @@ const EventPerformanceAnalytics = () => {
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center">
                         {getTrendIcon(event.trends.revenue.change)}
-                        <span className={`text-sm ml-1 ${getTrendColor(event.trends.revenue.change)}`}>
+                        <span
+                          className={`text-sm ml-1 ${getTrendColor(
+                            event.trends.revenue.change
+                          )}`}
+                        >
                           {event.trends.revenue.change > 0 ? "+" : ""}
                           {formatPercentage(event.trends.revenue.change)}
                         </span>
@@ -554,13 +587,18 @@ const EventPerformanceAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Top Performing Events */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Performing Events</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Top Performing Events
+          </h3>
           <div className="space-y-4">
             {filteredEvents
               .sort((a, b) => b.totalRevenue - a.totalRevenue)
               .slice(0, 3)
               .map((event, index) => (
-                <div key={event.id} className="flex items-center justify-between">
+                <div
+                  key={event.id}
+                  className="flex items-center justify-between"
+                >
                   <div className="flex items-center">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
                       <span className="text-sm font-medium text-blue-700">
@@ -591,7 +629,9 @@ const EventPerformanceAnalytics = () => {
 
         {/* Key Insights */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Insights</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Key Insights
+          </h3>
           <div className="space-y-4">
             <div className="flex items-start">
               <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
@@ -651,13 +691,17 @@ const EventPerformanceAnalytics = () => {
 
       {/* Performance Trends */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Performance Trends</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Performance Trends
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 mb-2">
               {formatPercentage(
-                filteredEvents.reduce((sum, event) => sum + event.conversionRate, 0) /
-                filteredEvents.length
+                filteredEvents.reduce(
+                  (sum, event) => sum + event.conversionRate,
+                  0
+                ) / filteredEvents.length
               )}
             </div>
             <div className="text-sm text-gray-600">Avg. Conversion Rate</div>
@@ -670,9 +714,10 @@ const EventPerformanceAnalytics = () => {
             <div className="text-2xl font-bold text-gray-900 mb-2">
               {formatPercentage(
                 filteredEvents
-                  .filter(event => event.satisfactionScore > 0)
+                  .filter((event) => event.satisfactionScore > 0)
                   .reduce((sum, event) => sum + event.satisfactionScore, 0) /
-                filteredEvents.filter(event => event.satisfactionScore > 0).length
+                  filteredEvents.filter((event) => event.satisfactionScore > 0)
+                    .length
               )}
             </div>
             <div className="text-sm text-gray-600">Avg. Satisfaction</div>
@@ -685,9 +730,10 @@ const EventPerformanceAnalytics = () => {
             <div className="text-2xl font-bold text-gray-900 mb-2">
               {formatPercentage(
                 filteredEvents
-                  .filter(event => event.completionRate > 0)
+                  .filter((event) => event.completionRate > 0)
                   .reduce((sum, event) => sum + event.completionRate, 0) /
-                filteredEvents.filter(event => event.completionRate > 0).length
+                  filteredEvents.filter((event) => event.completionRate > 0)
+                    .length
               )}
             </div>
             <div className="text-sm text-gray-600">Avg. Completion</div>
@@ -700,9 +746,10 @@ const EventPerformanceAnalytics = () => {
             <div className="text-2xl font-bold text-gray-900 mb-2">
               {Math.round(
                 filteredEvents
-                  .filter(event => event.netPromoterScore > 0)
+                  .filter((event) => event.netPromoterScore > 0)
                   .reduce((sum, event) => sum + event.netPromoterScore, 0) /
-                filteredEvents.filter(event => event.netPromoterScore > 0).length
+                  filteredEvents.filter((event) => event.netPromoterScore > 0)
+                    .length
               )}
             </div>
             <div className="text-sm text-gray-600">Avg. NPS Score</div>
@@ -718,4 +765,3 @@ const EventPerformanceAnalytics = () => {
 };
 
 export default EventPerformanceAnalytics;
-

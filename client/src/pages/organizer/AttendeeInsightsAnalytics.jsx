@@ -134,11 +134,27 @@ const AttendeeInsightsAnalytics = () => {
         { aspect: "Value for Money", rating: 4.4, count: 1234 },
       ],
       commonFeedback: [
-        { feedback: "Great networking opportunities", count: 234, sentiment: "positive" },
-        { feedback: "Excellent speakers and content", count: 189, sentiment: "positive" },
+        {
+          feedback: "Great networking opportunities",
+          count: 234,
+          sentiment: "positive",
+        },
+        {
+          feedback: "Excellent speakers and content",
+          count: 189,
+          sentiment: "positive",
+        },
         { feedback: "Well organized event", count: 156, sentiment: "positive" },
-        { feedback: "Could improve food quality", count: 98, sentiment: "negative" },
-        { feedback: "Too crowded in some areas", count: 76, sentiment: "negative" },
+        {
+          feedback: "Could improve food quality",
+          count: 98,
+          sentiment: "negative",
+        },
+        {
+          feedback: "Too crowded in some areas",
+          count: 76,
+          sentiment: "negative",
+        },
         { feedback: "Need more seating", count: 65, sentiment: "negative" },
       ],
       netPromoterScore: {
@@ -187,8 +203,10 @@ const AttendeeInsightsAnalytics = () => {
   ];
 
   const getTrendIcon = (value, threshold = 0) => {
-    if (value > threshold) return <TrendingUp className="h-4 w-4 text-green-500" />;
-    if (value < threshold) return <TrendingDown className="h-4 w-4 text-red-500" />;
+    if (value > threshold)
+      return <TrendingUp className="h-4 w-4 text-green-500" />;
+    if (value < threshold)
+      return <TrendingDown className="h-4 w-4 text-red-500" />;
     return <div className="h-4 w-4" />;
   };
 
@@ -214,7 +232,7 @@ const AttendeeInsightsAnalytics = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-start">
@@ -223,7 +241,8 @@ const AttendeeInsightsAnalytics = () => {
               Attendee Insights Analytics
             </h1>
             <p className="text-gray-600">
-              Deep insights into attendee demographics, behavior, and satisfaction
+              Deep insights into attendee demographics, behavior, and
+              satisfaction
             </p>
           </div>
           <div className="flex items-center space-x-3">
@@ -304,7 +323,9 @@ const AttendeeInsightsAnalytics = () => {
               <Users className="h-6 w-6 text-blue-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Attendees</p>
+              <p className="text-sm font-medium text-gray-600">
+                Total Attendees
+              </p>
               <p className="text-2xl font-bold text-gray-900">
                 {attendeeData.overview.totalAttendees.toLocaleString()}
               </p>
@@ -359,7 +380,9 @@ const AttendeeInsightsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Age Distribution */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Age Distribution</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Age Distribution
+          </h3>
           <div className="space-y-3">
             {attendeeData.demographics.ageGroups.map((group, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -387,7 +410,9 @@ const AttendeeInsightsAnalytics = () => {
 
         {/* Gender Distribution */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Gender Distribution</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Gender Distribution
+          </h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
@@ -398,28 +423,38 @@ const AttendeeInsightsAnalytics = () => {
                 <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
                   <div
                     className="bg-blue-500 h-2 rounded-full"
-                    style={{ width: `${attendeeData.overview.genderDistribution.male}%` }}
+                    style={{
+                      width: `${attendeeData.overview.genderDistribution.male}%`,
+                    }}
                   ></div>
                 </div>
                 <span className="text-sm text-gray-600 w-12 text-right">
-                  {formatPercentage(attendeeData.overview.genderDistribution.male)}
+                  {formatPercentage(
+                    attendeeData.overview.genderDistribution.male
+                  )}
                 </span>
               </div>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <div className="w-3 h-3 bg-pink-500 rounded-full mr-3"></div>
-                <span className="text-sm font-medium text-gray-900">Female</span>
+                <span className="text-sm font-medium text-gray-900">
+                  Female
+                </span>
               </div>
               <div className="flex items-center">
                 <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
                   <div
                     className="bg-pink-500 h-2 rounded-full"
-                    style={{ width: `${attendeeData.overview.genderDistribution.female}%` }}
+                    style={{
+                      width: `${attendeeData.overview.genderDistribution.female}%`,
+                    }}
                   ></div>
                 </div>
                 <span className="text-sm text-gray-600 w-12 text-right">
-                  {formatPercentage(attendeeData.overview.genderDistribution.female)}
+                  {formatPercentage(
+                    attendeeData.overview.genderDistribution.female
+                  )}
                 </span>
               </div>
             </div>
@@ -432,11 +467,15 @@ const AttendeeInsightsAnalytics = () => {
                 <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
                   <div
                     className="bg-purple-500 h-2 rounded-full"
-                    style={{ width: `${attendeeData.overview.genderDistribution.other}%` }}
+                    style={{
+                      width: `${attendeeData.overview.genderDistribution.other}%`,
+                    }}
                   ></div>
                 </div>
                 <span className="text-sm text-gray-600 w-12 text-right">
-                  {formatPercentage(attendeeData.overview.genderDistribution.other)}
+                  {formatPercentage(
+                    attendeeData.overview.genderDistribution.other
+                  )}
                 </span>
               </div>
             </div>
@@ -448,65 +487,73 @@ const AttendeeInsightsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Top Job Titles */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Job Titles</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Top Job Titles
+          </h3>
           <div className="space-y-3">
-            {attendeeData.demographics.jobTitles.slice(0, 6).map((job, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-sm font-medium text-blue-700">
-                      {index + 1}
+            {attendeeData.demographics.jobTitles
+              .slice(0, 6)
+              .map((job, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-sm font-medium text-blue-700">
+                        {index + 1}
+                      </span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">
+                      {job.title}
                     </span>
                   </div>
-                  <span className="text-sm font-medium text-gray-900">
-                    {job.title}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-20 bg-gray-200 rounded-full h-2 mr-3">
-                    <div
-                      className="bg-blue-500 h-2 rounded-full"
-                      style={{ width: `${job.percentage}%` }}
-                    ></div>
+                  <div className="flex items-center">
+                    <div className="w-20 bg-gray-200 rounded-full h-2 mr-3">
+                      <div
+                        className="bg-blue-500 h-2 rounded-full"
+                        style={{ width: `${job.percentage}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm text-gray-600 w-12 text-right">
+                      {job.count}
+                    </span>
                   </div>
-                  <span className="text-sm text-gray-600 w-12 text-right">
-                    {job.count}
-                  </span>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
         {/* Top Industries */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Industries</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Top Industries
+          </h3>
           <div className="space-y-3">
-            {attendeeData.demographics.industries.slice(0, 6).map((industry, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-sm font-medium text-green-700">
-                      {index + 1}
+            {attendeeData.demographics.industries
+              .slice(0, 6)
+              .map((industry, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-sm font-medium text-green-700">
+                        {index + 1}
+                      </span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900">
+                      {industry.industry}
                     </span>
                   </div>
-                  <span className="text-sm font-medium text-gray-900">
-                    {industry.industry}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-20 bg-gray-200 rounded-full h-2 mr-3">
-                    <div
-                      className="bg-green-500 h-2 rounded-full"
-                      style={{ width: `${industry.percentage}%` }}
-                    ></div>
+                  <div className="flex items-center">
+                    <div className="w-20 bg-gray-200 rounded-full h-2 mr-3">
+                      <div
+                        className="bg-green-500 h-2 rounded-full"
+                        style={{ width: `${industry.percentage}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm text-gray-600 w-12 text-right">
+                      {industry.count}
+                    </span>
                   </div>
-                  <span className="text-sm text-gray-600 w-12 text-right">
-                    {industry.count}
-                  </span>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
@@ -515,7 +562,9 @@ const AttendeeInsightsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Top Countries */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Countries</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Top Countries
+          </h3>
           <div className="space-y-3">
             {attendeeData.overview.topCountries.map((country, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -547,7 +596,9 @@ const AttendeeInsightsAnalytics = () => {
 
         {/* Top Cities */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Cities</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Top Cities
+          </h3>
           <div className="space-y-3">
             {attendeeData.overview.topCities.map((city, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -582,43 +633,54 @@ const AttendeeInsightsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Registration Patterns */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Registration Patterns</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Registration Patterns
+          </h3>
           <div className="space-y-3">
-            {attendeeData.behavior.registrationPatterns.map((pattern, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                  <span className="text-sm font-medium text-gray-900">
-                    {pattern.period}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
-                    <div
-                      className="bg-blue-500 h-2 rounded-full"
-                      style={{ width: `${pattern.percentage}%` }}
-                    ></div>
+            {attendeeData.behavior.registrationPatterns.map(
+              (pattern, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                    <span className="text-sm font-medium text-gray-900">
+                      {pattern.period}
+                    </span>
                   </div>
-                  <span className="text-sm text-gray-600 w-12 text-right">
-                    {pattern.count}
-                  </span>
+                  <div className="flex items-center">
+                    <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
+                      <div
+                        className="bg-blue-500 h-2 rounded-full"
+                        style={{ width: `${pattern.percentage}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm text-gray-600 w-12 text-right">
+                      {pattern.count}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
 
         {/* Engagement Levels */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Engagement Levels</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Engagement Levels
+          </h3>
           <div className="space-y-3">
             {attendeeData.behavior.engagementLevels.map((level, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className={`w-3 h-3 rounded-full mr-3 ${
-                    level.level === 'High' ? 'bg-green-500' :
-                    level.level === 'Medium' ? 'bg-yellow-500' : 'bg-red-500'
-                  }`}></div>
+                  <div
+                    className={`w-3 h-3 rounded-full mr-3 ${
+                      level.level === "High"
+                        ? "bg-green-500"
+                        : level.level === "Medium"
+                        ? "bg-yellow-500"
+                        : "bg-red-500"
+                    }`}
+                  ></div>
                   <span className="text-sm font-medium text-gray-900">
                     {level.level}
                   </span>
@@ -627,8 +689,11 @@ const AttendeeInsightsAnalytics = () => {
                   <div className="w-24 bg-gray-200 rounded-full h-2 mr-3">
                     <div
                       className={`h-2 rounded-full ${
-                        level.level === 'High' ? 'bg-green-500' :
-                        level.level === 'Medium' ? 'bg-yellow-500' : 'bg-red-500'
+                        level.level === "High"
+                          ? "bg-green-500"
+                          : level.level === "Medium"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
                       }`}
                       style={{ width: `${level.percentage}%` }}
                     ></div>
@@ -647,34 +712,40 @@ const AttendeeInsightsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Satisfaction Breakdown */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Satisfaction Breakdown</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Satisfaction Breakdown
+          </h3>
           <div className="space-y-3">
-            {attendeeData.feedback.satisfactionBreakdown.map((aspect, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <span className="text-sm font-medium text-gray-900">
-                    {aspect.aspect}
-                  </span>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-20 bg-gray-200 rounded-full h-2 mr-3">
-                    <div
-                      className="bg-blue-500 h-2 rounded-full"
-                      style={{ width: `${(aspect.rating / 5) * 100}%` }}
-                    ></div>
+            {attendeeData.feedback.satisfactionBreakdown.map(
+              (aspect, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <span className="text-sm font-medium text-gray-900">
+                      {aspect.aspect}
+                    </span>
                   </div>
-                  <span className="text-sm text-gray-600 w-12 text-right">
-                    {aspect.rating.toFixed(1)}
-                  </span>
+                  <div className="flex items-center">
+                    <div className="w-20 bg-gray-200 rounded-full h-2 mr-3">
+                      <div
+                        className="bg-blue-500 h-2 rounded-full"
+                        style={{ width: `${(aspect.rating / 5) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm text-gray-600 w-12 text-right">
+                      {aspect.rating.toFixed(1)}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
 
         {/* Common Feedback */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Common Feedback</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Common Feedback
+          </h3>
           <div className="space-y-3">
             {attendeeData.feedback.commonFeedback.map((feedback, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -684,7 +755,11 @@ const AttendeeInsightsAnalytics = () => {
                   </span>
                 </div>
                 <div className="flex items-center">
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${getSentimentColor(feedback.sentiment)}`}>
+                  <span
+                    className={`px-2 py-1 text-xs font-medium rounded-full ${getSentimentColor(
+                      feedback.sentiment
+                    )}`}
+                  >
                     {feedback.sentiment}
                   </span>
                   <span className="text-sm text-gray-600 ml-2">
@@ -699,7 +774,9 @@ const AttendeeInsightsAnalytics = () => {
 
       {/* Social Media Activity */}
       <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Social Media Activity</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Social Media Activity
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900 mb-2">
@@ -730,7 +807,9 @@ const AttendeeInsightsAnalytics = () => {
 
       {/* Key Insights */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Insights</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Key Insights
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="flex items-start">
             <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
@@ -817,4 +896,3 @@ const AttendeeInsightsAnalytics = () => {
 };
 
 export default AttendeeInsightsAnalytics;
-

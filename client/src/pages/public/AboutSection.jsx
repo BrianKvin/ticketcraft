@@ -40,7 +40,7 @@ const EventHighlight = () => {
   ];
 
   return (
-    <section className="py-16 px-4 max-w-7xl mx-auto space-y-16">
+    <section className="py-16 px-4 max-w-[1500px] mx-auto space-y-16">
       {/* Top Section: Feature Area */}
       <div className="bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 rounded-lg p-8">
         <div className="grid lg:grid-cols-5 gap-8 items-center">

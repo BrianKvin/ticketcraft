@@ -176,7 +176,7 @@ const OrganizerDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -200,7 +200,7 @@ const OrganizerDashboard = () => {
 
       {/* Success Message */}
       {location.state?.message && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 pt-4">
           <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
             <div className="flex">
               <div className="text-green-800">{location.state.message}</div>
@@ -209,7 +209,7 @@ const OrganizerDashboard = () => {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {stats.map((stat, index) => (

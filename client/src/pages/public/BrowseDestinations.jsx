@@ -124,7 +124,7 @@ const BrowseDestinations = () => {
 
       {/* Search Bar */}
       <div className="bg-white py-6 pt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white shadow-lg rounded-2xl py-2 px-4 flex items-center space-x-4">
             <div className="flex-grow">
               <Input
@@ -153,7 +153,7 @@ const BrowseDestinations = () => {
 
       {/* Featured Destinations Carousel */}
       <div className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             {/* Left Arrow */}
             <button
@@ -211,7 +211,7 @@ const BrowseDestinations = () => {
 
       {/* Promotional Ribbon */}
       <div className="py-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="h-48 rounded-2xl bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center text-center relative overflow-hidden"
             style={{
@@ -237,7 +237,7 @@ const BrowseDestinations = () => {
 
       {/* Section Title */}
       <div className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Browse Destinations
           </h2>

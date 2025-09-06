@@ -412,7 +412,7 @@ const Waitlist = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-start">

@@ -69,7 +69,7 @@ const DestinationDashboardContainer = ({ children }) => {
       <Navbar />
       {/* Top Bar - Fixed positioning to account for navbar */}
       <div className="bg-white border-b shadow-sm fixed top-24 left-0 right-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <h1 className="text-lg md:text-2xl font-bold text-gray-900">
             Destination Dashboard
           </h1>

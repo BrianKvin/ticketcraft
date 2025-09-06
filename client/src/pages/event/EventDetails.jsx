@@ -111,7 +111,7 @@ const EventDetails = () => {
       <Navbar />
       {/* Section 1: Header Background */}
       <div className="w-full mt-20">
-        <div className="mx-auto max-w-7xl relative h-64 overflow-hidden flex items-center justify-center">
+        <div className="mx-auto max-w-[1500px] relative h-64 overflow-hidden flex items-center justify-center">
           <img
             src={event.image}
             alt={event.title}
@@ -131,7 +131,7 @@ const EventDetails = () => {
       </div>
 
       {/* Section 2: Event Details (Main Content) */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column: Event Name and About the Event */}
           <div className="lg:col-span-2 flex flex-col gap-8">
@@ -222,7 +222,7 @@ const EventDetails = () => {
       </div>
 
       {/* Section 3: More Events */}
-      <div className="mx-auto max-w-7xl px-4 py-16">
+      <div className="mx-auto max-w-[1500px] px-4 py-16">
         <h2 className="text-2xl font-bold mb-8">More Events Like These</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {relatedEvents.map((relatedEvent) => (

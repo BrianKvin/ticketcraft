@@ -70,7 +70,7 @@ const RevenueReportsAnalytics = () => {
         refunds: { count: 12, amount: 2400 },
         netRevenue: 142800,
         profitMargin: 78.5,
-        costPerAcquisition: 45.50,
+        costPerAcquisition: 45.5,
         returnOnInvestment: 320,
         trends: {
           revenue: { current: 145200, previous: 120000, change: 21.0 },
@@ -86,14 +86,14 @@ const RevenueReportsAnalytics = () => {
         totalRevenue: 15600,
         ticketsSold: 78,
         totalCapacity: 100,
-        averageTicketPrice: 200.00,
+        averageTicketPrice: 200.0,
         revenueBreakdown: {
           premium: { count: 78, price: 200, revenue: 15600 },
         },
         refunds: { count: 0, amount: 0 },
         netRevenue: 15600,
         profitMargin: 0,
-        costPerAcquisition: 38.20,
+        costPerAcquisition: 38.2,
         returnOnInvestment: 0,
         trends: {
           revenue: { current: 15600, previous: 0, change: 0 },
@@ -109,7 +109,7 @@ const RevenueReportsAnalytics = () => {
         totalRevenue: 25600,
         ticketsSold: 320,
         totalCapacity: 350,
-        averageTicketPrice: 80.00,
+        averageTicketPrice: 80.0,
         revenueBreakdown: {
           vip: { count: 100, price: 150, revenue: 15000 },
           general: { count: 220, price: 80, revenue: 17600 },
@@ -117,7 +117,7 @@ const RevenueReportsAnalytics = () => {
         refunds: { count: 8, amount: 1200 },
         netRevenue: 24400,
         profitMargin: 65.2,
-        costPerAcquisition: 32.80,
+        costPerAcquisition: 32.8,
         returnOnInvestment: 180,
         trends: {
           revenue: { current: 25600, previous: 22000, change: 16.4 },
@@ -133,7 +133,7 @@ const RevenueReportsAnalytics = () => {
         totalRevenue: 67500,
         ticketsSold: 450,
         totalCapacity: 500,
-        averageTicketPrice: 150.00,
+        averageTicketPrice: 150.0,
         revenueBreakdown: {
           earlyBird: { count: 200, price: 120, revenue: 24000 },
           regular: { count: 200, price: 150, revenue: 30000 },
@@ -142,7 +142,7 @@ const RevenueReportsAnalytics = () => {
         refunds: { count: 15, amount: 2250 },
         netRevenue: 65250,
         profitMargin: 72.8,
-        costPerAcquisition: 42.30,
+        costPerAcquisition: 42.3,
         returnOnInvestment: 280,
         trends: {
           revenue: { current: 67500, previous: 58000, change: 16.4 },
@@ -158,14 +158,14 @@ const RevenueReportsAnalytics = () => {
         totalRevenue: 3750,
         ticketsSold: 25,
         totalCapacity: 200,
-        averageTicketPrice: 150.00,
+        averageTicketPrice: 150.0,
         revenueBreakdown: {
           student: { count: 25, price: 150, revenue: 3750 },
         },
         refunds: { count: 1, amount: 75 },
         netRevenue: 3675,
         profitMargin: 0,
-        costPerAcquisition: 28.50,
+        costPerAcquisition: 28.5,
         returnOnInvestment: 0,
         trends: {
           revenue: { current: 3750, previous: 0, change: 0 },
@@ -224,7 +224,7 @@ const RevenueReportsAnalytics = () => {
     { value: "comparison", label: "Year-over-Year" },
   ];
 
-  const filteredEvents = revenueData.eventBreakdown.filter(event => {
+  const filteredEvents = revenueData.eventBreakdown.filter((event) => {
     const matchesEvent = eventFilter === "all" || event.title === eventFilter;
     return matchesEvent;
   });
@@ -266,7 +266,7 @@ const RevenueReportsAnalytics = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-start">
@@ -362,7 +362,11 @@ const RevenueReportsAnalytics = () => {
               </p>
               <div className="flex items-center mt-1">
                 {getTrendIcon(revenueData.overview.revenueGrowth)}
-                <span className={`text-sm ml-1 ${getTrendColor(revenueData.overview.revenueGrowth)}`}>
+                <span
+                  className={`text-sm ml-1 ${getTrendColor(
+                    revenueData.overview.revenueGrowth
+                  )}`}
+                >
                   +{formatPercentage(revenueData.overview.revenueGrowth)}
                 </span>
               </div>
@@ -382,7 +386,11 @@ const RevenueReportsAnalytics = () => {
               </p>
               <div className="flex items-center mt-1">
                 {getTrendIcon(revenueData.overview.ticketGrowth)}
-                <span className={`text-sm ml-1 ${getTrendColor(revenueData.overview.ticketGrowth)}`}>
+                <span
+                  className={`text-sm ml-1 ${getTrendColor(
+                    revenueData.overview.ticketGrowth
+                  )}`}
+                >
                   +{formatPercentage(revenueData.overview.ticketGrowth)}
                 </span>
               </div>
@@ -396,13 +404,13 @@ const RevenueReportsAnalytics = () => {
               <Target className="h-6 w-6 text-yellow-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Avg. Ticket Price</p>
+              <p className="text-sm font-medium text-gray-600">
+                Avg. Ticket Price
+              </p>
               <p className="text-2xl font-bold text-gray-900">
                 {formatCurrency(revenueData.overview.averageTicketPrice)}
               </p>
-              <div className="text-sm text-gray-500 mt-1">
-                Per ticket
-              </div>
+              <div className="text-sm text-gray-500 mt-1">Per ticket</div>
             </div>
           </div>
         </div>
@@ -417,9 +425,7 @@ const RevenueReportsAnalytics = () => {
               <p className="text-2xl font-bold text-gray-900">
                 {formatCurrency(revenueData.overview.netRevenue)}
               </p>
-              <div className="text-sm text-gray-500 mt-1">
-                After refunds
-              </div>
+              <div className="text-sm text-gray-500 mt-1">After refunds</div>
             </div>
           </div>
         </div>
@@ -429,7 +435,9 @@ const RevenueReportsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Revenue Sources */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Revenue Sources</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Revenue Sources
+          </h3>
           <div className="space-y-3">
             {revenueData.revenueSources.map((source, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -457,7 +465,9 @@ const RevenueReportsAnalytics = () => {
 
         {/* Payment Methods */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Methods</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Payment Methods
+          </h3>
           <div className="space-y-3">
             {revenueData.paymentMethods.map((method, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -487,7 +497,9 @@ const RevenueReportsAnalytics = () => {
       {/* Event Revenue Breakdown */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-8">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Event Revenue Breakdown</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Event Revenue Breakdown
+          </h2>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -530,13 +542,15 @@ const RevenueReportsAnalytics = () => {
                       <div className="text-sm font-medium text-gray-900">
                         {event.title}
                       </div>
-                      <div className="text-sm text-gray-500">
-                        {event.date}
-                      </div>
+                      <div className="text-sm text-gray-500">{event.date}</div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(event.status)}`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
+                        event.status
+                      )}`}
+                    >
                       {event.status}
                     </span>
                   </td>
@@ -546,7 +560,11 @@ const RevenueReportsAnalytics = () => {
                     </div>
                     <div className="flex items-center">
                       {getTrendIcon(event.trends.revenue.change)}
-                      <span className={`text-xs ml-1 ${getTrendColor(event.trends.revenue.change)}`}>
+                      <span
+                        className={`text-xs ml-1 ${getTrendColor(
+                          event.trends.revenue.change
+                        )}`}
+                      >
                         {event.trends.revenue.change > 0 ? "+" : ""}
                         {formatPercentage(event.trends.revenue.change)}
                       </span>
@@ -581,7 +599,9 @@ const RevenueReportsAnalytics = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">
-                      {event.returnOnInvestment > 0 ? `${event.returnOnInvestment}%` : "N/A"}
+                      {event.returnOnInvestment > 0
+                        ? `${event.returnOnInvestment}%`
+                        : "N/A"}
                     </div>
                   </td>
                 </tr>
@@ -593,7 +613,9 @@ const RevenueReportsAnalytics = () => {
 
       {/* Monthly Revenue Trend */}
       <div className="bg-white rounded-lg border border-gray-200 p-6 mb-8">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Monthly Revenue Trend</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Monthly Revenue Trend
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
           {revenueData.monthlyRevenue.map((month, index) => (
             <div key={index} className="text-center">
@@ -604,9 +626,7 @@ const RevenueReportsAnalytics = () => {
               <div className="text-xs text-gray-500">
                 {month.tickets} tickets
               </div>
-              <div className="text-xs text-gray-500">
-                {month.events} events
-              </div>
+              <div className="text-xs text-gray-500">{month.events} events</div>
             </div>
           ))}
         </div>
@@ -616,16 +636,22 @@ const RevenueReportsAnalytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         {/* Refund Breakdown */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Refund Analysis</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Refund Analysis
+          </h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-gray-900">Total Refunds</div>
+              <div className="text-sm font-medium text-gray-900">
+                Total Refunds
+              </div>
               <div className="text-lg font-semibold text-gray-900">
                 {formatCurrency(revenueData.refunds.totalRefunds)}
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-gray-900">Refund Rate</div>
+              <div className="text-sm font-medium text-gray-900">
+                Refund Rate
+              </div>
               <div className="text-lg font-semibold text-gray-900">
                 {formatPercentage(revenueData.refunds.refundRate)}
               </div>
@@ -645,16 +671,22 @@ const RevenueReportsAnalytics = () => {
 
         {/* Revenue Projections */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Revenue Projections</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            Revenue Projections
+          </h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-gray-900">Next Month</div>
+              <div className="text-sm font-medium text-gray-900">
+                Next Month
+              </div>
               <div className="text-lg font-semibold text-gray-900">
                 {formatCurrency(revenueData.projections.nextMonth)}
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-gray-900">Next Quarter</div>
+              <div className="text-sm font-medium text-gray-900">
+                Next Quarter
+              </div>
               <div className="text-lg font-semibold text-gray-900">
                 {formatCurrency(revenueData.projections.nextQuarter)}
               </div>
@@ -666,7 +698,9 @@ const RevenueReportsAnalytics = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="text-sm font-medium text-gray-900">Growth Rate</div>
+              <div className="text-sm font-medium text-gray-900">
+                Growth Rate
+              </div>
               <div className="flex items-center">
                 <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
                 <span className="text-lg font-semibold text-green-600">
@@ -680,7 +714,9 @@ const RevenueReportsAnalytics = () => {
 
       {/* Key Insights */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Revenue Insights</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Key Revenue Insights
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="flex items-start">
             <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
@@ -767,4 +803,3 @@ const RevenueReportsAnalytics = () => {
 };
 
 export default RevenueReportsAnalytics;
-

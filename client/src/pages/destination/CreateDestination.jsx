@@ -123,7 +123,7 @@ const CreateDestination = () => {
         <>
           {/* Hero Section with Split Layout */}
           <section className="pt-20 pb-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 {/* Left Side - Content */}
                 <div className="space-y-8">
@@ -209,7 +209,7 @@ const CreateDestination = () => {
 
           {/* Destination Features Grid */}
           <section className="py-16 bg-muted/30">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                   Everything Your Destination Needs
@@ -310,7 +310,7 @@ const CreateDestination = () => {
 
           {/* Call to Action Section */}
           <section className="py-16">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-12">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                   Ready to Showcase Your Destination?

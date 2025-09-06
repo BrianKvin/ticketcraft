@@ -334,7 +334,7 @@ const EventTemplates = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
       <div className="mb-8">
         <div className="flex justify-between items-start">
@@ -724,4 +724,3 @@ const EventTemplates = () => {
 };
 
 export default EventTemplates;
-

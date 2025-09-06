@@ -156,7 +156,7 @@ const UserRegistration = () => {
       <main className="flex-1 pt-24">
         {/* Header */}
         <div className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Event Registration
             </h1>
@@ -168,7 +168,7 @@ const UserRegistration = () => {
 
         {/* Mobile Event Summary */}
         <div className="lg:hidden bg-white border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="max-w-[1500px] mx-auto px-4 sm:px-6 py-4">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-semibold text-gray-900">
@@ -191,7 +191,7 @@ const UserRegistration = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Enhanced Event Details Card */}
             <div className="lg:col-span-1 order-2 lg:order-1">

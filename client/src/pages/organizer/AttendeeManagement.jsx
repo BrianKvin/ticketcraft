@@ -275,7 +275,7 @@ const AttendeeManagement = () => {
   };
 
   return (
-    <div className="p-6">
+    <div>
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -566,4 +566,3 @@ const AttendeeManagement = () => {
 };
 
 export default AttendeeManagement;
-

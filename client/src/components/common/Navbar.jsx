@@ -37,7 +37,7 @@ const Navbar = () => {
     <>
       {/* Green bar */}
       <div className="bg-green-500 h-8 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-end text-white text-sm font-medium">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-end text-white text-sm font-medium">
           <div className="flex items-center space-x-6">
             {user ? (
               <>
@@ -83,7 +83,7 @@ const Navbar = () => {
             : "top-8 bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center">
@@ -164,7 +164,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="xl:hidden bg-white border-t border-gray-200 shadow-lg">
-            <div className="max-w-7xl mx-auto px-4 py-2 max-h-96 overflow-y-auto">
+            <div className="max-w-[1500px] mx-auto px-4 py-2 max-h-96 overflow-y-auto">
               {navItems.map((item) => (
                 <div key={item.name}>
                   <Link

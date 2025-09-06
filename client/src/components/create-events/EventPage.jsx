@@ -37,7 +37,7 @@ const EventPage = () => {
 
       {/* Hero Background Section */}
       <section className="pt-20 pb-16 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1500px] mx-auto">
           <Card className="overflow-hidden">
             <div
               className="h-[28rem] bg-cover bg-center relative"

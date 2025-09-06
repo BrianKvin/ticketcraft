@@ -17,24 +17,34 @@ const OrganizerLayout = ({ children }) => {
 
   return (
     <div className={`min-h-screen bg-gray-50 ${isDarkMode ? "dark" : ""}`}>
-      {/* Sidebar */}
-      <OrganizerSidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
+      <div className="max-w-[1500px] mx-auto flex">
+        {/* Sidebar */}
+        <div className="hidden lg:block w-64 flex-shrink-0">
+          <OrganizerSidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
+        </div>
 
-      {/* Main Content */}
-      <div className="lg:pl-64">
-        {/* Header */}
-        <OrganizerHeader
-          onMenuToggle={toggleSidebar}
-          isDarkMode={isDarkMode}
-          onThemeToggle={toggleTheme}
-        />
+        {/* Main Content */}
+        <div className="flex-1 min-w-0">
+          {/* Header */}
+          <OrganizerHeader
+            onMenuToggle={toggleSidebar}
+            isDarkMode={isDarkMode}
+            onThemeToggle={toggleTheme}
+          />
 
-        {/* Page Content */}
-        <main className="p-6">{children}</main>
+          {/* Page Content */}
+          <main className="w-full">
+            <div className="p-6">{children}</div>
+          </main>
+        </div>
+      </div>
+
+      {/* Mobile Sidebar Overlay */}
+      <div className="lg:hidden">
+        <OrganizerSidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
       </div>
     </div>
   );
 };
 
 export default OrganizerLayout;
-
