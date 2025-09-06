@@ -32,6 +32,21 @@ const DashboardNavbar = ({ user, activeSection }) => {
     },
     { id: "agenda", label: "Agenda", href: "/user/dashboard?section=agenda" },
     {
+      id: "networking",
+      label: "Networking",
+      href: "/user/dashboard?section=networking",
+    },
+    {
+      id: "notifications",
+      label: "Notifications",
+      href: "/user/dashboard?section=notifications",
+    },
+    {
+      id: "analytics",
+      label: "Analytics",
+      href: "/user/dashboard?section=analytics",
+    },
+    {
       id: "my-event",
       label: "My Event",
       href: "/user/dashboard?section=my-event",

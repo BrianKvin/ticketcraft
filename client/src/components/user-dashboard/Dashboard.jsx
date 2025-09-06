@@ -7,6 +7,9 @@ import DashboardExhibitors from "./DashboardExhibitors";
 import DashboardAgenda from "./DashboardAgenda";
 import DashboardMyEvent from "./DashboardMyEvent";
 import DashboardMyBadge from "./DashboardMyBadge";
+import AttendeeDiscovery from "./AttendeeDiscovery";
+import NotificationsCenter from "./NotificationsCenter";
+import PersonalAnalytics from "./PersonalAnalytics";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -43,11 +46,31 @@ const Dashboard = () => {
       case "agenda":
         return <DashboardAgenda eventData={eventData} />;
       case "my-event":
-        return <DashboardMyEvent eventData={eventData} registration={registration} />;
+        return (
+          <DashboardMyEvent eventData={eventData} registration={registration} />
+        );
       case "my-badge":
-        return <DashboardMyBadge eventData={eventData} user={user} registration={registration} />;
+        return (
+          <DashboardMyBadge
+            eventData={eventData}
+            user={user}
+            registration={registration}
+          />
+        );
+      case "networking":
+        return <AttendeeDiscovery eventData={eventData} />;
+      case "notifications":
+        return <NotificationsCenter eventData={eventData} />;
+      case "analytics":
+        return <PersonalAnalytics eventData={eventData} user={user} />;
       default:
-        return <DashboardHome eventData={eventData} user={user} registration={registration} />;
+        return (
+          <DashboardHome
+            eventData={eventData}
+            user={user}
+            registration={registration}
+          />
+        );
     }
   };
 
