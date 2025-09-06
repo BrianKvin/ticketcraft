@@ -3,26 +3,26 @@ import { Link } from "react-router-dom";
 import {
   Search,
   Filter,
-  Plus,
+  Download,
   Calendar,
   MapPin,
   Users,
   DollarSign,
   Eye,
   Edit,
-  Trash2,
   MoreVertical,
+  Plus,
+  RefreshCw,
   Clock,
   CheckCircle,
   XCircle,
   AlertCircle,
   BarChart3,
-  Download,
   Share2,
   Copy,
 } from "lucide-react";
 
-const AllEvents = () => {
+const AdminEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
@@ -49,9 +49,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80",
       tags: ["AI", "Machine Learning", "Innovation", "Tech"],
-      organizer: "TechCorp Events",
+      organizer: {
+        name: "TechCorp Events",
+        email: "events@techcorp.com",
+        verified: true,
+      },
       createdAt: "2024-01-15",
       lastModified: "2024-03-10",
+      attendees: 485,
+      checkIns: 420,
+      noShows: 65,
     },
     {
       id: 2,
@@ -72,9 +79,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80",
       tags: ["Leadership", "Management", "Strategy", "Executive"],
-      organizer: "Leadership Institute",
+      organizer: {
+        name: "Leadership Institute",
+        email: "contact@leadershipinstitute.com",
+        verified: true,
+      },
       createdAt: "2024-02-01",
       lastModified: "2024-03-05",
+      attendees: 78,
+      checkIns: 0,
+      noShows: 0,
     },
     {
       id: 3,
@@ -95,9 +109,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
       tags: ["Food", "Wine", "Culinary", "Tasting"],
-      organizer: "Culinary Events Co.",
+      organizer: {
+        name: "Culinary Events Co.",
+        email: "info@culinaryevents.com",
+        verified: true,
+      },
       createdAt: "2023-12-01",
       lastModified: "2024-02-08",
+      attendees: 320,
+      checkIns: 315,
+      noShows: 5,
     },
     {
       id: 4,
@@ -118,9 +139,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
       tags: ["Digital Marketing", "SEO", "Social Media", "Content"],
-      organizer: "Marketing Pro Events",
+      organizer: {
+        name: "Marketing Pro Events",
+        email: "hello@marketingpro.com",
+        verified: true,
+      },
       createdAt: "2023-11-15",
       lastModified: "2024-01-18",
+      attendees: 450,
+      checkIns: 445,
+      noShows: 5,
     },
     {
       id: 5,
@@ -141,9 +169,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80",
       tags: ["Startup", "Pitch", "Investment", "Entrepreneurship"],
-      organizer: "Startup Hub",
+      organizer: {
+        name: "Startup Hub",
+        email: "events@startuphub.com",
+        verified: false,
+      },
       createdAt: "2024-02-20",
       lastModified: "2024-03-12",
+      attendees: 25,
+      checkIns: 0,
+      noShows: 0,
     },
     {
       id: 6,
@@ -164,9 +199,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
       tags: ["Wellness", "Health", "Retreat", "Mindfulness"],
-      organizer: "Wellness Events",
+      organizer: {
+        name: "Wellness Events",
+        email: "info@wellnessevents.com",
+        verified: true,
+      },
       createdAt: "2024-03-01",
       lastModified: "2024-03-15",
+      attendees: 0,
+      checkIns: 0,
+      noShows: 0,
     },
     {
       id: 7,
@@ -187,9 +229,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1547036967-23d11aacaee0?auto=format&fit=crop&w=800&q=80",
       tags: ["Art", "Culture", "Festival", "Creative"],
-      organizer: "Cultural Events",
+      organizer: {
+        name: "Cultural Events",
+        email: "contact@culturalevents.com",
+        verified: false,
+      },
       createdAt: "2024-02-28",
       lastModified: "2024-03-14",
+      attendees: 0,
+      checkIns: 0,
+      noShows: 0,
     },
     {
       id: 8,
@@ -210,9 +259,16 @@ const AllEvents = () => {
       image:
         "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
       tags: ["Sports", "Fitness", "Expo", "Athletics"],
-      organizer: "Sports Events Inc.",
+      organizer: {
+        name: "Sports Events Inc.",
+        email: "info@sportsevents.com",
+        verified: true,
+      },
       createdAt: "2024-01-10",
       lastModified: "2024-03-01",
+      attendees: 45,
+      checkIns: 0,
+      noShows: 45,
     },
   ];
 
@@ -260,7 +316,8 @@ const AllEvents = () => {
     const matchesSearch =
       event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       event.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      event.location.toLowerCase().includes(searchQuery.toLowerCase());
+      event.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      event.organizer.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus =
       statusFilter === "all" || event.status === statusFilter;
     const matchesCategory =
@@ -325,17 +382,12 @@ const AllEvents = () => {
         <div className="flex justify-between items-start">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              All Events
+              Event Management
             </h1>
-            <p className="text-gray-600">Manage and track all your events</p>
+            <p className="text-gray-600">
+              Manage all events across the platform
+            </p>
           </div>
-          <Link
-            to="/events/create"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Create New Event
-          </Link>
         </div>
       </div>
 
@@ -417,7 +469,7 @@ const AllEvents = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search events by title, description, or location..."
+                placeholder="Search events by title, description, location, or organizer..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -524,6 +576,29 @@ const AllEvents = () => {
                 {event.description}
               </p>
 
+              {/* Organizer Info */}
+              <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {event.organizer.name}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      {event.organizer.email}
+                    </p>
+                  </div>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      event.organizer.verified
+                        ? "bg-green-100 text-green-800"
+                        : "bg-yellow-100 text-yellow-800"
+                    }`}
+                  >
+                    {event.organizer.verified ? "Verified" : "Pending"}
+                  </span>
+                </div>
+              </div>
+
               {/* Event Details */}
               <div className="space-y-2 mb-4">
                 <div className="flex items-center text-sm text-gray-500">
@@ -556,6 +631,35 @@ const AllEvents = () => {
                 </div>
               </div>
 
+              {/* Check-in Stats for completed/active events */}
+              {(event.status === "completed" || event.status === "active") && (
+                <div className="mb-4 p-3 bg-blue-50 rounded-lg">
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p className="text-xs text-gray-500">Check-ins</p>
+                      <p className="text-sm font-semibold text-blue-900">
+                        {event.checkIns}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">No-shows</p>
+                      <p className="text-sm font-semibold text-red-900">
+                        {event.noShows}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Rate</p>
+                      <p className="text-sm font-semibold text-green-900">
+                        {event.attendees > 0
+                          ? Math.round((event.checkIns / event.attendees) * 100)
+                          : 0}
+                        %
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Tags */}
               <div className="flex flex-wrap gap-1 mb-4">
                 {event.tags.slice(0, 3).map((tag, index) => (
@@ -577,16 +681,22 @@ const AllEvents = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Link
-                    to={`/events/${event.id}`}
+                    to={`/admin/events/${event.id}`}
                     className="text-blue-600 hover:text-blue-800"
                   >
                     <Eye className="h-4 w-4" />
                   </Link>
                   <Link
-                    to={`/events/edit/${event.id}`}
+                    to={`/admin/events/${event.id}/attendees`}
                     className="text-green-600 hover:text-green-800"
                   >
-                    <Edit className="h-4 w-4" />
+                    <Users className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    to={`/admin/events/${event.id}/analytics`}
+                    className="text-purple-600 hover:text-purple-800"
+                  >
+                    <BarChart3 className="h-4 w-4" />
                   </Link>
                   <button className="text-gray-600 hover:text-gray-800">
                     <MoreVertical className="h-4 w-4" />
@@ -616,20 +726,12 @@ const AllEvents = () => {
           <p className="text-gray-500 mb-4">
             {searchQuery || statusFilter !== "all" || categoryFilter !== "all"
               ? "Try adjusting your filters or search terms"
-              : "Get started by creating your first event"}
+              : "No events have been created yet"}
           </p>
-          <Link
-            to="/events/create"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 inline-flex items-center"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Create New Event
-          </Link>
         </div>
       )}
     </div>
   );
 };
 
-export default AllEvents;
-
+export default AdminEvents;

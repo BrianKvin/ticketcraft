@@ -37,3 +37,4 @@ const OrganizerLayout = ({ children }) => {
 };
 
 export default OrganizerLayout;
+

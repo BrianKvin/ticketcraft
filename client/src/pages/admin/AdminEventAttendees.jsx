@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import {
   Search,
   Filter,
@@ -17,13 +18,24 @@ import {
   MoreVertical,
   Plus,
   RefreshCw,
+  ArrowLeft,
+  BarChart3,
 } from "lucide-react";
 
-const AttendeeManagement = () => {
+const AdminEventAttendees = () => {
+  const { id } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [eventFilter, setEventFilter] = useState("all");
   const [selectedAttendees, setSelectedAttendees] = useState([]);
+
+  // Mock event data
+  const event = {
+    id: parseInt(id),
+    title: "Tech Innovation Summit 2024",
+    date: "2024-03-15",
+    location: "San Francisco, CA",
+    organizer: "TechCorp Events",
+  };
 
   // Mock attendee data
   const attendees = [
@@ -32,8 +44,6 @@ const AttendeeManagement = () => {
       name: "Sarah Johnson",
       email: "sarah.johnson@example.com",
       phone: "+1 (555) 123-4567",
-      event: "Tech Innovation Summit 2024",
-      eventDate: "2024-03-15",
       ticketType: "VIP",
       price: 299,
       status: "checked-in",
@@ -50,14 +60,12 @@ const AttendeeManagement = () => {
       name: "Michael Chen",
       email: "michael.chen@example.com",
       phone: "+1 (555) 234-5678",
-      event: "Startup Pitch Competition",
-      eventDate: "2024-05-15",
-      ticketType: "Student",
-      price: 75,
-      status: "registered",
-      checkInTime: null,
-      arrivalTime: null,
-      registrationDate: "2024-03-01",
+      ticketType: "General",
+      price: 199,
+      status: "checked-in",
+      checkInTime: "2024-03-15T09:22:15Z",
+      arrivalTime: "09:22 AM",
+      registrationDate: "2024-02-15",
       company: "InnovateLab",
       jobTitle: "Product Manager",
       dietaryRequirements: "None",
@@ -68,14 +76,12 @@ const AttendeeManagement = () => {
       name: "Emma Wilson",
       email: "emma.wilson@example.com",
       phone: "+1 (555) 345-6789",
-      event: "Digital Marketing Conference",
-      eventDate: "2024-01-20",
-      ticketType: "Early Bird",
-      price: 120,
-      status: "checked-out",
-      checkInTime: "2024-01-20T08:45:30Z",
-      arrivalTime: "08:45 AM",
-      registrationDate: "2023-12-15",
+      ticketType: "VIP",
+      price: 299,
+      status: "no-show",
+      checkInTime: null,
+      arrivalTime: null,
+      registrationDate: "2024-02-20",
       company: "DesignFirst Studio",
       jobTitle: "UX Designer",
       dietaryRequirements: "Gluten-free",
@@ -86,14 +92,12 @@ const AttendeeManagement = () => {
       name: "David Rodriguez",
       email: "david.r@example.com",
       phone: "+1 (555) 456-7890",
-      event: "Food & Wine Expo",
-      eventDate: "2024-02-10",
-      ticketType: "VIP",
-      price: 250,
+      ticketType: "General",
+      price: 199,
       status: "checked-in",
-      checkInTime: "2024-02-10T11:10:15Z",
-      arrivalTime: "11:10 AM",
-      registrationDate: "2024-01-05",
+      checkInTime: "2024-03-15T09:35:20Z",
+      arrivalTime: "09:35 AM",
+      registrationDate: "2024-02-25",
       company: "DataFlow Analytics",
       jobTitle: "Data Scientist",
       dietaryRequirements: "None",
@@ -104,14 +108,12 @@ const AttendeeManagement = () => {
       name: "Lisa Park",
       email: "lisa.park@example.com",
       phone: "+1 (555) 567-8901",
-      event: "Tech Innovation Summit 2024",
-      eventDate: "2024-03-15",
-      ticketType: "General",
-      price: 199,
-      status: "cancelled",
-      checkInTime: null,
-      arrivalTime: null,
-      registrationDate: "2024-02-20",
+      ticketType: "Student",
+      price: 99,
+      status: "checked-in",
+      checkInTime: "2024-03-15T09:45:10Z",
+      arrivalTime: "09:45 AM",
+      registrationDate: "2024-03-01",
       company: "CloudScale Technologies",
       jobTitle: "DevOps Engineer",
       dietaryRequirements: "Vegan",
@@ -122,14 +124,12 @@ const AttendeeManagement = () => {
       name: "Alex Thompson",
       email: "alex.t@example.com",
       phone: "+1 (555) 678-9012",
-      event: "Business Leadership Workshop",
-      eventDate: "2024-04-02",
-      ticketType: "Premium",
-      price: 150,
-      status: "waitlist",
+      ticketType: "General",
+      price: 199,
+      status: "registered",
       checkInTime: null,
       arrivalTime: null,
-      registrationDate: "2024-03-15",
+      registrationDate: "2024-03-05",
       company: "SecurityGuard Pro",
       jobTitle: "Security Analyst",
       dietaryRequirements: "None",
@@ -140,8 +140,6 @@ const AttendeeManagement = () => {
       name: "Maria Garcia",
       email: "maria.garcia@example.com",
       phone: "+1 (555) 789-0123",
-      event: "Tech Innovation Summit 2024",
-      eventDate: "2024-03-15",
       ticketType: "VIP",
       price: 299,
       status: "checked-out",
@@ -158,27 +156,17 @@ const AttendeeManagement = () => {
       name: "James Brown",
       email: "james.brown@example.com",
       phone: "+1 (555) 890-1234",
-      event: "Food & Wine Expo",
-      eventDate: "2024-02-10",
       ticketType: "General",
-      price: 150,
+      price: 199,
       status: "checked-in",
-      checkInTime: "2024-02-10T11:30:20Z",
-      arrivalTime: "11:30 AM",
-      registrationDate: "2024-01-20",
+      checkInTime: "2024-03-15T10:15:30Z",
+      arrivalTime: "10:15 AM",
+      registrationDate: "2024-02-20",
       company: "InnovateLab",
       jobTitle: "Marketing Director",
       dietaryRequirements: "None",
       emergencyContact: "Linda Brown (+1 555-210-9876)",
     },
-  ];
-
-  const events = [
-    "Tech Innovation Summit 2024",
-    "Business Leadership Workshop",
-    "Digital Marketing Conference",
-    "Food & Wine Expo",
-    "Startup Pitch Competition",
   ];
 
   const statusOptions = [
@@ -199,14 +187,9 @@ const AttendeeManagement = () => {
       count: attendees.filter((a) => a.status === "checked-out").length,
     },
     {
-      value: "cancelled",
-      label: "Cancelled",
-      count: attendees.filter((a) => a.status === "cancelled").length,
-    },
-    {
-      value: "waitlist",
-      label: "Waitlist",
-      count: attendees.filter((a) => a.status === "waitlist").length,
+      value: "no-show",
+      label: "No Show",
+      count: attendees.filter((a) => a.status === "no-show").length,
     },
   ];
 
@@ -217,10 +200,8 @@ const AttendeeManagement = () => {
       attendee.company.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStatus =
       statusFilter === "all" || attendee.status === statusFilter;
-    const matchesEvent =
-      eventFilter === "all" || attendee.event === eventFilter;
 
-    return matchesSearch && matchesStatus && matchesEvent;
+    return matchesSearch && matchesStatus;
   });
 
   const getStatusColor = (status) => {
@@ -231,10 +212,8 @@ const AttendeeManagement = () => {
         return "bg-blue-100 text-blue-800 border-blue-200";
       case "registered":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "cancelled":
+      case "no-show":
         return "bg-red-100 text-red-800 border-red-200";
-      case "waitlist":
-        return "bg-purple-100 text-purple-800 border-purple-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
     }
@@ -248,10 +227,8 @@ const AttendeeManagement = () => {
         return <XCircle className="h-4 w-4" />;
       case "registered":
         return <User className="h-4 w-4" />;
-      case "cancelled":
+      case "no-show":
         return <XCircle className="h-4 w-4" />;
-      case "waitlist":
-        return <Clock className="h-4 w-4" />;
       default:
         return <User className="h-4 w-4" />;
     }
@@ -278,10 +255,28 @@ const AttendeeManagement = () => {
     <div className="p-6">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Attendee Management
-        </h1>
-        <p className="text-gray-600">Manage and track all event attendees</p>
+        <div className="flex items-center mb-4">
+          <Link
+            to={`/admin/events/${id}`}
+            className="flex items-center text-gray-600 hover:text-gray-900 mr-4"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Event
+          </Link>
+        </div>
+        <div className="flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Event Attendees
+            </h1>
+            <p className="text-gray-600">
+              {event.title} - {event.date} • {event.location}
+            </p>
+            <p className="text-sm text-gray-500">
+              Organized by {event.organizer}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -332,13 +327,13 @@ const AttendeeManagement = () => {
 
         <div className="bg-white p-6 rounded-lg border border-gray-200">
           <div className="flex items-center">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <Clock className="h-6 w-6 text-purple-600" />
+            <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+              <XCircle className="h-6 w-6 text-red-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Waitlist</p>
+              <p className="text-sm font-medium text-gray-600">No Shows</p>
               <p className="text-2xl font-bold text-gray-900">
-                {attendees.filter((a) => a.status === "waitlist").length}
+                {attendees.filter((a) => a.status === "no-show").length}
               </p>
             </div>
           </div>
@@ -377,22 +372,6 @@ const AttendeeManagement = () => {
             </select>
           </div>
 
-          {/* Event Filter */}
-          <div className="lg:w-48">
-            <select
-              value={eventFilter}
-              onChange={(e) => setEventFilter(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="all">All Events</option>
-              {events.map((event) => (
-                <option key={event} value={event}>
-                  {event}
-                </option>
-              ))}
-            </select>
-          </div>
-
           {/* Actions */}
           <div className="flex gap-2">
             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center">
@@ -425,9 +404,6 @@ const AttendeeManagement = () => {
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Attendee
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Event
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Ticket
@@ -473,17 +449,9 @@ const AttendeeManagement = () => {
                           {attendee.email}
                         </div>
                         <div className="text-xs text-gray-400">
-                          {attendee.company}
+                          {attendee.company} • {attendee.jobTitle}
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      {attendee.event}
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      {formatDate(attendee.eventDate)}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -565,5 +533,4 @@ const AttendeeManagement = () => {
   );
 };
 
-export default AttendeeManagement;
-
+export default AdminEventAttendees;

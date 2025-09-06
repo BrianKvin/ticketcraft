@@ -365,3 +365,4 @@ const AttendeeDiscovery = ({ eventData }) => {
 };
 
 export default AttendeeDiscovery;
+

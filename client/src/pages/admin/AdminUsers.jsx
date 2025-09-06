@@ -17,224 +17,207 @@ import {
   MoreVertical,
   Plus,
   RefreshCw,
+  Shield,
+  UserCheck,
+  UserX,
 } from "lucide-react";
 
-const AttendeeManagement = () => {
+const AdminUsers = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [eventFilter, setEventFilter] = useState("all");
-  const [selectedAttendees, setSelectedAttendees] = useState([]);
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
-  // Mock attendee data
-  const attendees = [
+  // Mock user data
+  const users = [
     {
       id: 1,
       name: "Sarah Johnson",
       email: "sarah.johnson@example.com",
       phone: "+1 (555) 123-4567",
-      event: "Tech Innovation Summit 2024",
-      eventDate: "2024-03-15",
-      ticketType: "VIP",
-      price: 299,
-      status: "checked-in",
-      checkInTime: "2024-03-15T09:15:30Z",
-      arrivalTime: "09:15 AM",
-      registrationDate: "2024-02-10",
+      role: "attendee",
+      status: "active",
+      joinDate: "2024-01-15",
+      lastActive: "2024-03-15T09:15:30Z",
+      eventsAttended: 3,
+      totalSpent: 597,
+      location: "San Francisco, CA",
       company: "TechCorp Inc.",
       jobTitle: "Software Engineer",
-      dietaryRequirements: "Vegetarian",
-      emergencyContact: "John Johnson (+1 555-987-6543)",
     },
     {
       id: 2,
       name: "Michael Chen",
       email: "michael.chen@example.com",
       phone: "+1 (555) 234-5678",
-      event: "Startup Pitch Competition",
-      eventDate: "2024-05-15",
-      ticketType: "Student",
-      price: 75,
-      status: "registered",
-      checkInTime: null,
-      arrivalTime: null,
-      registrationDate: "2024-03-01",
+      role: "organizer",
+      status: "active",
+      joinDate: "2023-11-20",
+      lastActive: "2024-03-15T08:45:15Z",
+      eventsAttended: 0,
+      totalSpent: 0,
+      location: "New York, NY",
       company: "InnovateLab",
       jobTitle: "Product Manager",
-      dietaryRequirements: "None",
-      emergencyContact: "Lisa Chen (+1 555-876-5432)",
+      eventsCreated: 5,
+      totalRevenue: 15600,
     },
     {
       id: 3,
       name: "Emma Wilson",
       email: "emma.wilson@example.com",
       phone: "+1 (555) 345-6789",
-      event: "Digital Marketing Conference",
-      eventDate: "2024-01-20",
-      ticketType: "Early Bird",
-      price: 120,
-      status: "checked-out",
-      checkInTime: "2024-01-20T08:45:30Z",
-      arrivalTime: "08:45 AM",
-      registrationDate: "2023-12-15",
+      role: "attendee",
+      status: "inactive",
+      joinDate: "2023-12-15",
+      lastActive: "2024-02-20T14:30:45Z",
+      eventsAttended: 1,
+      totalSpent: 120,
+      location: "Chicago, IL",
       company: "DesignFirst Studio",
       jobTitle: "UX Designer",
-      dietaryRequirements: "Gluten-free",
-      emergencyContact: "David Wilson (+1 555-765-4321)",
     },
     {
       id: 4,
       name: "David Rodriguez",
       email: "david.r@example.com",
       phone: "+1 (555) 456-7890",
-      event: "Food & Wine Expo",
-      eventDate: "2024-02-10",
-      ticketType: "VIP",
-      price: 250,
-      status: "checked-in",
-      checkInTime: "2024-02-10T11:10:15Z",
-      arrivalTime: "11:10 AM",
-      registrationDate: "2024-01-05",
+      role: "organizer",
+      status: "pending",
+      joinDate: "2024-02-01",
+      lastActive: "2024-03-10T16:20:30Z",
+      eventsAttended: 0,
+      totalSpent: 0,
+      location: "Los Angeles, CA",
       company: "DataFlow Analytics",
       jobTitle: "Data Scientist",
-      dietaryRequirements: "None",
-      emergencyContact: "Maria Rodriguez (+1 555-654-3210)",
+      eventsCreated: 0,
+      totalRevenue: 0,
     },
     {
       id: 5,
       name: "Lisa Park",
       email: "lisa.park@example.com",
       phone: "+1 (555) 567-8901",
-      event: "Tech Innovation Summit 2024",
-      eventDate: "2024-03-15",
-      ticketType: "General",
-      price: 199,
-      status: "cancelled",
-      checkInTime: null,
-      arrivalTime: null,
-      registrationDate: "2024-02-20",
+      role: "attendee",
+      status: "suspended",
+      joinDate: "2024-01-20",
+      lastActive: "2024-03-01T10:15:20Z",
+      eventsAttended: 0,
+      totalSpent: 0,
+      location: "Seattle, WA",
       company: "CloudScale Technologies",
       jobTitle: "DevOps Engineer",
-      dietaryRequirements: "Vegan",
-      emergencyContact: "James Park (+1 555-543-2109)",
     },
     {
       id: 6,
       name: "Alex Thompson",
       email: "alex.t@example.com",
       phone: "+1 (555) 678-9012",
-      event: "Business Leadership Workshop",
-      eventDate: "2024-04-02",
-      ticketType: "Premium",
-      price: 150,
-      status: "waitlist",
-      checkInTime: null,
-      arrivalTime: null,
-      registrationDate: "2024-03-15",
+      role: "attendee",
+      status: "active",
+      joinDate: "2024-02-15",
+      lastActive: "2024-03-15T11:30:15Z",
+      eventsAttended: 2,
+      totalSpent: 225,
+      location: "Austin, TX",
       company: "SecurityGuard Pro",
       jobTitle: "Security Analyst",
-      dietaryRequirements: "None",
-      emergencyContact: "Sarah Thompson (+1 555-432-1098)",
     },
     {
       id: 7,
       name: "Maria Garcia",
       email: "maria.garcia@example.com",
       phone: "+1 (555) 789-0123",
-      event: "Tech Innovation Summit 2024",
-      eventDate: "2024-03-15",
-      ticketType: "VIP",
-      price: 299,
-      status: "checked-out",
-      checkInTime: "2024-03-15T09:45:10Z",
-      arrivalTime: "09:45 AM",
-      registrationDate: "2024-02-01",
+      role: "organizer",
+      status: "active",
+      joinDate: "2023-10-01",
+      lastActive: "2024-03-15T09:45:10Z",
+      eventsAttended: 0,
+      totalSpent: 0,
+      location: "Miami, FL",
       company: "TechCorp Inc.",
       jobTitle: "CTO",
-      dietaryRequirements: "Lactose-free",
-      emergencyContact: "Carlos Garcia (+1 555-321-0987)",
+      eventsCreated: 12,
+      totalRevenue: 145200,
     },
     {
       id: 8,
       name: "James Brown",
       email: "james.brown@example.com",
       phone: "+1 (555) 890-1234",
-      event: "Food & Wine Expo",
-      eventDate: "2024-02-10",
-      ticketType: "General",
-      price: 150,
-      status: "checked-in",
-      checkInTime: "2024-02-10T11:30:20Z",
-      arrivalTime: "11:30 AM",
-      registrationDate: "2024-01-20",
+      role: "attendee",
+      status: "active",
+      joinDate: "2024-01-20",
+      lastActive: "2024-03-14T15:20:45Z",
+      eventsAttended: 1,
+      totalSpent: 150,
+      location: "Denver, CO",
       company: "InnovateLab",
       jobTitle: "Marketing Director",
-      dietaryRequirements: "None",
-      emergencyContact: "Linda Brown (+1 555-210-9876)",
     },
-  ];
-
-  const events = [
-    "Tech Innovation Summit 2024",
-    "Business Leadership Workshop",
-    "Digital Marketing Conference",
-    "Food & Wine Expo",
-    "Startup Pitch Competition",
   ];
 
   const statusOptions = [
-    { value: "all", label: "All Status", count: attendees.length },
+    { value: "all", label: "All Status", count: users.length },
     {
-      value: "registered",
-      label: "Registered",
-      count: attendees.filter((a) => a.status === "registered").length,
+      value: "active",
+      label: "Active",
+      count: users.filter((u) => u.status === "active").length,
     },
     {
-      value: "checked-in",
-      label: "Checked In",
-      count: attendees.filter((a) => a.status === "checked-in").length,
+      value: "inactive",
+      label: "Inactive",
+      count: users.filter((u) => u.status === "inactive").length,
     },
     {
-      value: "checked-out",
-      label: "Checked Out",
-      count: attendees.filter((a) => a.status === "checked-out").length,
+      value: "pending",
+      label: "Pending",
+      count: users.filter((u) => u.status === "pending").length,
     },
     {
-      value: "cancelled",
-      label: "Cancelled",
-      count: attendees.filter((a) => a.status === "cancelled").length,
-    },
-    {
-      value: "waitlist",
-      label: "Waitlist",
-      count: attendees.filter((a) => a.status === "waitlist").length,
+      value: "suspended",
+      label: "Suspended",
+      count: users.filter((u) => u.status === "suspended").length,
     },
   ];
 
-  const filteredAttendees = attendees.filter((attendee) => {
-    const matchesSearch =
-      attendee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      attendee.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      attendee.company.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesStatus =
-      statusFilter === "all" || attendee.status === statusFilter;
-    const matchesEvent =
-      eventFilter === "all" || attendee.event === eventFilter;
+  const roleOptions = [
+    { value: "all", label: "All Roles", count: users.length },
+    {
+      value: "attendee",
+      label: "Attendees",
+      count: users.filter((u) => u.role === "attendee").length,
+    },
+    {
+      value: "organizer",
+      label: "Organizers",
+      count: users.filter((u) => u.role === "organizer").length,
+    },
+  ];
 
-    return matchesSearch && matchesStatus && matchesEvent;
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.company.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus =
+      statusFilter === "all" || user.status === statusFilter;
+    const matchesRole = roleFilter === "all" || user.role === roleFilter;
+
+    return matchesSearch && matchesStatus && matchesRole;
   });
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "checked-in":
+      case "active":
         return "bg-green-100 text-green-800 border-green-200";
-      case "checked-out":
-        return "bg-blue-100 text-blue-800 border-blue-200";
-      case "registered":
+      case "inactive":
+        return "bg-gray-100 text-gray-800 border-gray-200";
+      case "pending":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      case "cancelled":
+      case "suspended":
         return "bg-red-100 text-red-800 border-red-200";
-      case "waitlist":
-        return "bg-purple-100 text-purple-800 border-purple-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
     }
@@ -242,16 +225,25 @@ const AttendeeManagement = () => {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case "checked-in":
+      case "active":
         return <CheckCircle className="h-4 w-4" />;
-      case "checked-out":
-        return <XCircle className="h-4 w-4" />;
-      case "registered":
-        return <User className="h-4 w-4" />;
-      case "cancelled":
-        return <XCircle className="h-4 w-4" />;
-      case "waitlist":
+      case "inactive":
         return <Clock className="h-4 w-4" />;
+      case "pending":
+        return <Clock className="h-4 w-4" />;
+      case "suspended":
+        return <XCircle className="h-4 w-4" />;
+      default:
+        return <User className="h-4 w-4" />;
+    }
+  };
+
+  const getRoleIcon = (role) => {
+    switch (role) {
+      case "organizer":
+        return <UserCheck className="h-4 w-4" />;
+      case "attendee":
+        return <User className="h-4 w-4" />;
       default:
         return <User className="h-4 w-4" />;
     }
@@ -279,9 +271,11 @@ const AttendeeManagement = () => {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Attendee Management
+          User Management
         </h1>
-        <p className="text-gray-600">Manage and track all event attendees</p>
+        <p className="text-gray-600">
+          Manage all platform users and their accounts
+        </p>
       </div>
 
       {/* Stats Cards */}
@@ -292,12 +286,8 @@ const AttendeeManagement = () => {
               <Users className="h-6 w-6 text-blue-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">
-                Total Attendees
-              </p>
-              <p className="text-2xl font-bold text-gray-900">
-                {attendees.length}
-              </p>
+              <p className="text-sm font-medium text-gray-600">Total Users</p>
+              <p className="text-2xl font-bold text-gray-900">{users.length}</p>
             </div>
           </div>
         </div>
@@ -308,23 +298,9 @@ const AttendeeManagement = () => {
               <CheckCircle className="h-6 w-6 text-green-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Checked In</p>
+              <p className="text-sm font-medium text-gray-600">Active Users</p>
               <p className="text-2xl font-bold text-gray-900">
-                {attendees.filter((a) => a.status === "checked-in").length}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg border border-gray-200">
-          <div className="flex items-center">
-            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-              <User className="h-6 w-6 text-yellow-600" />
-            </div>
-            <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Registered</p>
-              <p className="text-2xl font-bold text-gray-900">
-                {attendees.filter((a) => a.status === "registered").length}
+                {users.filter((u) => u.status === "active").length}
               </p>
             </div>
           </div>
@@ -333,12 +309,26 @@ const AttendeeManagement = () => {
         <div className="bg-white p-6 rounded-lg border border-gray-200">
           <div className="flex items-center">
             <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-              <Clock className="h-6 w-6 text-purple-600" />
+              <UserCheck className="h-6 w-6 text-purple-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Waitlist</p>
+              <p className="text-sm font-medium text-gray-600">Organizers</p>
               <p className="text-2xl font-bold text-gray-900">
-                {attendees.filter((a) => a.status === "waitlist").length}
+                {users.filter((u) => u.role === "organizer").length}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg border border-gray-200">
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+              <Clock className="h-6 w-6 text-yellow-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Pending</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {users.filter((u) => u.status === "pending").length}
               </p>
             </div>
           </div>
@@ -354,7 +344,7 @@ const AttendeeManagement = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search attendees by name, email, or company..."
+                placeholder="Search users by name, email, or company..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -377,17 +367,16 @@ const AttendeeManagement = () => {
             </select>
           </div>
 
-          {/* Event Filter */}
+          {/* Role Filter */}
           <div className="lg:w-48">
             <select
-              value={eventFilter}
-              onChange={(e) => setEventFilter(e.target.value)}
+              value={roleFilter}
+              onChange={(e) => setRoleFilter(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              <option value="all">All Events</option>
-              {events.map((event) => (
-                <option key={event} value={event}>
-                  {event}
+              {roleOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label} ({option.count})
                 </option>
               ))}
             </select>
@@ -411,7 +400,7 @@ const AttendeeManagement = () => {
         </div>
       </div>
 
-      {/* Attendees Table */}
+      {/* Users Table */}
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -424,22 +413,22 @@ const AttendeeManagement = () => {
                   />
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Attendee
+                  User
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Event
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Ticket
+                  Role
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Check-in Time
+                  Activity
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Registration
+                  Stats
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Join Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -447,8 +436,8 @@ const AttendeeManagement = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredAttendees.map((attendee) => (
-                <tr key={attendee.id} className="hover:bg-gray-50">
+              {filteredUsers.map((user) => (
+                <tr key={user.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <input
                       type="checkbox"
@@ -459,7 +448,7 @@ const AttendeeManagement = () => {
                     <div className="flex items-center">
                       <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                         <span className="text-sm font-medium text-blue-700">
-                          {attendee.name
+                          {user.name
                             .split(" ")
                             .map((n) => n[0])
                             .join("")}
@@ -467,59 +456,68 @@ const AttendeeManagement = () => {
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">
-                          {attendee.name}
+                          {user.name}
                         </div>
                         <div className="text-sm text-gray-500">
-                          {attendee.email}
+                          {user.email}
                         </div>
                         <div className="text-xs text-gray-400">
-                          {attendee.company}
+                          {user.company} • {user.jobTitle}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      {attendee.event}
+                    <div className="flex items-center">
+                      {getRoleIcon(user.role)}
+                      <span className="ml-2 text-sm text-gray-900 capitalize">
+                        {user.role}
+                      </span>
                     </div>
-                    <div className="text-sm text-gray-500">
-                      {formatDate(attendee.eventDate)}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">
-                      {attendee.ticketType}
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      ${attendee.price}
-                    </div>
+                    {user.role === "organizer" && (
+                      <div className="text-xs text-gray-500 mt-1">
+                        {user.eventsCreated} events • $
+                        {user.totalRevenue?.toLocaleString()}
+                      </div>
+                    )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(
-                        attendee.status
+                        user.status
                       )}`}
                     >
-                      {getStatusIcon(attendee.status)}
-                      <span className="ml-1 capitalize">
-                        {attendee.status.replace("-", " ")}
-                      </span>
+                      {getStatusIcon(user.status)}
+                      <span className="ml-1 capitalize">{user.status}</span>
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {attendee.checkInTime ? (
+                    <div>
+                      <div>Last active: {formatTime(user.lastActive)}</div>
+                      <div className="text-xs text-gray-500">
+                        {formatDate(user.lastActive)}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {user.role === "attendee" ? (
                       <div>
-                        <div>{attendee.arrivalTime}</div>
+                        <div>{user.eventsAttended} events</div>
                         <div className="text-xs text-gray-500">
-                          {formatTime(attendee.checkInTime)}
+                          ${user.totalSpent} spent
                         </div>
                       </div>
                     ) : (
-                      "Not checked in"
+                      <div>
+                        <div>{user.eventsCreated} events</div>
+                        <div className="text-xs text-gray-500">
+                          ${user.totalRevenue?.toLocaleString()} revenue
+                        </div>
+                      </div>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(attendee.registrationDate)}
+                    {formatDate(user.joinDate)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
@@ -527,8 +525,18 @@ const AttendeeManagement = () => {
                         <Eye className="h-4 w-4" />
                       </button>
                       <button className="text-green-600 hover:text-green-900">
-                        <Mail className="h-4 w-4" />
+                        <Edit className="h-4 w-4" />
                       </button>
+                      {user.status === "pending" && (
+                        <button className="text-green-600 hover:text-green-900">
+                          <UserCheck className="h-4 w-4" />
+                        </button>
+                      )}
+                      {user.status === "active" && (
+                        <button className="text-red-600 hover:text-red-900">
+                          <UserX className="h-4 w-4" />
+                        </button>
+                      )}
                       <button className="text-gray-600 hover:text-gray-900">
                         <MoreVertical className="h-4 w-4" />
                       </button>
@@ -545,9 +553,8 @@ const AttendeeManagement = () => {
       <div className="mt-6 flex items-center justify-between">
         <div className="text-sm text-gray-700">
           Showing <span className="font-medium">1</span> to{" "}
-          <span className="font-medium">{filteredAttendees.length}</span> of{" "}
-          <span className="font-medium">{filteredAttendees.length}</span>{" "}
-          results
+          <span className="font-medium">{filteredUsers.length}</span> of{" "}
+          <span className="font-medium">{filteredUsers.length}</span> results
         </div>
         <div className="flex items-center space-x-2">
           <button className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
@@ -565,5 +572,4 @@ const AttendeeManagement = () => {
   );
 };
 
-export default AttendeeManagement;
-
+export default AdminUsers;

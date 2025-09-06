@@ -395,3 +395,4 @@ const NotificationsCenter = ({ eventData }) => {
 };
 
 export default NotificationsCenter;
+

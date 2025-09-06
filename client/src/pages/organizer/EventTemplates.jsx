@@ -724,3 +724,4 @@ const EventTemplates = () => {
 };
 
 export default EventTemplates;
+
