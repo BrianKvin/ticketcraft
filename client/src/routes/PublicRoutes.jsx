@@ -1,4 +1,4 @@
-import Home from "../pages/public/Home";
+// import Home from "../pages/public/Home"; // COMMENTED OUT: Using BrowseEvents as home
 import BrowseEvents from "../pages/public/BrowseEvents";
 import BrowseDestinations from "../pages/public/BrowseDestinations";
 import About from "../pages/public/About";
@@ -8,7 +8,7 @@ import Register from "../components/forms/Register";
 const publicRoutes = [
   {
     path: "/",
-    element: <Home />,
+    element: <BrowseEvents />, // CHANGED: BrowseEvents is now the home page
   },
   {
     path: "/browse-events",

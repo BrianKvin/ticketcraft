@@ -600,3 +600,6 @@ const AdminEventDetails = () => {
 };
 
 export default AdminEventDetails;
+
+
+

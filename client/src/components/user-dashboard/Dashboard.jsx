@@ -7,6 +7,7 @@ import DashboardExhibitors from "./DashboardExhibitors";
 import DashboardAgenda from "./DashboardAgenda";
 import DashboardMyEvent from "./DashboardMyEvent";
 import DashboardMyBadge from "./DashboardMyBadge";
+import DashboardAbstracts from "./DashboardAbstracts";
 import AttendeeDiscovery from "./AttendeeDiscovery";
 import NotificationsCenter from "./NotificationsCenter";
 import PersonalAnalytics from "./PersonalAnalytics";
@@ -63,6 +64,8 @@ const Dashboard = () => {
         return <NotificationsCenter eventData={eventData} />;
       case "analytics":
         return <PersonalAnalytics eventData={eventData} user={user} />;
+      case "abstracts":
+        return <DashboardAbstracts eventData={eventData} user={user} registration={registration} />;
       default:
         return (
           <DashboardHome

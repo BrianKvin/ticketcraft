@@ -12,3 +12,6 @@ const TicketScannerPage = () => {
 
 export default TicketScannerPage;
 
+
+
+
