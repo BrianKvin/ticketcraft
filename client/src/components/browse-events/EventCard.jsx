@@ -1,63 +1,239 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Calendar, MapPin, Heart, Clock } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Heart,
+  Clock,
+  Star,
+  Users,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, variant = "default" }) => {
   const navigate = useNavigate();
+  const [isLiked, setIsLiked] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleRegister = () => {
-    // Navigate to event details page
     navigate(`/events/${event.id}`);
   };
 
-  return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-        />
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full flex items-center justify-center">
-          <Heart className="w-5 h-5 text-red-500" />
+  const handleLike = (e) => {
+    e.stopPropagation();
+    setIsLiked(!isLiked);
+  };
+
+  // Determine if event is trending or popular
+  const isTrending = event.id % 3 === 0;
+  const isPopular = event.id % 4 === 0;
+  const isAlmostSoldOut = event.id % 5 === 0;
+
+  // Get status badge
+  const getStatusBadge = () => {
+    if (isAlmostSoldOut)
+      return { text: "Almost Gone", color: "bg-orange-500", icon: Zap };
+    if (isTrending)
+      return { text: "Trending", color: "bg-purple-500", icon: TrendingUp };
+    if (isPopular) return { text: "Popular", color: "bg-blue-500", icon: Star };
+    return null;
+  };
+
+  const statusBadge = getStatusBadge();
+  const StatusIcon = statusBadge?.icon;
+
+  if (variant === "hero") {
+    return (
+      <div
+        className="relative group cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div className="relative h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-purple-600 via-blue-600 to-green-600">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+          {/* Status Badge */}
+          {statusBadge && (
+            <div
+              className={`absolute top-6 left-6 ${statusBadge.color} text-white px-3 py-1.5 rounded-full flex items-center gap-1.5 text-sm font-semibold backdrop-blur-sm`}
+            >
+              <StatusIcon className="w-4 h-4" />
+              {statusBadge.text}
+            </div>
+          )}
+
+          {/* Like Button */}
+          <button
+            onClick={handleLike}
+            className="absolute top-6 right-6 bg-white/20 backdrop-blur-md p-3 rounded-full hover:bg-white/30 transition-all duration-300 hover:scale-110"
+          >
+            <Heart
+              className={`w-5 h-5 ${
+                isLiked ? "text-red-500 fill-red-500" : "text-white"
+              }`}
+            />
+          </button>
+
+          {/* Content */}
+          <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="space-y-4">
+              <h3 className="text-3xl font-bold text-white leading-tight group-hover:text-green-300 transition-colors duration-300">
+                {event.title}
+              </h3>
+
+              <div className="flex items-center text-white/90 space-x-6">
+                <div className="flex items-center space-x-2">
+                  <Calendar className="w-5 h-5" />
+                  <span className="text-lg">{event.date}</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-5 h-5" />
+                  <span className="text-lg">{event.location}</span>
+                </div>
+              </div>
+
+              <p className="text-white/80 text-lg line-clamp-2 max-w-2xl">
+                {event.description}
+              </p>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <span
+                    className={`text-3xl font-bold ${
+                      event.isFree ? "text-green-300" : "text-white"
+                    }`}
+                  >
+                    {event.isFree ? "Free" : event.price}
+                  </span>
+                  {!event.isFree && (
+                    <span className="text-white/60 line-through text-lg">
+                      $199
+                    </span>
+                  )}
+                </div>
+
+                <button
+                  onClick={handleRegister}
+                  className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl shadow-lg"
+                >
+                  {event.isFree ? "Register Free" : "Buy Tickets"}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    );
+  }
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">
-          {event.title}
-        </h3>
+  return (
+    <div
+      className="group cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-white/20 dark:border-gray-700/50 group-hover:border-green-200/50 dark:group-hover:border-green-400/50 group-hover:-translate-y-2">
+        {/* Image Container */}
+        <div className="relative h-56 overflow-hidden">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+          />
 
-        <div className="flex items-center text-gray-600 mb-2">
-          <Calendar size={16} className="mr-2" />
-          <span className="text-sm">{event.date}</span>
-        </div>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        <div className="flex items-center text-gray-600 mb-3">
-          <MapPin size={16} className="mr-2" />
-          <span className="text-sm">{event.location}</span>
-        </div>
-
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-          {event.description}
-        </p>
-
-        <div className="flex items-center justify-between">
-          <div className="text-left">
-            <span
-              className={`text-lg font-bold ${
-                event.isFree ? "text-green-600" : "text-gray-900"
-              }`}
+          {/* Status Badge */}
+          {statusBadge && (
+            <div
+              className={`absolute top-4 left-4 ${statusBadge.color} text-white px-3 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-semibold backdrop-blur-sm shadow-lg`}
             >
-              {event.isFree ? "Free" : event.price}
-            </span>
-          </div>
+              <StatusIcon className="w-3 h-3" />
+              {statusBadge.text}
+            </div>
+          )}
+
+          {/* Like Button */}
           <button
-            onClick={handleRegister}
-            className="h-10 px-4 bg-green-500 hover:bg-green-600 text-white rounded-[20px] flex items-center justify-center transition-colors duration-200 group-hover:scale-110 text-xs font-semibold"
+            onClick={handleLike}
+            className="absolute top-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-2.5 rounded-full hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110 shadow-lg"
           >
-            {event.isFree ? "Register" : "Buy Now"}
+            <Heart
+              className={`w-4 h-4 ${
+                isLiked
+                  ? "text-red-500 fill-red-500"
+                  : "text-gray-600 dark:text-gray-300"
+              }`}
+            />
           </button>
+
+          {/* Quick Action Overlay */}
+          <div
+            className={`absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center transition-all duration-300 ${
+              isHovered ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <button
+              onClick={handleRegister}
+              className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-2xl font-bold transition-all duration-300 transform hover:scale-105 shadow-xl"
+            >
+              {event.isFree ? "Register Free" : "Buy Now"}
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-300 line-clamp-2">
+            {event.title}
+          </h3>
+
+          <div className="space-y-2 mb-4">
+            <div className="flex items-center text-gray-600 dark:text-gray-300">
+              <Calendar className="w-4 h-4 mr-2 text-green-500" />
+              <span className="text-sm font-medium">{event.date}</span>
+            </div>
+
+            <div className="flex items-center text-gray-600 dark:text-gray-300">
+              <MapPin className="w-4 h-4 mr-2 text-green-500" />
+              <span className="text-sm font-medium">{event.location}</span>
+            </div>
+          </div>
+
+          <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 line-clamp-2 leading-relaxed">
+            {event.description}
+          </p>
+
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span
+                className={`text-2xl font-bold ${
+                  event.isFree
+                    ? "text-green-600 dark:text-green-400"
+                    : "text-gray-900 dark:text-white"
+                }`}
+              >
+                {event.isFree ? "Free" : event.price}
+              </span>
+              {!event.isFree && (
+                <span className="text-gray-400 dark:text-gray-500 text-sm line-through">
+                  $199
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 text-sm">
+              <Users className="w-4 h-4" />
+              <span>{Math.floor(Math.random() * 500) + 50} going</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
