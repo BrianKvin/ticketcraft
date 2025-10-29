@@ -1,8 +1,17 @@
-import react from 'react'
+import { RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "./context/AuthContext";
+import router from "./routes";
 
-function App() {
+// Create a client
+const queryClient = new QueryClient();
 
-  return <h1 className="text-3xl font-bold underline bg-red-400">Hello world!</h1>;
-}
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </QueryClientProvider>
+);
 
-export default App
+export default App;

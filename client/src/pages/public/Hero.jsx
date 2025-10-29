@@ -1,0 +1,209 @@
+import React, { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import concertImage from "../../assets/images/concert.jpg";
+import musicImage from "../../assets/images/music.jpg";
+import drumsImage from "../../assets/images/drums.jpg";
+import audienceImage from "../../assets/images/audience.jpg";
+import cheerImage from "../../assets/images/cheer.jpg";
+import techSummitImage from "../../assets/images/tech-summit.jpg";
+
+const Hero = () => {
+  const heroContent = [
+    {
+      image: concertImage,
+      title: "Create Unforgettable",
+      subtitle: "Experiences",
+      description:
+        "The complete event management platform that helps you sell tickets, manage events, and create amazing experiences for your attendees.",
+    },
+    {
+      image: musicImage,
+      title: "Sell Tickets",
+      subtitle: "Instantly",
+      description:
+        "Create and sell tickets with secure QR codes. Get paid instantly and deliver tickets to attendees automatically.",
+    },
+    {
+      image: drumsImage,
+      title: "Manage Events",
+      subtitle: "Seamlessly",
+      description:
+        "Powerful dashboard and mobile app for managing events, attendees, and check-ins from anywhere.",
+    },
+    {
+      image: audienceImage,
+      title: "Connect with",
+      subtitle: "Your Audience",
+      description:
+        "Build relationships with your attendees through our comprehensive event management and communication tools.",
+    },
+    {
+      image: cheerImage,
+      title: "Celebrate",
+      subtitle: "Success",
+      description:
+        "Track your event performance with real-time analytics and insights to make every event better than the last.",
+    },
+    {
+      image: techSummitImage,
+      title: "Scale Your",
+      subtitle: "Business",
+      description:
+        "From small meetups to large conferences, our platform grows with your event business needs.",
+    },
+  ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const nextImage = useCallback(() => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === heroContent.length - 1 ? 0 : prevIndex + 1
+    );
+  }, [heroContent.length]);
+
+  const prevImage = useCallback(() => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? heroContent.length - 1 : prevIndex - 1
+    );
+  }, [heroContent.length]);
+
+  const goToImage = (index) => {
+    setCurrentImageIndex(index);
+  };
+
+  // Auto-cycle through images
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(nextImage, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [nextImage, isPaused]);
+
+  // Handle touch events for swipe functionality
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextImage();
+    } else if (isRightSwipe) {
+      prevImage();
+    }
+  };
+
+  const currentContent = heroContent[currentImageIndex];
+
+  return (
+    <div
+      className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1 }}
+    >
+      {/* Background Images with parallax effect */}
+      {heroContent.map((content, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 bg-cover bg-center bg-fixed transition-opacity duration-2000 ${
+            index === currentImageIndex ? "opacity-100" : "opacity-0"
+          }`}
+          style={{
+            backgroundImage: `url(${content.image})`,
+            backgroundAttachment: "fixed",
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+      ))}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight transition-all duration-1000">
+          {currentContent.title}
+          <span className="block text-green-400">
+            {currentContent.subtitle}
+          </span>
+        </h1>
+
+        <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto transition-all duration-1000">
+          {currentContent.description}
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            to="/events"
+            className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          >
+            Start Your Event
+          </Link>
+
+          <Link
+            to="/browse-events"
+            className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-200"
+          >
+            Browse Events
+          </Link>
+        </div>
+
+        <div className="mt-8">
+          <a
+            href="#events"
+            className="text-green-400 hover:text-green-300 text-sm font-medium transition-colors duration-200"
+          >
+            ↓ See Upcoming Events
+          </a>
+        </div>
+
+        <div className="mt-12 text-sm text-gray-300">
+          <p>Trusted by 10,000+ event organizers worldwide</p>
+        </div>
+      </div>
+
+      {/* Navigation Dots */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+        {heroContent.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToImage(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-200 ${
+              index === currentImageIndex
+                ? "bg-white scale-110"
+                : "bg-white/50 hover:bg-white/75"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Scroll indicator - now positioned below dots */}
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;
